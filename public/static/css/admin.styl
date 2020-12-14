@@ -1,0 +1,244 @@
+//colorprin = #81C822
+//colorosc = #309BC7
+colorprin = #309BC7
+colorosc = #3080C7
+colorsec = #81C822
+body
+	background-color #f5f6fa
+	font-size 14px
+	
+
+h2,h3,h4,h5,ul,body,html
+	padding 0px
+	margin 0px
+	list-style none
+	text-decoration none
+	box-sizing border-box
+	font-family 'Roboto',sans-serif
+
+
+.negrita
+	font-weight: bold
+
+label
+	font-weight: bold
+	
+.negrita
+	font-weight: bold
+	
+.mtop16
+	margin-top 16px
+
+.mtop8
+	margin-top 8px
+	margin-left 4px
+	
+.mbottom10
+	margin-bottom 10px
+
+.mtop0
+	margin-top 0px
+	padding 0px
+
+.wrapper
+	min-height 100%//100vh
+	overflow hidden
+	.col1
+		float left
+		position relative
+		z-index 999
+		width 17%
+	.col2
+		float left
+		width 83%
+
+.sidebar
+	background-color #fff
+	min-height 100% //100vh
+	.section-top
+		background-color colorprin //#DE1B09
+		box-shadow 0 0.5rem 1rem rgba(0, 0, 0, 0.15)
+		.logo
+			display block
+			margin 0px auto
+			padding-top 24px			
+			width 50%
+		.user
+			color #fff !important
+			padding 16px
+			font-size 14px
+			.name
+				a 
+					color #fff
+					
+	.main
+		margin-top 8px
+		display block
+		ul
+			li
+				margin-bottom 4px
+				margin-left 8px
+				a					
+					color colorosc !important
+					display block
+					font-size 1.1vw//1.1em
+					padding 5px 1px
+					i
+						margin-right 10px
+						
+					&:hover
+						background-color colorprin
+						box-shadow 0 0.5rem 1rem rgba(0, 0, 0, 0.15)
+						color #fff !important
+						text-decoration none
+				a.active
+					background-color colorprin
+					box-shadow 0 0.5rem 1rem rgba(0, 0, 0, 0.15)
+					color #fff !important
+					text-decoration none
+				ul
+					background-color #e8e8e8
+					li
+						a
+							color colorprin !important							
+							font-size 1em
+				&:hover
+					ul
+						display block
+
+.navbar
+	background-color colorprin
+	a
+		color #fff !important
+	.breadcrumb
+		background-color colorprin
+		padding 0px
+		margin 10px			
+		a
+			color #fff !important
+			&:hover
+				font-weight: bold
+				text-decoration none
+
+.page
+	padding-top 16px
+	padding-bottom 0px
+	.breadcrumb
+		background-color #fff		
+		box-shadow 0 0.5rem 1rem rgba(0, 0, 0, 0.10) !important
+		.breadcrumb-item
+			a
+				color colorprin !important
+				&:hover
+					color colorosc !important
+					text-decoration none
+.panel
+	background-color #fff
+	border-radius 6px
+	border-bottom 2px solid colorprin
+	width 100%
+	.header
+		border-bottom 1px solid #e8e8e8
+		h2.title			
+			display inline-block
+			color colorprin
+			font-size 1.1em
+			padding 12px 16px
+		ul
+			display inline-block
+			float right
+			margin-right 12px
+			li
+				display inline-block
+				position relative
+				a
+					color #333
+					display inline-block
+					padding 10px
+					&:hover
+						background-color #f6f6f6
+						color #222
+						text-decoration none
+					svg
+						color colorprin
+				ul
+					background-color #fff
+					border 1px solid #f0f0f0
+					display none
+					float none
+					position absolute
+					top -60px
+					right -16px
+					width 150px
+					li
+						display inline-block
+						border-bottom 1px solid #f0f0f0
+						width 100%
+						&:last-child
+							border-bottom 0px
+						a
+							display inline-block
+							width 100%
+				&:hover
+					ul
+						display block			
+
+	.inside
+		padding 16px
+		.form_search
+			display none
+			margin-bottom 16px
+			.btn
+				width 100%				
+			
+.opts
+	a
+		border-radius 4px
+		border 1px solid #dedede
+		display inline-block
+		padding 2px 5px//3px 5px
+		color colorprin
+		&:hover
+			color colorosc !important
+
+.sed_galeria
+	overflow hidden
+	.btn-submit
+		display block
+		margin-right 1%
+		width 100%
+		a
+			color colorprin
+			border 1px dashed #6666
+			border-radius 4px
+			display block
+			font-size 1.5em
+			text-align center
+			padding 12px
+			with 100%
+			&:hover
+				background-color colorprin
+				color #fff
+	.tumbs
+		overflow hidden
+		.tumb
+			float left
+			margin-top 16px
+			position relative
+			width 48%
+			a
+				background-color rgba(0,0,0, .5)
+				color #fff
+				border-radius 50%
+				padding 6px 10px
+				display inline-block
+				position absolute
+				bottom 8px
+				right 8px
+				&:hover
+					color colorprin !important
+			img
+				border-radius 4px
+				width 100%				
+			&:nth-child(odd)
+				margin-right 4%

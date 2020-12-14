@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="c72ee9cd-a6f3-4694-8827-a1b4d2a242ad" activeEnvironment="Default" name="ApiSunat" soapui-version="5.6.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="af6e555e-bfae-435e-84fb-e6346bd68429" wsaVersion="NONE" name="BillServicePortBinding" type="wsdl" bindingName="{http://service.gem.factura.comppago.registro.servicio.sunat.gob.pe/}BillServicePortBinding" soapVersion="1_1" anonymous="optional" definition="https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl"><con:part><con:url>https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://service.gem.factura.comppago.registro.servicio.sunat.gob.pe/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://service.gem.factura.comppago.registro.servicio.sunat.gob.pe/" xmlns:ns1="http://service.sunat.gob.pe">
+  <wsdl:import location="billService?ns1.wsdl" namespace="http://service.sunat.gob.pe"/>
+  <wsdl:binding name="BillServicePortBinding" type="ns1:billService">
+    <soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="getStatus">
+      <soap11:operation soapAction="urn:getStatus" style="document"/>
+      <wsdl:input name="getStatusRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStatusResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendBill">
+      <soap11:operation soapAction="urn:sendBill" style="document"/>
+      <wsdl:input name="sendBillRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sendBillResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendPack">
+      <soap11:operation soapAction="urn:sendPack" style="document"/>
+      <wsdl:input name="sendPackRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sendPackResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSummary">
+      <soap11:operation soapAction="urn:sendSummary" style="document"/>
+      <wsdl:input name="sendSummaryRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sendSummaryResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="billService">
+    <wsdl:port name="BillServicePort" binding="ns0:BillServicePortBinding">
+      <soap11:address location="https://e-beta.sunat.gob.pe:443/ol-ti-itcpfegem-beta/billService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?ns1.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://service.sunat.gob.pe" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://service.gem.factura.comppago.registro.servicio.sunat.gob.pe/" xmlns:ns1="http://service.sunat.gob.pe">
+  <wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:schema>
+      <xsd:import schemaLocation="billService.xsd2.xsd" namespace="http://service.sunat.gob.pe"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getStatus">
+    <wsdl:part name="parameters" element="xsns:getStatus" xmlns:xsns="http://service.sunat.gob.pe"/>
+  </wsdl:message>
+  <wsdl:message name="getStatusResponse">
+    <wsdl:part name="parameters" element="xsns:getStatusResponse" xmlns:xsns="http://service.sunat.gob.pe"/>
+  </wsdl:message>
+  <wsdl:message name="sendBill">
+    <wsdl:part name="parameters" element="xsns:sendBill" xmlns:xsns="http://service.sunat.gob.pe"/>
+  </wsdl:message>
+  <wsdl:message name="sendBillResponse">
+    <wsdl:part name="parameters" element="xsns:sendBillResponse" xmlns:xsns="http://service.sunat.gob.pe"/>
+  </wsdl:message>
+  <wsdl:message name="sendPack">
+    <wsdl:part name="parameters" element="xsns:sendPack" xmlns:xsns="http://service.sunat.gob.pe"/>
+  </wsdl:message>
+  <wsdl:message name="sendPackResponse">
+    <wsdl:part name="parameters" element="xsns:sendPackResponse" xmlns:xsns="http://service.sunat.gob.pe"/>
+  </wsdl:message>
+  <wsdl:message name="sendSummary">
+    <wsdl:part name="parameters" element="xsns:sendSummary" xmlns:xsns="http://service.sunat.gob.pe"/>
+  </wsdl:message>
+  <wsdl:message name="sendSummaryResponse">
+    <wsdl:part name="parameters" element="xsns:sendSummaryResponse" xmlns:xsns="http://service.sunat.gob.pe"/>
+  </wsdl:message>
+  <wsdl:portType name="billService">
+    <wsdl:operation name="getStatus">
+      <wsdl:input name="getStatusRequest" message="ns1:getStatus"/>
+      <wsdl:output name="getStatusResponse" message="ns1:getStatusResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendBill">
+      <wsdl:input name="sendBillRequest" message="ns1:sendBill"/>
+      <wsdl:output name="sendBillResponse" message="ns1:sendBillResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendPack">
+      <wsdl:input name="sendPackRequest" message="ns1:sendPack"/>
+      <wsdl:output name="sendPackResponse" message="ns1:sendPackResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendSummary">
+      <wsdl:input name="sendSummaryRequest" message="ns1:sendSummary"/>
+      <wsdl:output name="sendSummaryResponse" message="ns1:sendSummaryResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService.xsd2.xsd</con:url><con:content><![CDATA[<xs:schema version="1.0" targetNamespace="http://service.sunat.gob.pe" xmlns:tns="http://service.sunat.gob.pe" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="getStatus" type="tns:getStatus"/>
+  <xs:element name="getStatusResponse" type="tns:getStatusResponse"/>
+  <xs:element name="sendBill" type="tns:sendBill"/>
+  <xs:element name="sendBillResponse" type="tns:sendBillResponse"/>
+  <xs:element name="sendPack" type="tns:sendPack"/>
+  <xs:element name="sendPackResponse" type="tns:sendPackResponse"/>
+  <xs:element name="sendSummary" type="tns:sendSummary"/>
+  <xs:element name="sendSummaryResponse" type="tns:sendSummaryResponse"/>
+  <xs:complexType name="sendSummary">
+    <xs:sequence>
+      <xs:element name="fileName" type="xs:string" minOccurs="0"/>
+      <xs:element name="contentFile" ns1:expectedContentTypes="application/octet-stream" type="xs:base64Binary" minOccurs="0" xmlns:ns1="http://www.w3.org/2005/05/xmlmime"/>
+      <xs:element name="partyType" type="xs:string" maxOccurs="1" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendSummaryResponse">
+    <xs:sequence>
+      <xs:element name="ticket" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getStatus">
+    <xs:sequence>
+      <xs:element name="ticket" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getStatusResponse">
+    <xs:sequence>
+      <xs:element name="status" type="tns:statusResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="statusResponse">
+    <xs:sequence>
+      <xs:element name="content" type="xs:base64Binary" minOccurs="0"/>
+      <xs:element name="statusCode" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendPack">
+    <xs:sequence>
+      <xs:element name="fileName" type="xs:string" minOccurs="0"/>
+      <xs:element name="contentFile" ns2:expectedContentTypes="application/octet-stream" type="xs:base64Binary" minOccurs="0" xmlns:ns2="http://www.w3.org/2005/05/xmlmime"/>
+      <xs:element name="partyType" type="xs:string" maxOccurs="1" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendPackResponse">
+    <xs:sequence>
+      <xs:element name="ticket" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendBill">
+    <xs:sequence>
+      <xs:element name="fileName" type="xs:string" minOccurs="0"/>
+      <xs:element name="contentFile" ns3:expectedContentTypes="application/octet-stream" type="xs:base64Binary" minOccurs="0" xmlns:ns3="http://www.w3.org/2005/05/xmlmime"/>
+      <xs:element name="partyType" type="xs:string" maxOccurs="1" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendBillResponse">
+    <xs:sequence>
+      <xs:element name="applicationResponse" type="xs:base64Binary" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://e-beta.sunat.gob.pe:443/ol-ti-itcpfegem-beta/billService</con:endpoint></con:endpoints><con:operation id="633c3ba7-d626-47cb-9831-0280a9b8c8fa" isOneWay="false" action="urn:getStatus" name="getStatus" bindingOperationName="getStatus" type="Request-Response" outputName="getStatusResponse" inputName="getStatusRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4d6ba537-85be-4fd5-a437-79665b907c7d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://e-beta.sunat.gob.pe:443/ol-ti-itcpfegem-beta/billService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.sunat.gob.pe">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:getStatus>\r
+         <!--Optional:-->\r
+         <ticket>?</ticket>\r
+      </ser:getStatus>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getStatus"/></con:call></con:operation><con:operation id="b40f7485-8d86-42c7-93fe-631ebfbaf6ad" isOneWay="false" action="urn:sendBill" name="sendBill" bindingOperationName="sendBill" type="Request-Response" outputName="sendBillResponse" inputName="sendBillRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6e7206ed-1461-4cdd-9b4a-119450b5750b" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.sunat.gob.pe" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+	<soapenv:Header>
+		<wsse:Security>
+			<wsse:UsernameToken>
+				<wsse:Username>20530221548CRESPIRA</wsse:Username>
+				<wsse:Password>Respira20</wsse:Password>
+			</wsse:UsernameToken>
+		</wsse:Security>
+	</soapenv:Header>
+	<soapenv:Body>
+		<ser:sendBill>
+			<fileName>20530221548-03-B001-00000001.zip</fileName>
+			<contentFile>UEsDBBQAAAAIAPFbiFHVAZSl8Q8AADMpAAAgAAAAMjA1MzAyMjE1NDgtMDMtQjAwMS0wMDAwMDAwMS54bWztWVmTokoWfr+/wnEeK6oBca2waiJZRJRFdnViHhAQURZlEeHXT+JWWmV13+6ZnomYmI7bF/PkyS/Pniez+387BH5t78SJF4WvdewbWq85oRXZXui+1llFfO52W71nrF5LUjO0TT8Kndd6GNX/9vZHnw33kWc5NQgRJq/1LA5fIjPxkpfQDJzkJdk6lrf0LDP1ovAlW/gvibVyAvPlkNgv57XPjfpp+YtlWj8JQUZBEIXAdWPHNVMHDrdQujBNbkAXvwZKQHbrIaCVnjXNqv8cy4H/t5ylaaUvdmRlAWQ/4V6X2HDBKk23LwiS5/m3HP8WxS7SQFEUQXsI5LETz/3rhds5pL8kMX1InbBy4iOpd/bPgkqZ6cNJx6ZMqE+xdW7QMjv90gSQ+wOwFu5usdQKSzluxEd25jvvhjok3heWwpApz50WPXthFYmWU3/7o9aH1nrRCO6qfAKJn6kV8US9sVIIf6VvfTt5UTw3NNMsdmqs/VpnYgdOOHFFrV/nHZsNl9FxSJphFELtfK88asg76Sqya8B3o9hLV8EjHVT5pIZMk89Q2WcLa4bPFQXFsVYduRfjzwB+DJ84MZ+TlYmdsWRn6cQwj52aJrOv9ZMeamyGyTKKg+R++HM7OeHe8aOtYz8nF4GrTZHPG1Ce6yTpr2hzo8kJRDf9zHmjJ3ESaOoIE4fpTjmkaUKUBCMjhiS99pEPzH3k1g6n4QdPXi1+WsEddDUe8Js5HrdZeSpnJN8JysMMUwx93MJ261RvFq5RNFYBOtPpghygisbp/lM6DomlBsI8bE8F/6Cv8WnQbA+BuKWKGafujCfUF8DexwuSe5qWB5MSxoXMiC0320cTjAWomBmh77FJUCSDNbmhsf2Q3QfpIivSTDqQhJMhYrzpxQQmeuqaHBIxNxyORbK92i8RpGEU+IwwfSpvGqbHcbrhj8p4jQSDsZGh68ZuTgpSJAdGjO8nynDKP/VwxQ5WVjvWRliaIZ19qTNAkoR4HbJtV37qgYCcTkiup+pp0xkFEzwx9K17EBubQTuKw9TL2t1wqIDVamm2njYzeoAboRqGkjhg9QVWkqEFimTT7bivr33ks60r84+d4uqKaQvtVeXhOiCdOD0VEeeNZ1k2KkmSiDIX5CwBXJYV6SU+QYCwYKKckmajcTRnV3tLABLNERLIFxTN8WDDAEyjiRVParR2mFCgTbiCToCI57GRP2/4pT0c7Vm6tZo1/P0iGCQsI/ss7W/mRgs1jfl21hisTUssFx7RYmm9tJnBZlEQlDmdb+EeS55Aj3uAPDdkTRhoJKbIWmska7wrobQrNQ4rC+ddXgXOIEcLnqJzfj07CGtwECjZPNLKexrUlxiUn+UfUEA5ye/yJEaMdH1EcPrpy0vNnAIzSpekIQV0SdF1RVJplKfYIwbp5rGE6qI+GE2gvgNdwyYq3RsqmgDH8kAlCVHFRpqsEIqsC3D9iGAHfCYpLYpb0yZPuEecmZTLqi8rUJ6UXwOML0HBr2lMoNwDq4LlSb6EZ2gd4sC0wHRR0uUl5IW6gxz+RUVVO4gUrfHEWbY85z5i6SWhn7B4Xg0PXV2Hcg5kRdGguvQAfnvdJUlQstbStE3XVTe6rmo9XkXtkYR2XZnWeajnRPPlATsYDTRoL21Du1rRIrgNn7G0QOtkJZNWQhsVvKqhIkWSQGE/xhMB44lyXXoCqnkpIuFvAoxDCemgyjhkKZ/wpF7At8VJJnX0wdwdycuxSbFCkc/ZmBg0RFb3D9PN1OhO431aHjgFxcKOEemU4JLtIWYkZiQD1lz2GDuVTVnpmf5klVItrzeau6bpWNu1scSGcxwbjaI4LVk7KfUO0mvGkUHonjGPx2thtU8jtmh4ZacRd70dIXD0et8l9bLUDJ0fiDnfSsfJUhjvZijBbFKxm2mUBsZFc51P+InBwEPRzRu9cZDMfEJybQSZRlHDxTyBQqIlli9n/GLcChKFGmEyZUpqkpCTiIFVbq3b26VoZE2+ZbQ6eTfnuWBJafmh1NUDTgpiIfcyfrLiF4XM7npR4aHdHGluhptVV1bGB7OLENw4XqEkyGkATJEErSh3XdHgmSZDkgmsTtqAyKEvGDafUQAnYNtHuPSAkKwcRLPYHMqoRUV7riEUNtkqYP5u5wafzRs9jwsJn8NH+wUulXB+NTvl5IELIC8F/Dus2Wz+jtVbWzjIrEDPTENfc4G9n3mtfK4Cu4rNodSkB66kLY3OlqUxQnqywXZQkrPMVloxjqKxdMpJGVWBNEQIwOaAOuXIUOFphgKGS8jUwOjkaG8QM8WmlBRMj4e0h6qFP1VhvK2tKkdsFigk8JrQJuyOH1oMrVQ2kQh3K2yAS1NAIvxVwwU8tA8vzdhxPoNxqw3hnDEyVqg9JErR6+5t3Ma5cOQvAt+fFa1w0WAzi9H2UMd8gQtbm+kVjtLNuQ8YrE7sFyIGa6KwYmkbrteLmZG7c0aDNU4vbMYPqrlZIywXa5I4gJl8XA8YctOQYN7w8KczNAHIXbOZ8+4HGYN3GS0m3f5IRtPo7vmhexMbLMkzuWO6BA0YDcxyIgEMDSyXWAGGB6ZElYBpAhYQm2oefiUwZEFTItZgKAGz+lb8OXABI4G5BL80D79EcZ4PALOpcD/iDSo+WYJ4JAo0txo3gSId6bnrPPLVIFzhPMWzQxn+FW/iD/qbJHK5TexdgqrkhPKj1b5zl9hW+86kSv5utS99pOfEtpIP0hNAAqADojjK6RLYmX4cLyq9huA8pqv10B9WpV8Ghhd9aWBL1X5dsJCI1VnvdsU/B8S+wpcuds2JshrzEjjue8QhQWUfDDAosEDFt6lwtpUeC/eEe7H/AlT7SUA9fpsAnuwuoGjA5wCHOZLb7jFvlgTTzRcqQCNq7PLsLLvN88WjPD/Se6XJ0MXHXF9QAIso0eVns/0dDsV+znEF5n6Q763GasV7vfXMEJLZVCh5pVXRc+ok3+SU1xIF3AXgCf6YqyNJ4nkQ3cQmDyMEZUhlxyjsAqfgmULmGgBNFuYFsHW1QfDh0wSzFWK2zjHJQVy5BKJbBGPGa9HjodyhBE8hporeoO1D92nbzkSlOSsVxyzRHU9mi5jbDLZIuZfLnhfNgwzzUCNdHdZdr+P3FIFeiKIlPM23zbCrP403AR7Zs2ljtFEnq43KlIxJjJEst1bjCezn1rNguZwS+zYUajCVm2gql16RoVYaxOvFOpCYTmpvwnnuu3I4j1SWWUynhq2uEXHidkx448NZBM8oiXRleYmNxh6mLQ4qTT5F8WaqqQM+5KHnmEzVoZGA1Q5bJM1o6OypY9lMU9KycIFnT8WSpCgxppoSNkqdrKWlqx114HcCGjUb60yMHUb33VFPKhwKa7UNmiycyGbjQRJZBReIObA9MwkJOypbYxyPkkkQjvPYn3Ft187mRkIvjGWwbg2eDjLSI+dWV4i0SZaPe9FU3vE9Kzi4skC06d1+kI4mJa5oaIdlhC7g7M52KRfrueIjHDK0lwpgnpBwVOgdnVs2cmfpM9l8HjU4DYg7QxiXG6JcFb20zHiRCdgUxRKjBFprhE+BZhHNFLWtfJcU3s4u/P0QHt/DCBywMCaZJiyNPSJvrmEyqvxkMbGm4lYd4S0MZ83NnEOf9paVpl2+J4rswloZ0NY8IdteuSpteeFP80LhRG0tNdx506Bkzk/UzNZGXAvrGIaoaGraCwIhlDRVXUyXG5zo+No2bI4jqeBpDYt2uW/IjUgWMHBu5j826H3kroVHbpv7u+YfDh9ew6tbO/Lg2t5HHt3w+9bCqoj66dmKpd4a37A+8ol65iSzJI2C8239yIz2kUcTZ374i4BX82f09OeMfDOfJJlDVXo30Ab6jDWe0W4fuZ+5sJ5euapHDzKynZrvJSlLvdZRDMXqxxFw4fW0EMzAea1P6BfYjgP1NHO8uVfPLFvnxY0WL0kGbfhiwVHiQIoTvEDbm37kRsn1F0R9Q/E+8mDvi0hClEI5zNDNTNfhIsv0nUoiDGpaf+v/5e8kBWvy3xVReKmRGpBpQQU1UhRq8IYOeWqKyNHKP/7x1kcuYBdg6vz8RWZxdeUu7hRmFbHWbGCdGvC3K/Ok4EnpC3v9bUILJ1SI9AnpsgvnhVCdLEwFyBJ71tvZPZ/oFb9p3YReFWNnR7JURW6gLRxtNLBWs3vj4ttlUVxMzDgtKvKJfhyyNhTu+sJ1nLxA145vaEeLtuvnwWMXn+Z+ycnt+tsXssOE+Z6U7ypU0twIfhxenU9Cp8tiTYA3NJETGZYUa/A2XRNEWaVrMq1MWBnUFEC+h0G1/MP2F1ofeWzPoyyU53pQqauTQJqa1io4l4QTT5X6cWj6728573JD87399foO9cko1fS7WA+B+sgP5egjHwPpKBewrCrevNBVsu3W95z4Xrf/0cjhHNf0aTifFjfyy44LMzo+LvgXg+kT1HkX834K2HbsJMlp9iTEmXSteFX17iOPZk6QyPcw+8hXKt/MXKPj62D4ECunM+ffFCtV3f6dsYI2Ot1ms9P7jwSKRrAcpym1CZR2Dq8SNXipYsG/Ghbm1fnVCXEmvx8lN9vL32qcqNRUwHFAoJUaP6+RkAKjFOtcpbgB6SOPwY97Ho+iuLjb795aVRzeHoOnBZ+bAi30UseuCcdFSY22ohD2LFat+mcfL6k6ndoyimt0Fkdbp3534OJYu/2M3ZzqE/qqyGdh7tQ6i/M7E+VjJhztppoHNYIB+HY5rSEBBNWKmnXuBirtJrRQf2t/w87pfWW6JhSkKNkivUBdscyF73yFh+Pfen3kE+Pd+p+U5SoMCZtCN4qLr9JYExCapGuwNLcuSXtyP1xbuyyuXZzmxPU35S4p37U+rj3RvrMP1sLvC8fp3HnDriXzAnzTILCM/uG8fzfMtbTqQL0a4lG9vZexjzwwUB954MJfdiv6qz5Fv6H/YZ+Kv8WnvV6v+7VPBfBjnw5k+v8+/UWf0j/t01vnfeHmyqedL31KT8X/Wp72kQ9l/Kjw8WDgo9BJzbi4L/DVyXm93f+4ND9gvz0r2NDys8Tbfxk5zbsI+MB+RZqYxXtgfRfkjvOq/0N9j5Y438orNW5vpLePDHdPB7aUmccDtZbBRqBy0mt9Pq9fR9z5vD9HR+xYtQZav+J9APmO1X/N6tX5Dm/b8Di/u1WdGy//eOFKoX3JKLS9qnOouG9vcMfxn7HzO9/H1Zfo/Q3vKVjVBGM3EtxlSh/5oZZ95CsTfWp3/kyP8b3SdZOE/4aG51el+aKS/o6W5xwCTmxV93Ss+x4rZ9J95aMPTrCtnCM7ZnJqeX/HC1ynaqL6yNebXsX6VGR/eLo/as9+0J/9TOF/WPkfl/6Htf9z8T/XvNQJ3iOcchIr9o5GuXklEAVF41R46aMplny/9d0yXze44F3Lj/P2x5+qJ+8Bf8N2n6bOtYbfVeo+ch6+/fFPUEsBAh8AFAAAAAgA8VuIUdUBlKXxDwAAMykAACAAJAAAAAAAAAAgAAAAAAAAADIwNTMwMjIxNTQ4LTAzLUIwMDEtMDAwMDAwMDEueG1sCgAgAAAAAAABABgAMPrcl3/N1gEw+tyXf83WAcI/HHR/zdYBUEsFBgAAAAABAAEAcgAAAC8QAAAAAA==</contentFile>
+		</ser:sendBill>
+	</soapenv:Body>
+</soapenv:Envelope>
+]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendBill"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="62c7e15f-f04e-4c7b-970e-54e5842f8ca3" isOneWay="false" action="urn:sendPack" name="sendPack" bindingOperationName="sendPack" type="Request-Response" outputName="sendPackResponse" inputName="sendPackRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c39ad84f-1c2a-405d-bdd3-4b8b2d9d26ed" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://e-beta.sunat.gob.pe:443/ol-ti-itcpfegem-beta/billService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.sunat.gob.pe">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:sendPack>\r
+         <!--Optional:-->\r
+         <fileName>?</fileName>\r
+         <!--Optional:-->\r
+         <contentFile>cid:868733428333</contentFile>\r
+         <!--Optional:-->\r
+         <partyType>?</partyType>\r
+      </ser:sendPack>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendPack"/></con:call></con:operation><con:operation id="d9fb2002-df5f-4860-9635-90983fe376be" isOneWay="false" action="urn:sendSummary" name="sendSummary" bindingOperationName="sendSummary" type="Request-Response" outputName="sendSummaryResponse" inputName="sendSummaryRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0a6cd190-feb6-4aa3-b2e0-5d559b2af573" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://e-beta.sunat.gob.pe:443/ol-ti-itcpfegem-beta/billService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.sunat.gob.pe">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:sendSummary>\r
+         <!--Optional:-->\r
+         <fileName>?</fileName>\r
+         <!--Optional:-->\r
+         <contentFile>cid:1439317780535</contentFile>\r
+         <!--Optional:-->\r
+         <partyType>?</partyType>\r
+      </ser:sendSummary>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendSummary"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
