@@ -34,7 +34,7 @@
             <h3 class="titulo">REPORTE DE MOVIMIENTOS</h3>
             <h3 class="subtitulo">Rango de fechas</h3> --}}
         </div>
-        {{dd($doc)}}
+        {{-- {{dd($doc)}} --}}
         {{-- <center><h3>REPORTE DE MOVIMIENTOS</h3></center> --}}
         @php
             $tcli = 0;
