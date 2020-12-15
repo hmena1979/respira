@@ -15,7 +15,7 @@
 			<div class="col-md-12">
 				<div class="panel shadow">
 					<div class="inside">
-						{!! Form::open(['url'=>'/admin/paciente/'.$paciente->id.'/past']) !!}
+						{!! Form::open(['url'=>'/admin/paciente/'.$paciente->id.'/'.$item.'/past']) !!}
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="antecedentes">
@@ -210,10 +210,10 @@
                         html += "<thead><tr><th>CÓDIGO</th><th>NOMBRE</th><th></th></tr></thead>";
                         html += "<tbody>";
                         var regMostrar = 0;
-                        if(response.length <= 10){
+                        if(response.length <= 250){
                             regMostrar = response.length;
                         }else{
-                            regMostrar = 150;
+                            regMostrar = 250;
                         }
                         for (var i = 0; i < regMostrar; i++) {
                             html += "<tr><td>"+response[i].codigo + "</td><td>" + response[i].nombre+"</td>";

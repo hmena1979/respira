@@ -227,7 +227,7 @@ class PacienteController extends Controller
     	endif;
     }
 
-    public function postPacientePast(Request $request, $id)
+    public function postPacientePast(Request $request, $id, $item)
     {
         $paciente = Paciente::findOrFail($id);
         $antecedentes = [
@@ -254,7 +254,7 @@ class PacienteController extends Controller
         $paciente->tie_enfer = Str::upper(e($request->input('tie_enfer')));
         $paciente->tenfact = Str::upper(e($request->input('tenfact')));
         if($paciente->save()):
-            return redirect('/admin/historias/'.$id.'/001/home')->with('message', 'Antecedentes actualizados')->with('typealert', 'success');
+            return redirect('/admin/historias/'.$id.'/'.$item.'/home')->with('message', 'Antecedentes actualizados')->with('typealert', 'success');
         else:
             return back()->withErrors($validator)->with('message', 'No se actualizó el registro')->withinput();
         endif;

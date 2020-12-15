@@ -49,14 +49,14 @@
         <div class="cuadro">
             <table class="cliente">
                 <tr>
-                    <th class="text-left" width="50%">PACIENTE:</th>
-                    <th class="text-left" width="50%">PRESCRIPTOR:</th>
+                    <th class="text-left" width="50%">PACIENTE</th>
+                    <th class="text-left" width="50%">MÉDICO</th>
                 </tr>
             </table>
             <table class="cliente">
                 <tr>
                     <td class="tam50"><span class="negrita">DOCUMENTO N°: </span> {{$paciente->numdoc}}</td>
-                    <td class="tam50"><span class="negrita">DOCTOR: </span> {{$doctor->nombre}}</td>
+                    <td class="tam50"><span class="negrita">NOMBRE: </span> {{$doctor->nombre}}</td>
                 </tr>
                 <tr>
                     <td class="tam50"><span class="negrita">NOMBRE: </span> {{$paciente->razsoc}}</td>
@@ -184,7 +184,11 @@
                         </div>
                         @ENDIF
                         <div class="telfcita">
-                            Teléfono: {{ $doctor->telefono }} / Celular: {{ $doctor->celular }}
+                            {{-- Teléfono: {{ $doctor->telefono }} / Celular: {{ $doctor->celular }} --}}
+                            Citas: Telf.: 073-600195<br>
+                            Cel.: 995303715<br>
+                            Farmacia: Tel.: 073-600187
+
                         </div>
                         
                     </td>

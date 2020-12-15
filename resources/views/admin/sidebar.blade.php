@@ -59,6 +59,9 @@
 				@if(kvfj(Auth::user()->permissions,'notfars'))
 				<a href="{{ url('/admin/notfars/'.session('padmision')) }}" class="lk-notfars lk-notfar_add lk-notfar_edit lk-notfar_delete" "data-toggle="tooltip" data-placement="top" title = 'Nota de Débito/Crédito'><i class="fas fa-window-restore"></i><span>Nota de Débito/Crédito</span></a>
 				@endif
+				@if(kvfj(Auth::user()->permissions,'report'))
+				<a href="{{ url('/admin/rfarmacia') }}" class="report" "data-toggle="tooltip" data-placement="top" title = 'Reportes'><i class="fas fa-window-restore"></i><span>Reportes</span></a>
+				@endif
 			</div>
 		</li>
 		<li class="item" id="sunat">

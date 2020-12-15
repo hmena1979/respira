@@ -37,7 +37,7 @@ Route::prefix('/admin')->group(function(){
     Route::post('/paciente/add', 'Admin\PacienteController@postPacienteAdd')->name('paciente_add');
     Route::get('/paciente/{id}/edit', 'Admin\PacienteController@getPacienteEdit')->name('paciente_edit');
     Route::post('/paciente/{id}/edit', 'Admin\PacienteController@postPacienteEdit')->name('paciente_edit');
-    Route::post('/paciente/{id}/past', 'Admin\PacienteController@postPacientePast')->name('pacientes');
+    Route::post('/paciente/{id}/{item}/past', 'Admin\PacienteController@postPacientePast')->name('pacientes');
     Route::get('/paciente/{id}/appointment', 'Admin\PacienteController@getPacienteAppointment')->name('paciente_appointment');
     Route::post('/paciente/{id}/appointment', 'Admin\PacienteController@postPacienteAppointment')->name('paciente_appointment');
     Route::get('/paciente/{id}/delete', 'Admin\PacienteController@getPacienteDelete')->name('paciente_delete');
@@ -256,8 +256,11 @@ Route::prefix('/admin')->group(function(){
 
     //Modulo Reportes
     Route::get('/radmision', 'Admin\ReporteController@getReporteAdmision')->name('report');
+    Route::get('/rfarmacia', 'Admin\ReporteController@getReporteFarmacia')->name('report');
     Route::post('/radmision/pacientes', 'Admin\ReporteController@postReportePaciente')->name('report');
     Route::post('/radmision/servicios', 'Admin\ReporteController@postReporteServicio')->name('report');
+    Route::post('/rfarmacia/productos', 'Admin\ReporteController@postReporteProducto')->name('report');
+    Route::post('/rfarmacia/movprod', 'Admin\ReporteController@postReporteMovProducto')->name('report');
 
     //SUNAT - Geberación de XML y envio a SUNAT
     Route::get('/sunat/{id}/xml', 'Admin\SunatController@getSunatAdmision')->name('pdf');

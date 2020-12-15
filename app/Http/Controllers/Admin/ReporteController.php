@@ -15,6 +15,10 @@ use App\Http\Models\Historia;
 use App\Http\Models\Param;
 use App\Http\Models\Factura;
 use App\Http\Models\Detfactura;
+use App\Http\Models\Salida;
+use App\Http\Models\Detsalida;
+use App\Http\Models\Producto;
+
 
 class ReporteController extends Controller
 {
@@ -37,6 +41,18 @@ class ReporteController extends Controller
         ];
 
         return view('admin.report.admision',$data);
+    }
+
+    public function getReporteFarmacia()
+    {
+        $productos = Producto::orderBy('nombre')->pluck('nombre','id');
+        $fpago = Categoria::where('modulo', 11)->pluck('nombre','codigo');
+        $data = [
+            'productos' => $productos,
+            'fpago' => $fpago
+        ];
+
+        return view('admin.report.farmacia',$data);
     }
 
     public function postReportePaciente(Request $request)
@@ -255,5 +271,183 @@ class ReporteController extends Controller
 
     }
 
-    // Request $request
+    public function postReporteProducto()
+    {
+        $parametro = Param::findOrFail(1);
+        $productos = Producto::with(['umedida'])->orderBy('nombre')->get();
+
+        $data = [
+            'parametro' => $parametro,
+            'productos' => $productos
+        ];
+        $pdf = PDF::loadView('pdf.rproductos', $data)->setPaper('A4', 'portrait');
+        return $pdf->stream('Pacientes.pdf', array('Attachment'=>false));
+    }
+
+    public function postReporteMovProducto(Request $request)
+    {
+        $parametro = Param::findOrFail(1);
+        $opprod = e($request->input('rp_optp'));
+        $optipo = e($request->input('rp_optt'));
+        $opfp = e($request->input('rp_optfp'));
+        $grupo = e($request->input('rs_group'));
+        $fini = e($request->input('rs_fini'));
+        $ffin = e($request->input('rs_ffin'));
+
+        if($optipo == 1){
+            $tipo = [1=>'VENTA', 2=>'CONSUMO'];
+            $array_tipo = [1,2];
+        }else{
+            if($request->input('rp_tipo') == 1){
+                $tipo = [1=>'VENTA'];
+                $array_tipo = [1];
+            }else{
+                $tipo = [2=>'CONSUMO'];
+                $array_tipo = [2];
+            }
+        }
+
+        if($opfp == 1){
+            $fpago = Salida::with(['fp'])->select('fpago_id')->whereBetween('fecha',[$fini,$ffin])->groupBy('fpago_id')->get();
+        }else{
+            $fpago = Salida::with(['fp'])->select('fpago_id')
+                ->where('fpago_id',$request->input('rp_fpago'))
+                ->whereBetween('fecha',[$fini,$ffin])->groupBy('fpago_id')->get();
+        }
+
+        if($opprod == 1){
+            $producto = Detsalida::with('prod')
+            ->join('salidas','detsalidas.salida_id','salidas.id')
+            ->whereBetween('salidas.fecha',[$fini,$ffin])
+            ->where('salidas.anulado',2)
+            ->select('detsalidas.producto_id')
+            ->groupby('detsalidas.producto_id')
+            ->get();
+
+            // $producto = Salida::join('detsalidas','salidas.id','detsalidas.salida_id')
+            //     ->join('productos','detsalidas.producto_id','productos.id')
+            //     ->whereBetween('fecha',[$fini,$ffin])
+            //     ->where('salidas.anulado',2)
+            //     ->select('detsalidas.producto_id','productos.nombre')
+            //     ->groupby('detsalidas.producto_id')
+            //     ->get();
+            $array_prod = Salida::join('detsalidas','salidas.id','detsalidas.salida_id')
+                ->whereBetween('fecha',[$fini,$ffin])
+                ->where('salidas.anulado',2)
+                ->groupby('detsalidas.producto_id')
+                ->pluck('detsalidas.producto_id');
+        }else{
+            $producto = Salida::join('detsalidas','salidas.id','detsalidas.salida_id')
+                ->join('productos','detsalidas.producto_id','productos.id')
+                ->whereBetween('fecha',[$fini,$ffin])
+                ->where('salidas.anulado',2)
+                ->where('detsalidas.producto_id',$request->input('rp_producto'))
+                ->select('detsalidas.producto_id','productos.nombre')
+                ->groupby('detsalidas.producto_id')
+                ->get();
+            $array_prod = Salida::join('detsalidas','salidas.id','detsalidas.salida_id')
+                ->whereBetween('fecha',[$fini,$ffin])
+                ->where('salidas.anulado',2)
+                ->where('detsalidas.producto_id',$request->input('rp_producto'))
+                ->groupby('detsalidas.producto_id')
+                ->pluck('detsalidas.producto_id');
+        }
+
+        switch($grupo){
+            case 1:
+                $mov = array();
+                foreach($fpago as $fpg){
+                    $dt = Salida::with(['cli'])
+                    ->join('detsalidas','salidas.id','detsalidas.salida_id')
+                    ->join('productos','detsalidas.producto_id','productos.id')
+                    ->whereBetween('fecha',[$fini,$ffin])
+                    ->where('salidas.fpago_id',$fpg->fpago_id)
+                    ->where('salidas.anulado',2)
+                    ->whereNull('detsalidas.deleted_at')
+                    ->whereNull('salidas.deleted_at')
+                    ->wherein('salidas.tipsal',$array_tipo)
+                    ->wherein('detsalidas.producto_id',$array_prod)
+                    ->select('salidas.fecha', 'salidas.ruc','salidas.serie', 'salidas.numero','productos.nombre as producto','detsalidas.cantidad','detsalidas.precio','detsalidas.subtotal')
+                    ->get();
+                    if($dt->count()>0){
+                        $mov[$fpg->fp->nombre] = $dt;
+                    }
+                }
+        
+                $data = [
+                    'fini' => $fini,
+                    'ffin' => $ffin,
+                    'mov' => $mov,
+                    'fpago' => $fpago,
+                    'parametro' => $parametro
+                ];
+                $pdf = PDF::loadView('pdf.rmovfar', $data)->setPaper('A4', 'portrait');
+                // return view('pdf.rmovfar',$data);
+                
+                break;
+            case 2:
+                $doc = array();
+                foreach($producto as $d){
+                    // foreach($fpago as $fpg){
+                        $dt = Salida::with(['cli'])
+                        ->join('detsalidas','salidas.id','detsalidas.salida_id')
+                        ->whereBetween('fecha',[$fini,$ffin])
+                        // ->where('salidas.fpago_id',$fpg->fpago_id)
+                        ->where('salidas.anulado',2)
+                        ->where('detsalidas.producto_id',$d->producto_id)
+                        ->whereNull('detsalidas.deleted_at')
+                        ->whereNull('salidas.deleted_at')
+                        // ->wherein('salidas.tipsal',$array_tipo)
+                        ->select('salidas.fecha', 'salidas.ruc','salidas.serie', 'salidas.numero','detsalidas.cantidad','detsalidas.precio','detsalidas.subtotal')
+                        ->get();
+                        if($dt->count()>0){
+                            $doc[$d->prod->nombre] = $dt;
+                        }
+                    // }
+                }
+                $data = [
+                    'fini' => $fini,
+                    'ffin' => $ffin,
+                    'doc' => $doc,
+                    'producto' => $producto,
+                    'parametro' => $parametro
+                ];
+                $pdf = PDF::loadView('pdf.rmovfarprod', $data)->setPaper('A4', 'portrait');
+                // return view('pdf.rmovfarprod',$data);
+                break;
+
+            // case 3:
+            //     $doc = array();
+            //     foreach($doctor as $d){
+            //         //$mov = array();
+            //         foreach($fpago as $fpg){
+            //             $dt = Factura::with(['cli'])
+            //                 ->join('detfacturas','facturas.id','detfacturas.factura_id')
+            //                 ->whereBetween('fecha',[$fini,$ffin])
+            //                 ->where('facturas.fpago_id',$fpg->fpago_id)
+            //                 ->where('facturas.anulado',2)
+            //                 ->where('facturas.doctor_id',$d->doctor_id)
+            //                 ->whereNull('detfacturas.deleted_at')
+            //                 ->whereNull('facturas.deleted_at')
+            //                 ->wherein('detfacturas.servicio',$array_serv)
+            //                 ->select('facturas.fecha', 'facturas.ruc','facturas.serie', 'facturas.numero','detfacturas.servicio','detfacturas.stcli','detfacturas.stdr','detfacturas.subtotal')
+            //                 ->get();
+            //             if($dt->count()>0){
+            //                 $doc[$d->dr->nombre][$fpg->fp->nombre] = $dt;
+            //             }
+            //         }
+            //     }
+                
+            //     $data = [
+            //         'fini' => $fini,
+            //         'ffin' => $ffin,
+            //         'doc' => $doc,
+            //         'parametro' => $parametro
+            //     ];
+            //     $pdf = PDF::loadView('pdf.rmovadm_doc', $data)->setPaper('A4', 'portrait');
+            //     break;
+        }
+        
+        return $pdf->stream('rep.pdf', array('Attachment'=>false));
+    }
 }

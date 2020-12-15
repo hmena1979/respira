@@ -26,4 +26,13 @@ class Salida extends Model
     {
     	return $this->hasOne(Categoria::class, 'codigo', 'moneda')->where('modulo',10);
     }
+
+    public function det(){
+        return $this->hasMany(Detsalida::class);
+    }
+
+    public function fp()
+    {
+    	return $this->hasOne(Categoria::class, 'codigo', 'fpago_id')->where('modulo',11);
+    }
 }
