@@ -118,7 +118,6 @@
 						</div>
 						{!! Form::submit('Guardar', ['class'=>'btn btn-success mtop16', 'id'=>'guardar']) !!}
 						{!! Form::close() !!}
-
 					</div>				
 				</div>
 			</div>

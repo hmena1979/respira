@@ -61,14 +61,31 @@
 								<label for="telefono">Celular / Teléfono:</label>
 								{!! Form::text('telefono', $proveedor->telefono, ['class'=>'form-control','autocomplete'=>'off']) !!}
 							</div>
-						</div>
-						{!! Form::submit('Guardar', ['class'=>'btn btn-success mtop16', 'id'=>'guardar']) !!}
-						{!! Form::close() !!}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                {!! Form::submit('Guardar', ['class'=>'btn btn-success mtop16', 'id'=>'guardar']) !!}
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+						
 					</div>				
 				</div>
 			</div>
 
-		</div>		
+        </div>
+        <div class="row mtop16">
+			<div class="col-md-12">
+				<div class="panel shadow">
+					<div class="inside">
+                        <a href="{{ url('admin/paciente/'.$proveedor->id.'/convert') }}" class="btn btn-convertir" datatoggle="tooltip" data-placement="top" title="Convertir en paciente">
+                            Convertir en paciente
+                        </a> 
+
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
 @endsection
 @section('script')

@@ -58,6 +58,18 @@ class PacienteController extends Controller
         return view('admin.pacientes.add', $data);
     }
 
+    public function getPacienteConvert($id){
+        $historia = strval(Correlativo::where('index','HISTORIA')->value('valor') + 1);
+        $historia = str_pad($historia, 5, '0', STR_PAD_LEFT);
+        $paciente = Paciente::findOrFail($id);
+        $paciente->historia = $historia;
+        $paciente->tipo = 1;
+        if($paciente->save()){
+            $corr = Correlativo::where('index','HISTORIA')->update(['valor'=> intval($historia)]);
+            return redirect('/admin/pacientes')->with('message', 'Registro actualizado')->with('typealert', 'success');
+        }        
+    }
+
     public function postPacienteAdd(Request $request)
     {
         $tipo = $request->input('tipdoc_id');
