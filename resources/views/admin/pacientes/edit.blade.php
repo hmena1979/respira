@@ -134,9 +134,9 @@
 			var tipo = document.getElementById('tipdoc_id').value;
 			if(tipo=='1' && this.value.length != 8){
 				alert('DNI debe tener 8 caracteres');
-				document.getElementById('numdoc').select();
-				document.getElementById('numdoc').focus();
-				document.getElementById('guardar').style.display = 'none';
+				// document.getElementById('numdoc').select();
+				// document.getElementById('numdoc').focus();
+				// document.getElementById('guardar').style.display = 'none';
 				return false;
 			}
 			if(tipo=='1'){
@@ -147,11 +147,11 @@
 						alert('Documento no existe en la Base de datos de la RENIEC');
 						// document.getElementById('numdoc').select();
 						// document.getElementById('numdoc').focus();
-						document.getElementById('guardar').style.display = 'none';
+						// document.getElementById('guardar').style.display = 'none';
 						return false;
 					}else{
 						if(confirm('DNI ingresado pertecena a:\n'+response['apellidoPaterno']+' '+response['apellidoMaterno']+' '+response['nombres']+'\nEs correcto?')){
-							document.getElementById('guardar').style.display = 'block';
+							// document.getElementById('guardar').style.display = 'block';
 							var nombres = response['nombres'];
 							var espacio = nombres.indexOf(" ");
 							var nombre1 = espacio!=-1?nombres.substr(0,espacio):nombres;

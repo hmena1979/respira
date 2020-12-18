@@ -127,8 +127,8 @@
 			var tipo = document.getElementById('tipdoc_id').value;
 			if(tipo=='1' && this.value.length != 8){
 				alert('DNI debe tener 8 caracteres');
-				document.getElementById('numdoc').select();
-				document.getElementById('numdoc').focus();
+				// document.getElementById('numdoc').select();
+				// document.getElementById('numdoc').focus();
 				// document.getElementById('guardar').style.display = 'none';
 				return false;
 			}
