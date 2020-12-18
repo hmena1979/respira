@@ -577,14 +577,10 @@ class SunatController extends Controller
         if (!$result->isSuccess()) {
             // Error en la conexion con el servicio de SUNAT
             //var_dump($result->getError());
-            $cdr = $result->getCdrResponse();
-            // $factura->cdr = var_dump($result->getError());
-            $mensaje = $cdr->getDescription().PHP_EOL;
-
-            $factura->cdr = $mensaje;
+            $factura->cdr = var_dump($result->getError());
             // $factura->cdr = $result->getCdrResponse();
-            $fact = $factura->save();
-            return redirect('/admin/factura/'.$factura->id.'/edit')->with('message', 'Problemas de conexión')->with('typealert', 'danger');
+            // $fact = $factura->save();
+            // return redirect('/admin/factura/'.$factura->id.'/edit')->with('message', 'Problemas de conexión')->with('typealert', 'danger');
             // return 'Error de conexión';
         }
         $factura->status = 4;
@@ -598,18 +594,18 @@ class SunatController extends Controller
         $mensaje = '';
 
         if ($code === 0) {
-            $mensaje = 'ESTADO: ACEPTADA'.PHP_EOL.' ';
+            $mensaje = 'ESTADO: ACEPTADA';
             $factura->status = 5;
             if (count($cdr->getNotes()) > 0) {
-                $mensaje = 'INCLUYE OBSERVACIONES:'.PHP_EOL.' ';
+                $mensaje = ', INCLUYE OBSERVACIONES: ';
                 // Mostrar observaciones
                 foreach ($cdr->getNotes() as $obs) {
-                    $mensaje = 'OBS: '.$obs.PHP_EOL.' ';
+                    $mensaje = 'OBS: '.$obs.', ';
                 }
             }
         
         } else if ($code >= 2000 && $code <= 3999) {
-            $mensaje = 'ESTADO: RECHAZADA'.PHP_EOL.' ';
+            $mensaje = 'ESTADO: RECHAZADA'.', ';
             $factura->status = 6;
         
         } else {
@@ -619,7 +615,7 @@ class SunatController extends Controller
             $mensaje = 'Excepción'.' ';
         }
         
-        $mensaje = $cdr->getDescription().PHP_EOL;
+        $mensaje = $cdr->getDescription();
 
         $factura->cdr = $mensaje;
         
