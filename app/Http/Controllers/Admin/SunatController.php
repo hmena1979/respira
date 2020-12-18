@@ -577,10 +577,14 @@ class SunatController extends Controller
         if (!$result->isSuccess()) {
             // Error en la conexion con el servicio de SUNAT
             //var_dump($result->getError());
-            $factura->cdr = var_dump($result->getError());
+            $cdr = $result->getCdrResponse();
+            // $factura->cdr = var_dump($result->getError());
+            $mensaje = $cdr->getDescription().PHP_EOL;
+
+            $factura->cdr = $mensaje;
             // $factura->cdr = $result->getCdrResponse();
-            // $fact = $factura->save();
-            // return redirect('/admin/factura/'.$factura->id.'/edit')->with('message', 'Problemas de conexión')->with('typealert', 'danger');
+            $fact = $factura->save();
+            return redirect('/admin/factura/'.$factura->id.'/edit')->with('message', 'Problemas de conexión')->with('typealert', 'danger');
             // return 'Error de conexión';
         }
         $factura->status = 4;
