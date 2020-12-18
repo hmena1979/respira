@@ -272,6 +272,9 @@ Route::prefix('/admin')->group(function(){
     Route::get('/sunat/certificado', 'Admin\SunatController@getSunatCertificado')->name('pdf');
     Route::get('/sunat/certificadocer', 'Admin\SunatController@getSunatCertificadoCer')->name('pdf');
 
+    //Pruebas
+    // Route::get('/pruebas', 'Admin\SunatController@getSunat')->name('pdf');
+
 
     
 });
