@@ -38,7 +38,11 @@
                     <td>{{ $r->postie.' '.$r->ptie->nombre }}</td>
                     <td class="text-center">
                         <div class="opts">
-                            <a href="{{ url('/admin/historia/'.$r->id.'/prescriptiondelete') }}"datatoggle="tooltip" data-placement="top" title="Eliminar" onclick="return confirm('Desea eliminar el registro?')"><i class="fas fa-trash-alt"></i></a>										
+                            <button type="button" class="btn" onclick="editItemReceta('{{ $r->id }}')" datatoggle="tooltip" data-placement="top" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <a href="{{ url('/admin/historia/'.$r->id.'/prescriptiondelete') }}"datatoggle="tooltip" data-placement="top" title="Eliminar" onclick="return confirm('Desea eliminar el registro?')"><i class="fas fa-trash-alt"></i></a>
+                            {{-- <a href="{{ url('/admin/historia/'.$r->id.'/prescriptiondelete') }}"datatoggle="tooltip" data-placement="top" title="Eliminar" onclick="return confirm('Desea eliminar el registro?')"><i class="fas fa-trash-alt"></i></a> --}}
                         </div>
                     </td>
                 </tr>
@@ -48,10 +52,13 @@
     </div>
 </div>
 
-<div class="panel shadow">
+<div class="panel shadow" id ='agregaitem'>
     <div class="inside">
         {!! Form::open(['url'=>'/admin/historia/'.$historia->id.'/prescriptionadd']) !!}
         <div class="row">
+            {!! Form::text('receta_id', null, ['class'=>'form-control', 'autocomplete'=>'off','id'=>'receta_id','hidden']) !!}
+            {!! Form::text('tipitem', 1, ['class'=>'form-control', 'autocomplete'=>'off','id'=>'tipitem','hidden']) !!}
+            {!! Form::text('paciente_id', $historia->paciente_id, ['class'=>'form-control', 'autocomplete'=>'off','hidden']) !!}
             {!! Form::text('paciente_id', $historia->paciente_id, ['class'=>'form-control', 'autocomplete'=>'off','hidden']) !!}
             {!! Form::text('item', $historia->item, ['class'=>'form-control', 'autocomplete'=>'off','hidden']) !!}
             {!! Form::text('producto_id', '', ['class'=>'form-control', 'id'=>'producto_id', 'autocomplete'=>'off','hidden']) !!}
@@ -99,9 +106,9 @@
                 <label class="lsinmargen" for="posologia">Posología:</label>
                 <div class="input-group">
                     <div class="input-group-append">
-                        {!! Form::text('posologia', null, ['class'=>'form-control tam30p','autocomplete'=>'off']) !!}
-                        {!! Form::select('posmed_id',$posmed,'0',['class'=>'custom-select']) !!}
-                        {!! Form::select('posfrec_id',$posfre,'0',['class'=>'custom-select']) !!}	
+                        {!! Form::text('posologia', null, ['class'=>'form-control tam30p','id'=>'posologia','autocomplete'=>'off']) !!}
+                        {!! Form::select('posmed_id',$posmed,'0',['class'=>'custom-select','id'=>'posmed_id']) !!}
+                        {!! Form::select('posfrec_id',$posfre,'0',['class'=>'custom-select','id'=>'posfrec_id']) !!}	
                     </div>
                 </div>
             </div>
@@ -109,8 +116,8 @@
                 <label class="lsinmargen" for="postie_id">Tiempo:</label>
                 <div class="input-group">
                     <div class="input-group-append">
-                        {!! Form::text('postie', null, ['class'=>'form-control tam30p','autocomplete'=>'off']) !!}
-                        {!! Form::select('postie_id',$postie,'0',['class'=>'custom-select']) !!}
+                        {!! Form::text('postie', null, ['class'=>'form-control tam30p','id'=>'postie','autocomplete'=>'off']) !!}
+                        {!! Form::select('postie_id',$postie,'0',['class'=>'custom-select','id'=>'postie_id']) !!}
                     </div>
                 </div>
             </div>
@@ -118,15 +125,16 @@
         <div class="row mtop8f">
             <div class="col-md-6">
                 <label class="lsinmargen" for="recomendacion">Indicaciones:</label>
-                {!! Form::text('recomendacion', null, ['class'=>'form-control','autocomplete'=>'off']) !!}
+                {!! Form::text('recomendacion', null, ['class'=>'form-control','id'=>'recomendacion','autocomplete'=>'off']) !!}
             </div>
             <div class="col-md-1">
-                {!! Form::submit('+', ['class'=>'btn btn-success mtop25', 'title'=>"Agregar receta"]) !!}
+                {!! Form::submit('+', ['class'=>'btn btn-success mtop25', 'title'=>"Agregar receta", 'id'=>'btnprescription']) !!}
                 {!! Form::close() !!}
             </div>
         </div>
     </div>
 </div>
+
 <div class="panel shadow mtop10 mbottom16">
     <div class="inside">
         {!! Form::open(['url'=>'/admin/historia/'.$historia->id.'/prescriptionfooter']) !!}

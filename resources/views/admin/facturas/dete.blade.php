@@ -170,6 +170,20 @@
             document.getElementById("stcli").value = document.getElementById("cantidad").value * document.getElementById("precli").value
         });
 
+        // document.getElementById('precli').addEventListener("blur",function(){
+        //     if(this.value > document.getElementById("precio").value){
+        //         document.getElementById("predr").value = 0.00;
+        //         document.getElementById("stdr").value = 0.00;
+        //         document.getElementById("precio").value = this.value;
+        //         document.getElementById("stcli").value = document.getElementById("cantidad").value * this.value;
+        //         document.getElementById("subtotal").value = this.value * document.getElementById("cantidad").value;
+        //     }else{
+        //         document.getElementById("predr").value = document.getElementById("precio").value - this.value;
+        //         document.getElementById("stdr").value = document.getElementById("cantidad").value * document.getElementById("predr").value;
+        //         document.getElementById("stcli").value = document.getElementById("cantidad").value * document.getElementById("precli").value;
+        //     }
+        // });
+
         document.getElementById('precli').addEventListener("blur",function(){
             if(this.value > document.getElementById("precio").value){
                 document.getElementById("predr").value = 0.00;

@@ -212,6 +212,15 @@ class FacturaController extends Controller
         }
     }
 
+    public function getFacturaCambiaDoctor($id,$doctor_id)
+    {
+        $f = Factura::findOrFail($id);
+        $f->doctor_id = $doctor_id;
+        if($f->save()){
+            return true;
+        }
+    }
+
     public function getFacturaDetAdd($id)
     {
         $factura = Factura::findOrFail($id);

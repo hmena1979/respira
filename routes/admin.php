@@ -69,6 +69,7 @@ Route::prefix('/admin')->group(function(){
     Route::get('/historia/{id}/triage', 'Admin\HistoriaController@getHistoriaTriage')->name('historia_triage');
     Route::post('/historia/{id}/triage', 'Admin\HistoriaController@postHistoriaTriage')->name('historia_triage');
     Route::post('/historia/{id}/prescriptionadd', 'Admin\HistoriaController@postHistoriaPrescriptionAdd')->name('historia_prescription');
+    Route::get('/historia/{id}/searchprescription', 'Admin\HistoriaController@getHistoriaSearchPrescription')->name('historia_prescription');
     Route::post('/historia/{id}/prescriptionfooter', 'Admin\HistoriaController@postHistoriaPrescriptionFooter')->name('historia_prescription');
     Route::get('/historia/{id}/prescriptiondelete', 'Admin\HistoriaController@getHistoriaPrescriptionDelete')->name('historia_prescription');
 
@@ -140,6 +141,7 @@ Route::prefix('/admin')->group(function(){
     Route::get('/factura/{id}/detd', 'Admin\FacturaController@getFacturaDetDelete')->name('factura_add');
     Route::get('/factura/{id}/end', 'Admin\FacturaController@getFacturaEnd')->name('factura_edit');
     Route::get('/factura/{id}/bdetrac', 'Admin\FacturaController@getFacturaBuscaDetraccion')->name('factura_edit');
+    Route::get('/factura/{id}/{doctor_id}/cambiadr', 'Admin\FacturaController@getFacturaCambiaDoctor')->name('factura_edit');
     //Route::get('/factura/{id}/xml', 'Admin\FacturaController@getFacturaXML')->name('factura_edit');
 
     //Modulo de Ingresos

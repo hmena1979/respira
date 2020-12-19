@@ -279,8 +279,12 @@ class HistoriaController extends Controller
             session(['pagina' => "cuatro"]);
     		return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withinput();
         else:
-            $r = new Receta;
-            $r->historia_id = $id;
+            if($request->input('tipitem') == 1){
+                $r = new Receta;
+                $r->historia_id = $id;
+            }else{
+                $r = Receta::findOrFail($request->input('receta_id'));
+            }
             $r->producto_id = $request->input('producto_id');
             $r->nombre = Str::upper(e($request->input('nombre')));
             $r->umedida_id = e($request->input('umedida_id'));
@@ -296,6 +300,15 @@ class HistoriaController extends Controller
                 return redirect('/admin/historias/'.$request->input('paciente_id').'/'.$request->input('item').'/home')->with('message', 'Registro agregado')->with('typealert', 'success');
             endif;
         endif;
+    }
+
+    public function getHistoriaSearchPrescription(Request $request,$id)
+    {
+        if($request->ajax()){
+            $receta = Receta::findOrFail($id);
+            return response()->json($receta);
+        }
+        
     }
 
     public function getHistoriaPrescriptionDelete($id)

@@ -150,7 +150,17 @@
                         <div class="row mtop8f">
                             <div class="col-md-6">
                                 <label class="lsinmargen" for="doctor_id">Doctor:</label>
-                                {!! Form::select('doctor_id',$doctor,$factura->doctor_id,['class'=>'custom-select','id'=>'doctor_id']) !!}
+                                <div class="row no-gutters">
+                                    <div class="col-md-10">
+                                        {!! Form::select('doctor_id',$doctor,$factura->doctor_id,['class'=>'custom-select','id'=>'doctor_id']) !!}
+                                    </div>
+                                    <div class="col-md-2 @if($factura->status==1) oculto @endif">
+                                        <button type="button" class="btn btn-convertir" onclick="editDoctor('{{ $factura->id }}')" datatoggle="tooltip" data-placement="top" title="Cambiar doctor">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        {{-- <a href="{{ url('/admin/factura/'.$factura->id.'/cambiadr') }}" class="btn btn-primary">A</a> --}}
+                                    </div>
+                                </div>                                
                             </div>
                             <div class="col-md-6 text-right">
                                                                
@@ -471,6 +481,14 @@
                 }
             }
         });
+    }
+
+    function editDoctor(id){
+        var doctor = document.getElementById("doctor_id").value
+        $.get(url_global+"/admin/factura/"+id+"/"+doctor+"/cambiadr/",function(response){
+            alert('Registro actualizado');
+        });
+        
     }
 
     function devIdS(codigo){

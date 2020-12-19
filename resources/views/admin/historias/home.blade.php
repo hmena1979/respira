@@ -275,6 +275,29 @@
     
     }
 
+    function editItemReceta(valor){
+        //document.getElementById("agregaitem").style.display = 'none';
+        $.get(url_global+"/admin/historia/"+valor+"/searchprescription/",function(response){
+            // alert(response.nombre);
+            document.getElementById("receta_id").value = response.id;
+            document.getElementById("tipitem").value = 2;
+            document.getElementById("producto_id").value = response.producto_id;
+            document.getElementById("nombrep").value = response.nombre;
+            document.getElementById("umedida_id").value = response.umedida_id;
+            document.getElementById("cantidad").value = response.cantidad;
+            document.getElementById("posologia").value = response.posologia;
+            document.getElementById("posmed_id").value = response.posmed_id;
+            document.getElementById("posfrec_id").value = response.posfrec_id;
+            document.getElementById("postie").value = response.postie;
+            document.getElementById("postie_id").value = response.postie_id;
+            document.getElementById("recomendacion").value = response.recomendacion;
+            document.getElementById("btnprescription").value = 'Actualizar';
+            document.getElementById("nombrep").focus();
+        });	
+        
+        alert(id);
+    }
+
     function limpia(){
         document.getElementsByClassName('cuerpom')[0].innerHTML = '';
         document.getElementsByClassName('cuerpop')[0].innerHTML = '';
