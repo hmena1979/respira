@@ -580,7 +580,7 @@ class SunatController extends Controller
             $abc = (array)$abc1;
             // $data = ['abc' => $abc];
             // return view('admin.pruebas.home',$data );
-            $factura->status = 5;
+            // $factura->status = 5;
             // $factura->cdr = print_r($result->getError(),true);
             $factura->cdr = $abc["\x00*\x00message"];
             $fact = $factura->save();
@@ -1718,7 +1718,13 @@ class SunatController extends Controller
         $result = $sender->send($envio, $xml);
 
         if (!$result->isSuccess()) {
-            return 'Error de conexión';
+            $abc1 = $result->getError();
+            $abc = (array)$abc1;
+            $salida->cdr = $abc["\x00*\x00message"];
+            $sal = $salida->save();
+            return redirect('/admin/salida/'.$salida->id.'/edit')->with('message', 'Problemas de conexión, revise CDR')->with('typealert', 'danger');
+
+            // return 'Error de conexión';
         }
         $salida->status = 4;
         $cdr = $result->getCdrResponse();

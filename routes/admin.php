@@ -249,6 +249,17 @@ Route::prefix('/admin')->group(function(){
     Route::get('/notfar/{id}/detd', 'Admin\NotFarController@getNotFarDetDelete')->name('notfar_add');
     Route::get('/notfar/{id}/end', 'Admin\NotFarController@getNotFarEnd')->name('notfar_edit');
 
+    //Modulo Modelo de Recetas
+    Route::get('/modrecetas', 'Admin\ModRecetaController@getModRecetaHome')->name('modrecetas');
+    Route::get('/modreceta/add', 'Admin\ModRecetaController@getModRecetaAdd')->name('modreceta_add');
+    Route::post('/modreceta/add', 'Admin\ModRecetaController@postModRecetaAdd')->name('modreceta_add');
+    Route::get('/modreceta/{id}/deta', 'Admin\ModRecetaController@getModRecetaDetAdd')->name('modreceta_edit');
+    Route::post('/modreceta/{id}/deta', 'Admin\ModRecetaController@postModRecetaDetAdd')->name('modreceta_edit');
+    Route::get('/modreceta/{id}/detdelete', 'Admin\ModRecetaController@getModRecetaDetDelete')->name('modreceta_edit');
+    Route::get('/modreceta/{id}/edit', 'Admin\ModRecetaController@getModRecetaEdit')->name('modreceta_edit');
+    Route::post('/modreceta/{id}/edit', 'Admin\ModRecetaController@postModRecetaEdit')->name('modreceta_edit');
+    Route::get('/modreceta/{id}/delete', 'Admin\ModRecetaController@getModRecetaDelete')->name('modreceta_delete');
+
     //PDF's
     Route::get('/pdf/{id}/receta', 'Admin\PDFController@getReceta')->name('pdf');
     Route::get('/pdf/{id}/recetav', 'Admin\PDFController@getRecetaV')->name('pdf');

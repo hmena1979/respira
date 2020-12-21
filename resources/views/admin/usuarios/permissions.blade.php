@@ -31,6 +31,7 @@
                     </div>
                     <div class="row mtop16">
                         @include('admin.usuarios.permissions.module_historias')
+                        @include('admin.usuarios.permissions.module_modrecetas')
                     </div>
                     <div class="row mtop16">
                         @include('admin.usuarios.permissions.module_servicios')

@@ -37,8 +37,6 @@
         {{-- {{dd($doc)}} --}}
         {{-- <center><h3>REPORTE DE MOVIMIENTOS</h3></center> --}}
         @php
-            $tcli = 0;
-            $tdoc = 0;
             $tst = 0;
         @endphp
         @foreach ($doc as $m=>$value)
@@ -65,9 +63,8 @@
                 </thead>
                 <tbody>
                     @php
-                        $scli = 0;
-                        $sdoc = 0;
-                        $sst = 0;                        
+                        $cp = 0;
+                        $sst = 0;
                     @endphp
                     @foreach($value as $valores)
                     <tr>
@@ -79,12 +76,15 @@
                         <td class="text-right">{{ $valores->subtotal }}</td>
                     </tr>
                     @php
+                        $cp += $valores->cantidad;
                         $sst += $valores->subtotal;
                         $tst += $valores->subtotal;
                     @endphp
                     @endforeach
                     <tr class="ultimafila">
-                        <td colspan="5"></td>
+                        <td colspan="3"></td>
+                        <td class="negrita text-right ultimafila">{{ number_format($cp,2) }}</td>
+                        <td></td>
                         <td class="negrita text-right ultimafila">{{ number_format($sst,2) }}</td>
                     </tr>
                 </tbody>

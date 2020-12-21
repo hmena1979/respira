@@ -316,12 +316,21 @@ class ReporteController extends Controller
         }
 
         if($opprod == 1){
+            // $producto = Producto::select('productos.id','productos.nombre')
+            //     ->join('detsalidas','productos.id','detsalidas.producto_id')
+            //     ->join('salidas','detsalidas.salida_id','salidas.id')
+            //     ->whereBetween('salidas.fecha',[$fini,$ffin])
+            //     ->orderBy('productos.nombre')
+            //     ->groupby('productos.id','productos.nombre')
+            //     ->get();
             $producto = Detsalida::with('prod')
             ->join('salidas','detsalidas.salida_id','salidas.id')
+            ->join('productos','detsalidas.producto_id','productos.id')
             ->whereBetween('salidas.fecha',[$fini,$ffin])
             ->where('salidas.anulado',2)
-            ->select('detsalidas.producto_id')
-            ->groupby('detsalidas.producto_id')
+            ->select('productos.id','productos.nombre')
+            ->orderBy('productos.nombre')
+            ->groupby('productos.id','productos.nombre')
             ->get();
             $array_prod = Salida::join('detsalidas','salidas.id','detsalidas.salida_id')
                 ->whereBetween('fecha',[$fini,$ffin])
@@ -329,20 +338,8 @@ class ReporteController extends Controller
                 ->groupby('detsalidas.producto_id')
                 ->pluck('detsalidas.producto_id');
         }else{
-            $producto = Salida::join('detsalidas','salidas.id','detsalidas.salida_id')
-                ->join('productos','detsalidas.producto_id','productos.id')
-                ->whereBetween('fecha',[$fini,$ffin])
-                ->where('salidas.anulado',2)
-                ->where('detsalidas.producto_id',$request->input('rp_producto'))
-                ->select('detsalidas.producto_id','productos.nombre')
-                ->groupby('detsalidas.producto_id')
-                ->get();
-            $array_prod = Salida::join('detsalidas','salidas.id','detsalidas.salida_id')
-                ->whereBetween('fecha',[$fini,$ffin])
-                ->where('salidas.anulado',2)
-                ->where('detsalidas.producto_id',$request->input('rp_producto'))
-                ->groupby('detsalidas.producto_id')
-                ->pluck('detsalidas.producto_id');
+            $producto = Producto::select('id','nombre')->where('id',$request->input('rp_producto'))->get();
+            $array_prod = Producto::where('id',$request->input('rp_producto'))->pluck('id');
         }
 
         switch($grupo){
@@ -385,13 +382,13 @@ class ReporteController extends Controller
                     ->whereBetween('fecha',[$fini,$ffin])
                     // ->where('salidas.fpago_id',$fpg->fpago_id)
                     ->where('salidas.anulado',2)
-                    ->where('detsalidas.producto_id',$d->producto_id)
+                    ->where('detsalidas.producto_id',$d->id)
                     ->whereNull('detsalidas.deleted_at')
                     ->whereNull('salidas.deleted_at')
                     ->select('salidas.fecha', 'salidas.ruc','salidas.serie', 'salidas.numero','detsalidas.cantidad','detsalidas.precio','detsalidas.subtotal')
                     ->get();
                     if($dt->count()>0){
-                        $doc[$d->prod->nombre] = $dt;
+                        $doc[$d->nombre] = $dt;
                     }
                 }
                 $data = [

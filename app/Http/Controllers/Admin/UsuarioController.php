@@ -265,6 +265,10 @@ class UsuarioController extends Controller
 			'notfar_add' => $request->input('notfar_add'),
 			'notfar_edit' => $request->input('notfar_edit'),
 			'notfar_delete' => $request->input('notfar_delete'),
+			'modrecetas' => $request->input('modrecetas'),
+			'modreceta_add' => $request->input('modreceta_add'),
+			'modreceta_edit' => $request->input('modreceta_edit'),
+			'modreceta_delete' => $request->input('modreceta_delete'),
 		];
 		$permissions = json_encode($permissions);
 		$user->permissions = $permissions;
