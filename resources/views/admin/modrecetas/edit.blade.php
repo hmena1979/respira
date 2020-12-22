@@ -73,6 +73,7 @@
                                             {{-- <button type="button" class="btn" onclick="editItemReceta('{{ $r->id }}')" datatoggle="tooltip" data-placement="top" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </button> --}}
+                                            <a href="{{ url('/admin/modreceta/'.$r->id.'/dete') }}"datatoggle="tooltip" data-placement="top" title="Editar" ><i class="fas fa-edit"></i></a>
                                             <a href="{{ url('/admin/modreceta/'.$r->id.'/detdelete') }}"datatoggle="tooltip" data-placement="top" title="Eliminar" onclick="return confirm('Desea eliminar el registro?')"><i class="fas fa-trash-alt"></i></a>
                                             {{-- <a href="{{ url('/admin/historia/'.$r->id.'/prescriptiondelete') }}"datatoggle="tooltip" data-placement="top" title="Eliminar" onclick="return confirm('Desea eliminar el registro?')"><i class="fas fa-trash-alt"></i></a> --}}
                                         </div>

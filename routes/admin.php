@@ -69,6 +69,7 @@ Route::prefix('/admin')->group(function(){
     Route::get('/historia/{id}/triage', 'Admin\HistoriaController@getHistoriaTriage')->name('historia_triage');
     Route::post('/historia/{id}/triage', 'Admin\HistoriaController@postHistoriaTriage')->name('historia_triage');
     Route::post('/historia/{id}/prescriptionadd', 'Admin\HistoriaController@postHistoriaPrescriptionAdd')->name('historia_prescription');
+    Route::post('/historia/{id}/prescriptiongen', 'Admin\HistoriaController@postHistoriaPrescriptionGen')->name('historia_prescription');
     Route::get('/historia/{id}/searchprescription', 'Admin\HistoriaController@getHistoriaSearchPrescription')->name('historia_prescription');
     Route::post('/historia/{id}/prescriptionfooter', 'Admin\HistoriaController@postHistoriaPrescriptionFooter')->name('historia_prescription');
     Route::get('/historia/{id}/prescriptiondelete', 'Admin\HistoriaController@getHistoriaPrescriptionDelete')->name('historia_prescription');
@@ -255,6 +256,8 @@ Route::prefix('/admin')->group(function(){
     Route::post('/modreceta/add', 'Admin\ModRecetaController@postModRecetaAdd')->name('modreceta_add');
     Route::get('/modreceta/{id}/deta', 'Admin\ModRecetaController@getModRecetaDetAdd')->name('modreceta_edit');
     Route::post('/modreceta/{id}/deta', 'Admin\ModRecetaController@postModRecetaDetAdd')->name('modreceta_edit');
+    Route::get('/modreceta/{id}/dete', 'Admin\ModRecetaController@getModRecetaDetEdit')->name('modreceta_edit');
+    Route::post('/modreceta/{id}/dete', 'Admin\ModRecetaController@postModRecetaDetEdit')->name('modreceta_edit');
     Route::get('/modreceta/{id}/detdelete', 'Admin\ModRecetaController@getModRecetaDetDelete')->name('modreceta_edit');
     Route::get('/modreceta/{id}/edit', 'Admin\ModRecetaController@getModRecetaEdit')->name('modreceta_edit');
     Route::post('/modreceta/{id}/edit', 'Admin\ModRecetaController@postModRecetaEdit')->name('modreceta_edit');

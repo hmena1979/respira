@@ -227,6 +227,5 @@
         document.getElementById('buscarm').value = '';
     }
 
-    
 </script>
 @endsection

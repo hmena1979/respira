@@ -29,13 +29,13 @@
             <div class="col-md-12">
                 <div class="panel shadow">
                     <div class="inside">
-                        {!! Form::open(['url'=>'/admin/modreceta/'.$modreceta->id.'/deta']) !!}
+                        {!! Form::open(['url'=>'/admin/modreceta/'.$detmodreceta->id.'/dete']) !!}
                         <div class="row">
-                            {!! Form::text('producto_id', '', ['class'=>'form-control', 'id'=>'producto_id', 'autocomplete'=>'off','hidden']) !!}
+                            {!! Form::text('producto_id', $detmodreceta->producto_id, ['class'=>'form-control', 'id'=>'producto_id', 'autocomplete'=>'off','hidden']) !!}
                             <div class="col-md-6">
                                 <label class="lsinmargen" for="nombre">Producto:</label>
                                 <div class="input-group">
-                                    {!! Form::text('nombre', null, ['class'=>'form-control', 'id'=>'nombrep','autocomplete'=>'off']) !!}
+                                    {!! Form::text('nombre', $detmodreceta->nombre, ['class'=>'form-control', 'id'=>'nombrep','autocomplete'=>'off']) !!}
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-toggle="modal" data-target="#buscarprod" onclick="limpia()"><i class="fas fa-search"></i></button>
                                     </div>
@@ -63,11 +63,11 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="lsinmargen" for="umedida_id">Presentación:</label>
-                                {!! Form::select('umedida_id',$umedida,null,['class'=>'custom-select', 'id'=>'umedida_id', 'placeholder'=>'']) !!}	
+                                {!! Form::select('umedida_id',$umedida,$detmodreceta->umedida_id,['class'=>'custom-select', 'id'=>'umedida_id', 'placeholder'=>'']) !!}	
                             </div>
                             <div class="col-md-2">
                                 <label class="lsinmargen" for="cantidad">Cantidad:</label>
-                                {!! Form::text('cantidad', null, ['class'=>'form-control', 'id'=>'cantidad','autocomplete'=>'off']) !!}	
+                                {!! Form::text('cantidad', $detmodreceta->cantidad, ['class'=>'form-control', 'id'=>'cantidad','autocomplete'=>'off']) !!}	
                             </div>
                         </div>
                         <div class="row mtop8f">
@@ -75,9 +75,9 @@
                                 <label class="lsinmargen" for="posologia">Posología:</label>
                                 <div class="input-group">
                                     <div class="input-group-append">
-                                        {!! Form::text('posologia', null, ['class'=>'form-control tam30p','id'=>'posologia','autocomplete'=>'off']) !!}
-                                        {!! Form::select('posmed_id',$posmed,'0',['class'=>'custom-select','id'=>'posmed_id']) !!}
-                                        {!! Form::select('posfrec_id',$posfre,'0',['class'=>'custom-select','id'=>'posfrec_id']) !!}	
+                                        {!! Form::text('posologia', $detmodreceta->posologia, ['class'=>'form-control tam30p','id'=>'posologia','autocomplete'=>'off']) !!}
+                                        {!! Form::select('posmed_id',$posmed,$detmodreceta->posmed_id,['class'=>'custom-select','id'=>'posmed_id']) !!}
+                                        {!! Form::select('posfrec_id',$posfre,$detmodreceta->posfrec_id,['class'=>'custom-select','id'=>'posfrec_id']) !!}	
                                     </div>
                                 </div>
                             </div>
@@ -85,8 +85,8 @@
                                 <label class="lsinmargen" for="postie_id">Tiempo:</label>
                                 <div class="input-group">
                                     <div class="input-group-append">
-                                        {!! Form::text('postie', null, ['class'=>'form-control tam30p','id'=>'postie','autocomplete'=>'off']) !!}
-                                        {!! Form::select('postie_id',$postie,'0',['class'=>'custom-select','id'=>'postie_id']) !!}
+                                        {!! Form::text('postie',$detmodreceta->postie, ['class'=>'form-control tam30p','id'=>'postie','autocomplete'=>'off']) !!}
+                                        {!! Form::select('postie_id',$postie,$detmodreceta->postie_id,['class'=>'custom-select','id'=>'postie_id']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -94,10 +94,10 @@
                         <div class="row mtop8f">
                             <div class="col-md-6">
                                 <label class="lsinmargen" for="recomendacion">Indicaciones:</label>
-                                {!! Form::text('recomendacion', null, ['class'=>'form-control','id'=>'recomendacion','autocomplete'=>'off']) !!}
+                                {!! Form::text('recomendacion', $detmodreceta->recomendacion, ['class'=>'form-control','id'=>'recomendacion','autocomplete'=>'off']) !!}
                             </div>
                             <div class="col-md-1">
-                                {!! Form::submit('+', ['class'=>'btn btn-success mtop25', 'title'=>"Agregar receta", 'id'=>'btnprescription']) !!}
+                                {!! Form::submit('Actualizar', ['class'=>'btn btn-success mtop25', 'title'=>"Actualizar receta", 'id'=>'btnprescription']) !!}
                                 {!! Form::close() !!}
                             </div>
                         </div>

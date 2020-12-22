@@ -118,6 +118,65 @@ class ModRecetaController extends Controller
         endif;
     }
 
+    public function getModRecetaDetEdit($id)
+    {
+        $detmodreceta = DetModreceta::findOrFail($id);
+        $modreceta = Modreceta::findOrFail($detmodreceta->modreceta_id);
+        $umedida = Umedida::orderBy('nombre')->pluck('nombre','id');
+        $posmed = Categoria::where('modulo', 7)->orWhere('modulo',12)->orderBy('nombre')->pluck('nombre','codigo');
+        $posfre = Categoria::where('modulo', 8)->orWhere('modulo',12)->orderBy('nombre')->pluck('nombre','codigo');
+        $postie = Categoria::where('modulo', 9)->orWhere('modulo',12)->orderBy('nombre')->pluck('nombre','codigo');
+        $data = [
+            'detmodreceta' => $detmodreceta,
+            'modreceta' => $modreceta,
+            'umedida' => $umedida,
+            'posmed' => $posmed,
+            'posfre' => $posfre,
+            'postie' => $postie
+        ];
+        return view('admin.modrecetas.dete', $data);
+    }
+
+    public function postModRecetaDetEdit(Request $request, $id)
+    {
+        $rules = [
+    		'nombre' => 'required',
+    		'umedida_id' => 'required',
+    		'cantidad' => 'required',
+    		'posmed_id' => 'required',
+    		'posfrec_id' => 'required',
+    		'postie_id' => 'required'
+    	];
+    	$messages = [
+    		'nombre.required' => 'Ingrese nombre del medicamento.',
+    		'umedida_id.required' => 'Ingrese presentación.',
+    		'cantidad.required' => 'Ingrese cantidad.',
+    		'posmed_id.required' => 'Ingrese posología.',
+    		'posfrec_id.required' => 'Ingrese posología.',
+    		'postie_id.required' => 'Ingrese tiempo.'
+    	];
+
+    	$validator = Validator::make($request->all(),$rules,$messages);
+        if($validator->fails()):
+    		return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withinput();
+        else:
+            $r = DetModreceta::findOrFail($id);
+            $r->producto_id = $request->input('producto_id');
+            $r->nombre = Str::upper(e($request->input('nombre')));
+            $r->umedida_id = e($request->input('umedida_id'));
+            $r->cantidad = e($request->input('cantidad'));
+            $r->posologia = e($request->input('posologia'));
+            $r->posmed_id = e($request->input('posmed_id'));
+            $r->posfrec_id = e($request->input('posfrec_id'));
+            $r->postie = Str::upper(e($request->input('postie')));
+            $r->postie_id = e($request->input('postie_id'));
+            $r->recomendacion = Str::upper(e($request->input('recomendacion')));
+            if($r->save()):
+                return redirect('/admin/modreceta/'.$r->modreceta_id.'/edit')->with('message', 'Registro agregado')->with('typealert', 'success');
+            endif;
+        endif;
+    }
+
     public function getModRecetaEdit($id)
     {
         $modreceta = Modreceta::findOrFail($id);

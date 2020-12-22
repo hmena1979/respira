@@ -1,9 +1,23 @@
 <div class="row mtop10">
-    <div class="col-md-12">
+    <div class="col-md-7">
         {{-- <a href="{{ url('admin/pdf/'.$historia->id.'/receta') }}" class="btn btn-outline-info" target="_blank" datatoggle="tooltip" data-placement="top" title="Imprimir receta">
             <i class="fas fa-prescription"></i>H</a> --}}
         <a href="{{ url('admin/pdf/'.$historia->id.'/recetav') }}" class="btn btn-outline-info" target="_blank" datatoggle="tooltip" data-placement="top" title="Imprimir receta">
             <i class="fas fa-prescription"></i></a>
+    </div>
+    <div class="col-md-5 text-right">
+        @if(kvfj(Auth::user()->permissions,'modrecetas'))
+        {!! Form::open(['url'=>'/admin/historia/'.$historia->id.'/prescriptiongen']) !!}
+            <div class="input-group">
+                {!! Form::text('paciente_id', $historia->paciente_id, ['class'=>'form-control', 'autocomplete'=>'off','hidden']) !!}
+                {!! Form::text('item', $historia->item, ['class'=>'form-control', 'autocomplete'=>'off','hidden']) !!}
+                {!! Form::select('modreceta',$modreceta,null,['class'=>'custom-select', 'id'=>'modreceta', 'placeholder'=>'']) !!}
+                <div class="input-group-append">
+                    {!! Form::submit('Generar', ['class'=>'btn btn-convertir', 'title'=>"Generar receta", 'id'=>'btngenreceta']) !!}
+                </div>
+            </div>
+        {!! Form::close() !!}
+        @endif
     </div>
 </a>
 </div>
@@ -59,7 +73,6 @@
             {!! Form::text('receta_id', null, ['class'=>'form-control', 'autocomplete'=>'off','id'=>'receta_id','hidden']) !!}
             {!! Form::text('tipitem', 1, ['class'=>'form-control', 'autocomplete'=>'off','id'=>'tipitem','hidden']) !!}
             {!! Form::text('paciente_id', $historia->paciente_id, ['class'=>'form-control', 'autocomplete'=>'off','hidden']) !!}
-            {!! Form::text('paciente_id', $historia->paciente_id, ['class'=>'form-control', 'autocomplete'=>'off','hidden']) !!}
             {!! Form::text('item', $historia->item, ['class'=>'form-control', 'autocomplete'=>'off','hidden']) !!}
             {!! Form::text('producto_id', '', ['class'=>'form-control', 'id'=>'producto_id', 'autocomplete'=>'off','hidden']) !!}
 
@@ -94,7 +107,7 @@
             </div>
             <div class="col-md-4">
                 <label class="lsinmargen" for="umedida_id">Presentación:</label>
-                {!! Form::select('umedida_id',$umedida,null,['class'=>'custom-select', 'id'=>'umedida_id', 'placeholder'=>'']) !!}	
+                {!! Form::select('umedida_id',$umedida,null,['class'=>'custom-select', 'id'=>'umedida_id', 'placeholder'=>'']) !!}
             </div>
             <div class="col-md-2">
                 <label class="lsinmargen" for="cantidad">Cantidad:</label>

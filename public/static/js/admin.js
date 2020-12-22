@@ -75,12 +75,12 @@ function sumarDias(pfecha,pdias){
 
 	var tmpfecha = new Date();
 	tmpfecha.setDate(fecha.getDate() + dias);
-	var nfecha = String(tmpfecha.getFullYear()) + '-' + String(tmpfecha.getMonth() + 1) + '-' + (String(tmpfecha.getDate())).padStart(2,0);
+	var nfecha = String(tmpfecha.getFullYear()) + '-' + (String(tmpfecha.getMonth() + 1)).padStart(2,0) + '-' + (String(tmpfecha.getDate())).padStart(2,0);
 	return nfecha;
 }
 
 function hoy(){
 	var tmpfecha = new Date();
-	var nfecha = String(tmpfecha.getFullYear()) + '-' + String(tmpfecha.getMonth() + 1) + '-' + (String(tmpfecha.getDate())).padStart(2,0);
+	var nfecha = String(tmpfecha.getFullYear()) + '-' + (String(tmpfecha.getMonth() + 1)).padStart(2,0) + '-' + (String(tmpfecha.getDate())).padStart(2,0);
 	return nfecha;
 }

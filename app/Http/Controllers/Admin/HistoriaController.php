@@ -15,6 +15,8 @@ use App\Http\Models\Cie10;
 use App\Http\Models\Diagnostico;
 use App\Http\Models\Receta;
 use App\Http\Models\Umedida;
+use App\Http\Models\Modreceta;
+use App\Http\Models\DetModreceta;
 
 class HistoriaController extends Controller
 {
@@ -48,6 +50,7 @@ class HistoriaController extends Controller
         $posfre = Categoria::where('modulo', 8)->orWhere('modulo',12)->orderBy('nombre')->pluck('nombre','codigo');
         $postie = Categoria::where('modulo', 9)->orWhere('modulo',12)->orderBy('nombre')->pluck('nombre','codigo');
         $tipo = Categoria::where('modulo', 13)->orderBy('nombre')->pluck('nombre','codigo');
+        $modreceta = Modreceta::orderBy('nombre')->pluck('nombre','id');
         $data = [
             'paciente' => $paciente,
             'historia1' => $historia1,
@@ -62,7 +65,8 @@ class HistoriaController extends Controller
             'posmed' => $posmed,
             'posfre' => $posfre,
             'postie' => $postie,
-            'tipo' => $tipo
+            'tipo' => $tipo,
+            'modreceta' => $modreceta
         ];
         if(!session('pagina')):
             session(['pagina' => "uno"]);
@@ -300,6 +304,29 @@ class HistoriaController extends Controller
                 return redirect('/admin/historias/'.$request->input('paciente_id').'/'.$request->input('item').'/home')->with('message', 'Registro agregado')->with('typealert', 'success');
             endif;
         endif;
+    }
+
+    public function postHistoriaPrescriptionGen(Request $request,$id)
+    {
+        $modreceta = $request->input('modreceta');
+        $detmodreceta = DetModreceta::where('modreceta_id',$request->input('modreceta'))->get();
+        foreach($detmodreceta as $det){
+            Receta::insert([
+                'historia_id'=>$id,
+                'producto_id'=>$det->producto_id,
+                'nombre'=>$det->nombre,
+                'umedida_id'=>$det->umedida_id,
+                'cantidad'=>$det->cantidad,
+                'posologia'=>$det->posologia,
+                'posmed_id'=>$det->posmed_id,
+                'posfrec_id'=>$det->posfrec_id,
+                'postie'=>$det->postie,
+                'postie_id'=>$det->postie_id,
+                'recomendacion'=>$det->recomendacion
+                ]);
+        }
+        session(['pagina' => "cuatro"]);
+        return redirect('/admin/historias/'.$request->input('paciente_id').'/'.$request->input('item').'/home')->with('message', 'Receta agregada')->with('typealert', 'success');
     }
 
     public function getHistoriaSearchPrescription(Request $request,$id)
