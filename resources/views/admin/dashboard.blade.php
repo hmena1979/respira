@@ -35,18 +35,18 @@
 					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
-								<th width="27%">Doctor</th>
+								<th width="20%">Doctor</th>
 								<th width="35%">Paciente</th>
 								<th width="12%">Estado</th>
 								<th width="8%">Tipo</th>
-								<th width="18%"></th>
+								<th width="25%"></th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($historias as $historia)
 							<tr>
-								<td>{{ $historia->dr->nombre }}</td>
-								<td>{{ $historia->pac->razsoc }}</td>
+								<td>{{ substr($historia->dr->nombre,0,20) }}</td>
+								<td>{{ substr($historia->pac->razsoc,0,38) }}</td>
 								<td>{{ $historia->sta->nombre }}</td>
 								<td>{{ $historia->tip->nombre }}</td>
 								<td>
@@ -58,6 +58,7 @@
 										@endif
 										@if(kvfj(Auth::user()->permissions,'paciente_history'))
 										<a href="{{ url('/admin/historias/'.$historia->paciente_id.'/'.$historia->item.'/home') }}"datatoggle="tooltip" data-placement="top" title="Historia"><i class="fas fa-book-medical"></i> Historia</a>
+										<a href="{{ url('/admin/historia/'.$historia->id.'/change') }}"datatoggle="tooltip" data-placement="top" title="Editar consulta"><i class="far fa-calendar"></i> Editar</a>
 										@endif										
 										{{-- @if(kvfj(Auth::user()->permissions,'paciente_appointment'))
 										<a href="{{ url('/admin/paciente/'.$historia->paciente_id.'/appointment') }}"datatoggle="tooltip" data-placement="top" title="Historia"><i class="fas fa-book-medical"></i> Programar</a>

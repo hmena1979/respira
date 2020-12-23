@@ -68,6 +68,8 @@ Route::prefix('/admin')->group(function(){
     Route::post('/historia/{id}/{item}/cita', 'Admin\HistoriaController@postHistoriaCita')->name('historia_cita');
     Route::get('/historia/{id}/triage', 'Admin\HistoriaController@getHistoriaTriage')->name('historia_triage');
     Route::post('/historia/{id}/triage', 'Admin\HistoriaController@postHistoriaTriage')->name('historia_triage');
+    Route::get('/historia/{id}/change', 'Admin\HistoriaController@getHistoriaChange')->name('historia_edit');
+    Route::post('/historia/{id}/change', 'Admin\HistoriaController@postHistoriaChange')->name('historia_edit');
     Route::post('/historia/{id}/prescriptionadd', 'Admin\HistoriaController@postHistoriaPrescriptionAdd')->name('historia_prescription');
     Route::post('/historia/{id}/prescriptiongen', 'Admin\HistoriaController@postHistoriaPrescriptionGen')->name('historia_prescription');
     Route::get('/historia/{id}/searchprescription', 'Admin\HistoriaController@getHistoriaSearchPrescription')->name('historia_prescription');
@@ -173,6 +175,7 @@ Route::prefix('/admin')->group(function(){
     Route::post('/salida/{id}/edit', 'Admin\SalidaController@postSalidaEdit')->name('salida_edit');
     Route::get('/salida/{id}/delete', 'Admin\SalidaController@getSalidaDelete')->name('salida_delete');
     Route::get('/salida/{id}/end', 'Admin\SalidaController@getSalidaEnd')->name('salida_edit');
+    Route::get('/salida/{id}/{fp}/{nope}/cambiafp', 'Admin\SalidaController@getSalidaCambiaFPago')->name('salida_edit');
 
     //Modulo Kardex
     //Route::get('/kardex/{periodo}/{producto}', 'Admin\KardexController@getKardexRegenerate')->name('ingresos');

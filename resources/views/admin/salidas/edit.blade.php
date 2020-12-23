@@ -144,11 +144,20 @@
                                 <label class="lsinmargen" for="fpago_id">F.Pago:</label>
                                 {!! Form::select('fpago_id',$fpago,$salida->fpago_id,['class'=>'custom-select','id'=>'fpago_id']) !!}
                             </div>
-                            <div class="col-md-2">
-                                <label class="lsinmargen" for="noperacion">N° Operación:</label>
-                                {!! Form::text('noperacion', $salida->noperacion, ['class'=>'form-control','id'=>'noperacion','autocomplete'=>'off','disabled']) !!}
+                            <div class="col-md-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-10">
+                                        <label class="lsinmargen" for="noperacion">N° Operación:</label>
+                                        {!! Form::text('noperacion', $salida->noperacion, ['class'=>'form-control','id'=>'noperacion','autocomplete'=>'off','disabled']) !!}
+                                    </div>
+                                    <div class="col-md-2 @if($salida->status==1) oculto @endif">
+                                        <button type="button" class="btn btn-convertir mtop25" onclick="editFPago('{{ $salida->id }}')" datatoggle="tooltip" data-placement="top" title="Actualizar forma de pago">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-8 text-right">
+                            <div class="col-md-7 text-right">
                                 @if($salida->status==1)
                                 {!! Form::submit('Guardar', ['class'=>'btn btn-success mtop20', 'id'=>'guardar']) !!}
                                 <a class="btn thead-blue mtop20 mr-3" href="{{ url('/admin/salida/'.$salida->id.'/deta') }}"
@@ -166,6 +175,7 @@
                                     <i class="fas fa-check-circle"></i>
                                 </a> --}}
                                 @else
+                                {!! Form::submit('Guardar', ['class'=>'btn btn-success mtop20 oculto', 'id'=>'guardar']) !!}
                                 <a class="btn thead-blue mtop20" href="{{ url('/admin/pdf/'.$salida->id.'/farmfact') }}"
                                     target="_blank" datatoggle="tooltip" data-placement="top" title="Imprimir comprobante">
 									<i class="fas fa-print"></i> 
@@ -484,6 +494,18 @@
                 }
             }
         });
+    }
+
+    function editFPago(id){
+        var fp = document.getElementById("fpago_id").value
+        var numop = document.getElementById("noperacion").value
+        if(numop.length == 0){
+            numop = '99999999';
+        }
+        $.get(url_global+"/admin/salida/"+id+"/"+fp+"/"+numop+"/cambiafp/",function(response){
+            alert('Registro actualizado');
+        });
+        
     }
 
     function devIdS(codigo){

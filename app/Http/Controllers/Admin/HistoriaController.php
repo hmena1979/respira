@@ -432,4 +432,50 @@ class HistoriaController extends Controller
                 return redirect('/admin/historias/'.$id.'/'.$item.'/home')->with('message', 'Fecha actualizada')->with('typealert', 'success');
     }
 
+    public function getHistoriaChange($id)
+    {
+        $historia = Historia::findOrFail($id);
+        $paciente = Paciente::findOrFail($historia->paciente_id);
+        if(Auth::user()->doctor_id === 1){
+            $doctor = Doctor::where('activo',1)->pluck('nombre','id');
+        }else{
+            $doctor = Doctor::where('activo',1)->where('id', Auth::user()->doctor_id)->pluck('nombre','id');
+        }
+        $tippac = Categoria::where('modulo', 1)->pluck('nombre','codigo');
+        $tipo = Categoria::where('modulo', 13)->pluck('nombre','codigo');
+        $data = [
+            'historia' => $historia,
+            'doctor' => $doctor,
+            'paciente' => $paciente,
+            'tippac' => $tippac,
+            'tipo' => $tipo
+        ];
+        return view('admin.historias.change', $data);
+    }
+
+    public function postHistoriaChange(Request $request, $id)
+    {
+        $rules = [
+    		'fecha' => 'required'
+    	];
+    	$messages = [
+    		'fecha.required' => 'Ingrese fecha.'
+            
+    	];
+
+    	$validator = Validator::make($request->all(),$rules,$messages);
+    	if($validator->fails()):
+    		return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withinput();
+        else:
+            $h = Historia::findOrFail($id);
+            $h->fecha = $request->input('fecha');
+            $h->doctor_id = $request->input('doctor_id');
+            $h->tipo =  $request->input('tipo');
+            $h->tippac_id = $request->input('tippac_id');
+            if($h->save()):
+                return redirect('/admin')->with('message', 'Registro actualizado')->with('typealert', 'success');
+            endif;
+        endif;
+    }
+
 }

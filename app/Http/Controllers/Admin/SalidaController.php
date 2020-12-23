@@ -362,6 +362,21 @@ class SalidaController extends Controller
     	endif;
     }
 
+    public function getSalidaCambiaFPago($id,$fp,$nope)
+    {
+        $s = Salida::findOrFail($id);
+        $s->fpago_id = $fp;
+
+        if($nope == '99999999'){
+            $s->noperacion = '';
+        }else{
+            $s->noperacion = $nope;
+        }
+        if($s->save()){
+            return true;
+        }
+    }
+
     public function getSalidaEnd($id)
     {
         $f = Salida::findOrFail($id);
