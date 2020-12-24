@@ -164,7 +164,7 @@
                             </div>
                             <div class="col-md-6 text-right">
                                                                
-                                <div @if($factura->status<>1)style="display:none"@endif>
+                                <div @if($factura->status<>1 && $factura->status<>6)style="display:none"@endif>
                                     {!! Form::submit('Guardar', ['class'=>'btn btn-success mtop20', 'id'=>'guardar']) !!}
                                     <a class="btn thead-blue mtop20" href="{{ url('/admin/factura/'.$factura->id.'/deta') }}"
                                         datatoggle="tooltip" data-placement="top" title="Agregar">
@@ -185,7 +185,7 @@
                                 </div>
                                 
                                 
-                                @if($factura->status<>1)
+                                @if($factura->status<>1 && $factura->status<>6)
                                 
                                 <a class="btn thead-blue mtop20" href="{{ url('/admin/pdf/'.$factura->id.'/admfact') }}"
                                     target="_blank" datatoggle="tooltip" data-placement="top" title="Imprimir comprobante">
@@ -232,7 +232,7 @@
                                     <td>{{ $detfactura->subtotal }}</td>
                                     <td>
                                         <div class="opts">
-                                            @if(kvfj(Auth::user()->permissions,'factura_edit')&&($factura->status==1))
+                                            @if(kvfj(Auth::user()->permissions,'factura_edit')&&($factura->status==1 || $factura->status==6))
                                             <a href="{{ url('/admin/factura/'.$detfactura->id.'/dete') }}"datatoggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
                                             <a href="{{ url('/admin/factura/'.$detfactura->id.'/detd') }}"datatoggle="tooltip" data-placement="top" title="Eliminar" onclick="return confirm('Desea eliminar el registro?')"><i class="fas fa-trash-alt"></i></a>
                                             @endif

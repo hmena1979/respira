@@ -246,6 +246,9 @@ class FacturaController extends Controller
 
     public function postFacturaDetAdd(Request $request, $id)
     {
+        if($request->input('subtotal') == 0 || $request->input('stcli') == 0){
+            return back()->with('message', 'Se ha producido un error, subtotal en cero')->with('typealert', 'danger')->withinput();
+        }
         $parametro = Param::findOrFail(1);
         $rules = [
     		'servicio' => 'required',
