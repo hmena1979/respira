@@ -377,7 +377,7 @@
                                                 <p class="espaciado30">(X) {{kvfj($historia->espirometria, 'opruebas')}} .</p> 
                                             @endif
                                             @if(kvfj($historia->espirometria, 'esimple') || kvfj($historia->espirometria, 'emb'))
-                                            <p class="espaciado30">
+                                            <p class="mtop16 espaciado30">
                                                 <span class="text-left"><u><strong>Recomendaciones para Espirometría:</strong></u></span>
                                                 <ul>
                                                     <li class="ml-10" type="square">Acudir sin haber utilizado inhaladores o Broncodilatadores al menos 8 horas antes de la prueba.</li>
