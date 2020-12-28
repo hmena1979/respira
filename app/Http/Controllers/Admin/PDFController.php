@@ -98,6 +98,65 @@ class PDFController extends Controller
         //return view('pdf.receta', $data);
     }
 
+    public function getRecetaPlan($id)
+    {
+        $historia = Historia::findOrFail($id);
+        $paciente = Paciente::findOrFail($historia->paciente_id);
+        $doctor = Doctor::findOrFail($historia->doctor_id);
+        $parametro = Param::findOrFail(1);
+        $recetas = Receta::with(['um','pmed','pfre','ptie'])->where('historia_id', $id)->get();
+        $qrcode = base64_encode(QrCode::format('svg')
+            ->size(100)
+            ->errorCorrection('H')
+            ->generate($parametro->dominio.'/receta'.'/'.$paciente->historia.$historia->item));
+        //$qrcode->size(500)->generate('Crea un QrCode sin Laravel!');
+        
+        //----------------------------------------------------------------------------------------------
+        $radio = false;
+        if(kvfj($historia->radtorax, 'senpar') || kvfj($historia->radtorax, 'cavum') || kvfj($historia->radtorax, 'torax') || kvfj($historia->radtorax, 'parrcostal')
+            || kvfj($historia->radtorax, '1incidencia') || kvfj($historia->radtorax, 'frontal') || kvfj($historia->radtorax, 'lateral')
+            || kvfj($historia->radtorax, '2incidencia') || kvfj($historia->radtorax, 'otpradio')){
+            $radio = true;
+        }
+        $ecograf = false;
+        if(kvfj($historia->radtorax, 'ecografia') || kvfj($historia->radtorax, 'ecotex') || kvfj($historia->radtorax, 'dpresuntivo')
+            || kvfj($historia->radtorax, 'dclinico')){
+            $ecograf = true;
+        }
+        $tomogra = false;
+        if(kvfj($historia->tomografia, 'ccontraste') || kvfj($historia->tomografia, 'scontraste') || kvfj($historia->tomografia, 'sparanasal')
+            || kvfj($historia->tomografia, 'cuello') || kvfj($historia->tomografia, 'ttorax') || kvfj($historia->tomografia, 'tpm') || kvfj($historia->tomografia, 'tar')
+            || kvfj($historia->tomografia, 'ptpc') || kvfj($historia->tomografia, 'vas3d') || kvfj($historia->tomografia, 'angiotem') || kvfj($historia->tomografia, 'toraxico')
+            || kvfj($historia->tomografia, 'otptomografia')){
+            $tomogra = true;
+        }
+        $espiro = false;
+        if(kvfj($historia->espirometria, 'esimple') || kvfj($historia->espirometria, 'emb') || kvfj($historia->espirometria, 'tc')
+            || kvfj($historia->espirometria, 'on') || kvfj($historia->espirometria, 'pmd') || kvfj($historia->espirometria, 'flujo')
+            || kvfj($historia->espirometria, 'opruebas')){
+            $espiro = true;
+        }
+
+        $data = [
+            'historia' => $historia,
+            'paciente' => $paciente,
+            'recetas' => $recetas,
+            'doctor' => $doctor,
+            'parametro' => $parametro,
+            'qrcode' => $qrcode,
+            'radio' => $radio,
+            'ecograf' => $ecograf,
+            'tomogra' => $tomogra,
+            'espiro' => $espiro
+        ];        
+        //----------------------------------------------------------------------------------------------
+
+        $pdf = PDF::loadView('pdf.recetanewplan', $data)->setPaper('A4', 'portrait');
+        return $pdf->stream($historia->id.$historia->item.'.pdf', array('Attachment'=>false));
+        
+        //return view('pdf.receta', $data);
+    }
+
     public function getAdmFacturacion($id)
     {
         $factura = Factura::with(['cli','mon'])->findOrFail($id);

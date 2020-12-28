@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="row mtop16">
-    <div class="col-md-7  borde-derecho">
+    <div class="col-md-7 borde-derecho">
         <div class="row">
             <div class="col-md-6 borde-derecho">
                 <div class="radio">
@@ -58,11 +58,11 @@
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" name="ccontraste" id="ccontraste" value="true" @if(kvfj($historia->tomografia, 'ccontraste')) checked @endif>
-                    <label class="form-check-label" for="ccontraste">Con contraste</label>
+                    <label class="form-check-label" for="ccontraste">Con Contraste</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" name="scontraste" id="scontraste" value="true" @if(kvfj($historia->tomografia, 'scontraste')) checked @endif>
-                    <label class="form-check-label" for="scontraste">Sin contraste</label>
+                    <label class="form-check-label" for="scontraste">Sin Contraste</label>
                 </div>
                 <div class="form-check form-check">
                     <input class="form-check-input" type="checkbox" name="sparanasal" id="sparanasal" value="true" @if(kvfj($historia->tomografia, 'sparanasal')) checked @endif>

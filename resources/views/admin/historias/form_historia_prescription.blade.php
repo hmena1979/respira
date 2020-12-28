@@ -3,7 +3,11 @@
         {{-- <a href="{{ url('admin/pdf/'.$historia->id.'/receta') }}" class="btn btn-outline-info" target="_blank" datatoggle="tooltip" data-placement="top" title="Imprimir receta">
             <i class="fas fa-prescription"></i>H</a> --}}
         <a href="{{ url('admin/pdf/'.$historia->id.'/recetav') }}" class="btn btn-outline-info" target="_blank" datatoggle="tooltip" data-placement="top" title="Imprimir receta">
-            <i class="fas fa-prescription"></i></a>
+            <i class="fas fa-prescription"></i>
+        </a>
+        <a href="{{ url('admin/pdf/'.$historia->id.'/recetaplan') }}" class="btn btn-outline-info" target="_blank" datatoggle="tooltip" data-placement="top" title="Imprimir receta con plan">
+            <i class="fas fa-prescription"></i><strong>P</strong>
+        </a>
     </div>
     <div class="col-md-5 text-right">
         @if(kvfj(Auth::user()->permissions,'modrecetas'))

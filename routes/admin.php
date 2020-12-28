@@ -269,6 +269,7 @@ Route::prefix('/admin')->group(function(){
     //PDF's
     Route::get('/pdf/{id}/receta', 'Admin\PDFController@getReceta')->name('pdf');
     Route::get('/pdf/{id}/recetav', 'Admin\PDFController@getRecetaV')->name('pdf');
+    Route::get('/pdf/{id}/recetaplan', 'Admin\PDFController@getRecetaPlan')->name('pdf');
     Route::get('/pdf/{id}/admfact', 'Admin\PDFController@getAdmFacturacion')->name('pdf');
     Route::get('/pdf/{id}/admnota', 'Admin\PDFController@getAdmNotas')->name('pdf');
     Route::get('/pdf/{id}/farmfact', 'Admin\PDFController@getFarmFacturacion')->name('pdf');
