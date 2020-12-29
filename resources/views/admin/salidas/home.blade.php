@@ -39,7 +39,7 @@
 					</div>
 					<div class="inside">
                         
-						<table id= "grid" class="table table-hover table-sm table">
+						<table id= "grid1" class="table table-hover table-sm table">
 							<thead>
 								<tr>
                                     <th width="10%">Fecha</th>
@@ -85,4 +85,39 @@
 		</div>		
 	</div>
 
+@endsection
+@section('script')
+<script>
+    var url_global='{{url("/")}}';
+    $(document).ready(function(){
+		$('#grid1').DataTable({
+                    "paging":   true,
+					"ordering": true,
+					"order" : [[0, 'desc'],[2, 'desc']],
+                    "info":     true,
+                    "language":{
+                        "info": "_TOTAL_ Registros",
+                        "search": "Buscar",
+                        "paginate":{
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        },
+                        "lengthMenu": "Mostrar <select>"+
+                                        "<option value='10'>10</option>"+
+                                        "<option value='25'>25</option>"+
+                                        "<option value='50'>50</option>"+
+                                        "<option value='100'>100</option>"+
+                                        "<option value='-1'>Todos</option>"+
+                                        "</select> Registros",
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "emptyTable": "No se encontraton coincidencias",
+                        "zeroRecords": "No se encontraton coincidencias",
+                        "infoEmpty": "",
+                        "infoFiltered": ""
+    
+                    }
+                });
+	});
+</script>
 @endsection

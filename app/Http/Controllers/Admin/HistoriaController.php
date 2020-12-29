@@ -230,7 +230,13 @@ class HistoriaController extends Controller
     		'cie10_id.required' => 'Ingrese CIE 10.',
     		'tipo_id.required' => 'Ingrese tipo.',
     		'visita_id.required' => 'Ingrese visita.'
-    	];
+        ];
+        
+        $cie10s = Cie10::where('codigo',e($request->input('cie10_id')))->get();
+        if($cie10s->count() == 0){
+            session(['pagina' => "dos"]);
+    		return back()->with('message', 'Se ha producido un error, CIE10 no existe')->with('typealert', 'danger')->withinput(); 
+        }
 
     	$validator = Validator::make($request->all(),$rules,$messages);
         if($validator->fails()):

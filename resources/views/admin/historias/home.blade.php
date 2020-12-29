@@ -184,6 +184,24 @@
 <script>
     var url_global='{{url("/")}}';
     $(document).ready(function(){
+        // $("cie10_id").bind('keypress',function(event){
+        //     var regex = new RegExp("^[a-zA-Z0-9]+$");
+        //     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        //     if(!regex.test(key)){
+        //         event.preventDefault();
+        //         return false;
+        //     }
+        // });
+
+        document.getElementById('cie10_id').addEventListener("keypress",function(event){
+            var regex = new RegExp("^[a-zA-Z0-9*]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if(!regex.test(key)){
+                event.preventDefault();
+                return false;
+            }
+        });
+        
         document.getElementById('cie10_id').addEventListener("change",function(){
             this.value = this.value.toUpperCase();
             document.getElementById("dcie10").value = this.value;

@@ -21,7 +21,7 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label class="lsinmargen" for="periodo">Periodo:</label>
-                                        {!! Form::text('periodo', session('padmision'), ['class'=>'form-control','id'=>'periodo','autocomplete'=>'off','disabled']) !!}
+                                        {!! Form::text('periodo', session('pfarmacia'), ['class'=>'form-control','id'=>'periodo','autocomplete'=>'off','disabled']) !!}
                                     </div>
                                     <div class="col-md-7">
                                         <label class="lsinmargen" for="tipo">Pago:</label>

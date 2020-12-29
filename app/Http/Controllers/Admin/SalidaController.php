@@ -103,6 +103,12 @@ class SalidaController extends Controller
     	if($validator->fails()):
     		return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withinput();
         else:
+            $anio = substr(e($request->input('fecha')),0,4);
+            $mes = substr(e($request->input('fecha')),5,2);
+            // session('padmision')
+            if($mes <> substr(session('pfarmacia'),0,2) || $anio <> substr(session('pfarmacia'),2,4)){
+                return back()->with('message', 'Fecha ingresada no corresponde al periodo')->with('typealert', 'danger')->withinput();
+            }
             $numero = strval(Correlativo::where('index',e($request->input('serie')))->value('valor') + 1);
             $numero = str_pad($numero, 8, '0', STR_PAD_LEFT);
             $f = new Salida;
