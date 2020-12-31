@@ -34,6 +34,11 @@ class HistoriaController extends Controller
         //$historias = Historia::where('paciente_id', $id)->get();
         $historia1 = Historia::where('paciente_id', $id)->where('item', $item)->get();
         //$historia_id = Historia::where('paciente_id', $id)->where('item', $item)->value('id');
+        if($historia1->count() == 0){
+            $historia1 = Historia::where('paciente_id', $id)->get();
+            $item = $historia1[0]->item;
+            $historia1 = Historia::where('paciente_id', $id)->where('item', $item)->get();
+        }
         if($paciente->his->count()>0 && $item <> 'E'):
             $historia_id = $historia1[0]->id;
         else:

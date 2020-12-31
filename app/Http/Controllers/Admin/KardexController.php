@@ -39,6 +39,10 @@ class KardexController extends Controller
                 $stock = 0.00;
                 $precio = 0.00;
             }
+        }else{
+            $sti = $salant[0]->saldo;
+            $stock = $salant[0]->saldo;
+            $precio = $salant[0]->precio;
         }
 
         foreach($kardexes as $kardex){

@@ -2,7 +2,7 @@
 @section('title','Compras')
 @section('breadcrumb')
 	<li class="breadcrumb-item">
-		<a href="{{ url('/admin/ingresos/'.session('padmision')) }}"><i class="fas fa-cart-plus"></i> Compras</a>
+		<a href="{{ url('/admin/ingresos/'.session('pfarmacia')) }}"><i class="fas fa-cart-plus"></i> Compras</a>
 	</li>
 @endsection
 

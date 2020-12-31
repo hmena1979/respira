@@ -2,7 +2,7 @@
 @section('title','Notas de Débito/Crédito')
 @section('breadcrumb')
 	<li class="breadcrumb-item">
-		<a href="{{ url('/admin/notadms/'.session('padmision')) }}"><i class="fas fa-window-restore"></i> Notas de Débito/Crédito</a>
+		<a href="{{ url('/admin/notadms/'.session('pfarmacia')) }}"><i class="fas fa-window-restore"></i> Notas de Débito/Crédito</a>
 	</li>
 @endsection
 

@@ -266,6 +266,11 @@ Route::prefix('/admin')->group(function(){
     Route::post('/modreceta/{id}/edit', 'Admin\ModRecetaController@postModRecetaEdit')->name('modreceta_edit');
     Route::get('/modreceta/{id}/delete', 'Admin\ModRecetaController@getModRecetaDelete')->name('modreceta_delete');
 
+    //Cierre de mes
+    Route::get('/cierre', 'Admin\CierreController@getCierreHome')->name('cierre');
+    Route::post('/cierre/cadmision', 'Admin\CierreController@postCierreAdmision')->name('cadmision');
+    Route::post('/cierre/cfarmacia', 'Admin\CierreController@postCierreFarmacia')->name('cfarmacia');
+
     //PDF's
     Route::get('/pdf/{id}/receta', 'Admin\PDFController@getReceta')->name('pdf');
     Route::get('/pdf/{id}/recetav', 'Admin\PDFController@getRecetaV')->name('pdf');

@@ -87,6 +87,17 @@
 		}
 		return $n;
 	}
+	
+	function pSiguiente($periodo){
+		$mes = substr($periodo, 0,2);
+		$anio = substr($periodo, 2);
+		if($mes == '12'){
+			$n = '01'.strval(intval($anio)+1);
+		}else{
+			$n = str_pad(intval($mes)+1, 2, '0', STR_PAD_LEFT).$anio;
+		}
+		return $n;
+	}
 
 
 ?>

@@ -57,7 +57,7 @@
 				<a href="{{ url('/admin/salidas/'.session('pfarmacia')) }}" class="lk-salidas lk-salida_add lk-salida_edit lk-salida_delete" "data-toggle="tooltip" data-placement="top" title = 'Venta/Consumo'><i class="fas fa-cart-arrow-down"></i><span>Venta / Consumo</span></a>
 				@endif
 				@if(kvfj(Auth::user()->permissions,'notfars'))
-				<a href="{{ url('/admin/notfars/'.session('padmision')) }}" class="lk-notfars lk-notfar_add lk-notfar_edit lk-notfar_delete" "data-toggle="tooltip" data-placement="top" title = 'Nota de Débito/Crédito'><i class="fas fa-window-restore"></i><span>Nota de Débito/Crédito</span></a>
+				<a href="{{ url('/admin/notfars/'.session('pfarmacia')) }}" class="lk-notfars lk-notfar_add lk-notfar_edit lk-notfar_delete" "data-toggle="tooltip" data-placement="top" title = 'Nota de Débito/Crédito'><i class="fas fa-window-restore"></i><span>Nota de Débito/Crédito</span></a>
 				@endif
 				@if(kvfj(Auth::user()->permissions,'report'))
 				<a href="{{ url('/admin/rfarmacia') }}" class="report" "data-toggle="tooltip" data-placement="top" title = 'Reportes'><i class="fas fa-window-restore"></i><span>Reportes</span></a>
@@ -124,6 +124,9 @@
 				@endif
 				@if(kvfj(Auth::user()->permissions,'saldos'))
 				<a href="{{ url('/admin/saldos') }}" class="lk-parametros" "data-toggle="tooltip" data-placement="top" title = 'Regenerar Saldos'><i class="fas fa-cog"></i><span>Regenerar Saldos</span></a>
+				@endif
+				@if(kvfj(Auth::user()->permissions,'cierre'))
+				<a href="{{ url('/admin/cierre') }}" class="lk-cierre" "data-toggle="tooltip" data-placement="top" title = 'Cierre de mes'><i class="fas fa-calendar-check"></i><span>Cierre de mes</span></a>
 				@endif
 			</div>
 		</li>

@@ -2,7 +2,7 @@
 @section('title','Notas de Débito/Crédito')
 @section('breadcrumb')
 	<li class="breadcrumb-item">
-		<a href="{{ url('/admin/notfars/'.session('padmision')) }}"><i class="fas fa-window-restore"></i> Notas de Débito/Crédito</a>
+		<a href="{{ url('/admin/notfars/'.session('pfarmacia')) }}"><i class="fas fa-window-restore"></i> Notas de Débito/Crédito</a>
 	</li>
 @endsection
 
@@ -21,7 +21,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label class="lsinmargen" for="periodo">Periodo:</label>
-                                        {!! Form::text('periodo', session('padmision'), ['class'=>'form-control','id'=>'periodo','autocomplete'=>'off','disabled']) !!}
+                                        {!! Form::text('periodo', session('pfarmacia'), ['class'=>'form-control','id'=>'periodo','autocomplete'=>'off','disabled']) !!}
                                     </div>
                                     <div class="col-md-8">
                                         <label class="lsinmargen" for="fecha">Fecha:</label>

@@ -30,6 +30,7 @@
                 <input type="checkbox" name="saldos" id="saldos" value="true" @if(kvfj($user->permissions, 'saldos')) checked @endif>
                 <label for="saldos">Regenerar saldos.</label>
             </div>
+            
         </div>
     </div>
 </div>
