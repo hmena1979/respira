@@ -15,6 +15,7 @@
 				<div class="headercontent">
 					<h2 class="title">Listado de Movimiento de Comprobantes</h2>
 				</div>
+				
 				<div class="inside">
 					{!! Form::open(['url'=>'/admin/sunat/comprobantes','target'=>"_blank"]) !!}
 					<div class="row">
