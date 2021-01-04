@@ -296,6 +296,12 @@ Route::prefix('/admin')->group(function(){
     Route::get('/sunat/{id}/notaxmlf', 'Admin\SunatController@getSunatNotaFarmacia')->name('pdf');
     Route::get('/sunat/certificado', 'Admin\SunatController@getSunatCertificado')->name('pdf');
     Route::get('/sunat/certificadocer', 'Admin\SunatController@getSunatCertificadoCer')->name('pdf');
+    //SUNAT - REPORTES
+    Route::get('/sunat/wincontall', 'Admin\SunatController@getSunatWinContall')->name('sunat');
+    Route::post('/sunat/wincontall', 'Admin\SunatController@postSunatWinContall')->name('sunat');
+    Route::get('/sunat/comprobantes', 'Admin\SunatController@getSunatComprobantes')->name('sunat');
+    Route::post('/sunat/comprobantes', 'Admin\SunatController@postSunatComprobantes')->name('sunat');
+
 
     //Pruebas
     // Route::get('/pruebas', 'Admin\SunatController@getSunat')->name('pdf');

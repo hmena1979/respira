@@ -64,15 +64,19 @@
 				@endif
 			</div>
 		</li>
+		@if(kvfj(Auth::user()->permissions,'sunat'))		
 		<li class="item" id="sunat">
 			<a href="#sunat" class="menu-btn">
 				<i class="fas fa-archway"></i><span>Sunat<i class="fas fa-chevron-down drop-down"></i></span>
 			</a>
 			<div class="sub-menu">
+				<a href="{{ url('/admin/sunat/wincontall') }}" class="lk-sunat" "data-toggle="tooltip" data-placement="top" title = 'Wincontall'><i class="fas fa-window-restore"></i><span>Wincontall</span></a>
+				<a href="{{ url('/admin/sunat/comprobantes') }}" class="lk-sunat" "data-toggle="tooltip" data-placement="top" title = 'Comprobantes'><i class="fas fa-window-restore"></i><span>Comprobantes de pago</span></a>
 				{{-- <a href="#"><i class="fas fa-lock"></i><span>Anulación</span></a>
 				<a href="#"><i class="fas fa-language"></i><span>Envío diario</span></a> --}}
 			</div>
 		</li>
+		@endif
 		<li class="item" id="tablas" "data-toggle="tooltip" data-placement="top" title = 'Tablas del sistema'>
 			<a href="#tablas" class="menu-btn">
 				<i class="fas fa-folder-open"></i><span>Tablas del sistema<i class="fas fa-chevron-down drop-down"></i></span>

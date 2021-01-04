@@ -32,4 +32,8 @@ class NotaAdm extends Model
     {
     	return $this->hasOne(Categoria::class, 'codigo', 'moneda')->where('modulo',10);
     }
+
+    public function det(){
+        return $this->hasMany(DetNotaAdm::class, 'notaadm_id','id');
+    }
 }

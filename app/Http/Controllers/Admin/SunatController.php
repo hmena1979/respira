@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Validator, Str;
+use PDF;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\WincontallExport;
 
 use XMLWriter;
 use Storage;
@@ -2364,6 +2369,140 @@ class SunatController extends Controller
 
         
        //return  $a;
+    }
+
+    public function getSunatWinContall()
+    {
+        return view('admin.sunat.wincontall');
+    }
+
+    public function postSunatWinContall(Request $request)
+    {
+        $parametro = Param::findOrFail(1);
+        $rules = [
+            'periodo' => 'required'
+    	];
+    	$messages = [
+    		'periodo.required' => 'Ingrese periodo.'
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+    	if($validator->fails()):
+    		return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withinput();
+        else:
+            $periodo = e($request->input('periodo'));
+            $file = $periodo.$parametro->ruc.'.xlsx';
+
+            return Excel::download(new WincontallExport($periodo), $file);
+            // return view('pdf.wincontall',$data);
+
+        endif;
+
+        
+
+    }
+
+    public function getSunatComprobantes()
+    {
+        $fpago = Categoria::where('modulo', 11)->pluck('nombre','codigo');
+        $data = [
+            'fpago' => $fpago
+        ];
+
+        return view('admin.report.comprobantes',$data);
+    }
+
+    public function postSunatComprobantes(Request $request)
+    {
+        $parametro = Param::findOrFail(1);
+        $optipo = e($request->input('rp_opt'));
+        $opfp = e($request->input('lis_optfp'));
+        $fini = e($request->input('lis_fini'));
+        $ffin = e($request->input('lis_ffin'));
+
+        if($opfp == 1){
+            $fpago = Categoria::select('codigo','nombre')->where('modulo', 11)->get();
+            // $fpago = Salida::with(['fp'])->select('fpago_id')->whereBetween('fecha',[$fini,$ffin])->groupBy('fpago_id')->get();
+        }else{
+            $fpago = Categoria::select('codigo','nombre')
+                ->where('modulo', 11)
+                ->where('codigo',$request->input('lis_fpago'))
+                ->get();
+            // $fpago = Salida::with(['fp'])->select('fpago_id')
+            //     ->where('fpago_id',$request->input('lis_fpago'))
+            //     ->whereBetween('fecha',[$fini,$ffin])->groupBy('fpago_id')->get();
+        }
+        $titulo = '';
+        $mov = array();
+        switch($optipo){
+            case 1:
+                $titulo = 'ADMISIÓN';
+                foreach($fpago as $fpg){
+                    $dt = Factura::with(['cli','sta'])
+                    ->whereBetween('fecha',[$fini,$ffin])
+                    ->where('fpago_id',$fpg->codigo)
+                    // ->where('anulado',2)
+                    ->select('fecha', 'ruc','comprobante_id','serie', 'numero','total_clinica AS total','status','cdr','anulado')
+                    ->get();
+                    if($dt->count()>0){
+                        $mov[$fpg->nombre] = $dt;
+                    }
+                }
+                break;
+            case 2:
+                $titulo = 'NOTAS ADMISIÓN';
+                foreach($fpago as $fpg){
+                    $dt = NotaAdm::with(['cli','sta'])
+                    ->whereBetween('fecha',[$fini,$ffin])
+                    ->where('fpago_id',$fpg->codigo)
+                    // ->where('anulado',2)
+                    ->select('fecha', 'ruc','comprobante_id','serie', 'numero','total','status','cdr','moneda AS anulado')
+                    ->get();
+                    if($dt->count()>0){
+                        $mov[$fpg->nombre] = $dt;
+                    }
+                }
+                break;
+            case 3:
+                $titulo = 'FARMACIA';
+                foreach($fpago as $fpg){
+                    $dt = Salida::with(['cli','sta'])
+                    ->whereBetween('fecha',[$fini,$ffin])
+                    ->where('fpago_id',$fpg->codigo)
+                    // ->where('anulado',2)
+                    ->where('tipsal',1)
+                    ->select('fecha', 'ruc','comprobante_id','serie', 'numero','total','status','cdr','anulado')
+                    ->get();
+                    if($dt->count()>0){
+                        $mov[$fpg->nombre] = $dt;
+                    }
+                }
+                break;
+            case 4:
+                $titulo = 'NOTAS FARMACIA';
+                foreach($fpago as $fpg){
+                    $dt = NotaFar::with(['cli','sta'])
+                    ->whereBetween('fecha',[$fini,$ffin])
+                    ->where('fpago_id',$fpg->codigo)
+                    // ->where('anulado',2)
+                    ->select('fecha', 'ruc','comprobante_id','serie', 'numero','total','status','cdr','moneda AS anulado')
+                    ->get();
+                    if($dt->count()>0){
+                        $mov[$fpg->nombre] = $dt;
+                    }
+                }
+                break;
+        }
+
+        $data = [
+            'fini' => $fini,
+            'ffin' => $ffin,
+            'mov' => $mov,
+            'titulo' => $titulo,
+            'parametro' => $parametro
+        ];
+        $pdf = PDF::loadView('pdf.rcomprobantes', $data)->setPaper('A4', 'portrait');
+        // return view('pdf.rmovfar',$data);
+        return $pdf->stream('rep.pdf', array('Attachment'=>false));
     }
 
 }

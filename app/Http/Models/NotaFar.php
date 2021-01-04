@@ -32,4 +32,8 @@ class NotaFar extends Model
     {
     	return $this->hasOne(Categoria::class, 'codigo', 'moneda')->where('modulo',10);
     }
+
+    public function det(){
+        return $this->hasMany(DetNotaFar::class, 'notafar_id','id');
+    }
 }

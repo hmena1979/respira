@@ -459,5 +459,7 @@ class ReporteController extends Controller
         return $pdf->stream('rep.pdf', array('Attachment'=>false));
     }
 
+    
+
 
 }
