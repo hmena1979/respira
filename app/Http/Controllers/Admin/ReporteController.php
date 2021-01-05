@@ -18,6 +18,7 @@ use App\Http\Models\Detfactura;
 use App\Http\Models\Salida;
 use App\Http\Models\Detsalida;
 use App\Http\Models\Producto;
+use App\Http\Models\Saldo;
 
 
 class ReporteController extends Controller
@@ -459,7 +460,77 @@ class ReporteController extends Controller
         return $pdf->stream('rep.pdf', array('Attachment'=>false));
     }
 
-    
+    public function postReporteUtilidad(Request $request)
+    {
+        $parametro = Param::findOrFail(1);
+        $optipo = e($request->input('lis_uopt'));
+        $fini = e($request->input('ut_fini'));
+        $ffin = e($request->input('ut_ffin'));
 
+        if($optipo == 1){
+        }else{
+        }
+
+        $producto = Detsalida::with('prod')
+            ->join('salidas','detsalidas.salida_id','salidas.id')
+            ->join('productos','detsalidas.producto_id','productos.id')
+            ->whereBetween('salidas.fecha',[$fini,$ffin])
+            ->where('salidas.anulado',2)
+            ->select('productos.id','productos.nombre')
+            ->orderBy('productos.nombre')
+            ->groupBy('productos.id','productos.nombre')
+            ->get();
+        
+        $doc = array();
+        foreach($producto as $d){
+            $dt = Salida::join('detsalidas','salidas.id','detsalidas.salida_id')
+            ->whereBetween('fecha',[$fini,$ffin])
+            // ->where('salidas.fpago_id',$fpg->fpago_id)
+            ->where('salidas.anulado',2)
+            ->where('salidas.tipsal',1)
+            ->where('detsalidas.producto_id',$d->id)
+            ->whereNull('detsalidas.deleted_at')
+            ->whereNull('salidas.deleted_at')
+            ->select('salidas.fecha', 'salidas.serie', 'salidas.numero', 'detsalidas.cantidad', 'detsalidas.precio',
+                'detsalidas.preprom','detsalidas.subtotal')
+            ->get();
+            if($dt->count()>0){
+                $doc[$d->nombre] = $dt;
+            }
+        }
+
+        $data = [
+            'fini' => $fini,
+            'ffin' => $ffin,
+            'doc' => $doc,
+            'parametro' => $parametro,
+            'optipo' => $optipo
+        ];
+        $pdf = PDF::loadView('pdf.utilidad', $data)->setPaper('A4', 'portrait');
+        // return view('pdf.rmovfar',$data);
+        return $pdf->stream('rep.pdf', array('Attachment'=>false));
+    }
+
+    public function postReporteSaldos(Request $request)
+    {
+        $parametro = Param::findOrFail(1);
+        $periodo = e($request->input('periodo'));
+
+        $producto = Saldo::join('productos','saldos.producto_id','productos.id')
+            ->where('saldos.periodo',$periodo)
+            ->select('productos.id','productos.nombre','saldos.inicial','saldos.entradas','saldos.salidas',
+                'saldos.saldo', 'saldos.precio')
+            ->orderBy('productos.nombre')
+            ->get();
+
+        $data = [
+            'periodo' => $periodo,
+            'producto' => $producto,
+            'parametro' => $parametro
+        ];
+        $pdf = PDF::loadView('pdf.saldos', $data)->setPaper('A4', 'portrait');
+        // return view('pdf.rmovfar',$data);
+        return $pdf->stream('rep.pdf', array('Attachment'=>false));
+    }
 
 }

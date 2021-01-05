@@ -288,6 +288,8 @@ Route::prefix('/admin')->group(function(){
     Route::post('/rfarmacia/productos', 'Admin\ReporteController@postReporteProducto')->name('report');
     Route::post('/rfarmacia/movprod', 'Admin\ReporteController@postReporteMovProducto')->name('report');
     Route::post('/rfarmacia/movcomp', 'Admin\ReporteController@postReporteMovComprobantes')->name('report');
+    Route::post('/rfarmacia/utilidad', 'Admin\ReporteController@postReporteUtilidad')->name('report');
+    Route::post('/rfarmacia/saldos', 'Admin\ReporteController@postReporteSaldos')->name('report');
 
     //SUNAT - Geberación de XML y envio a SUNAT
     Route::get('/sunat/{id}/xml', 'Admin\SunatController@getSunatAdmision')->name('pdf');

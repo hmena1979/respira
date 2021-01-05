@@ -95,7 +95,7 @@
 							{!! Form::select('rs_group',[1=>'Sin grupo',2=>'Producto'],1,['class'=>'custom-select','id'=>'rs_group']) !!}
 						</div>
 						<div class="col">
-							{!! Form::submit('Mostar', ['class'=>'btn btn-primary mtop20']) !!}
+							{!! Form::submit('Mostar', ['class'=>'btn btn-primary mtop25']) !!}
 						</div>
 					</div>
 					{!! Form::close() !!}
@@ -150,7 +150,7 @@
 							{!! Form::select('lis_group',[1=>'Sin grupo',2=>'Producto'],1,['class'=>'custom-select','id'=>'lis_group']) !!}
 						</div>
 						<div class="col">
-							{!! Form::submit('Mostar', ['class'=>'btn btn-primary mtop20']) !!}
+							{!! Form::submit('Mostar', ['class'=>'btn btn-primary mtop25']) !!}
 						</div>
 					</div>
 					{!! Form::close() !!}
@@ -158,6 +158,62 @@
 			</div>
 		</div>
 	</div>
+	@if(kvfj(Auth::user()->permissions,'producto_price'))
+	<div class="row mtop16 mbottom16">
+		<div class="col-md-12">
+			<div class="panel shadow">
+				<div class="headercontent">
+					<h2 class="title">Utilidad de ventas</h2>
+				</div>
+				<div class="inside">
+					{!! Form::open(['url'=>'/admin/rfarmacia/utilidad','target'=>"_blank"]) !!}
+					<div class="row">
+						<div class="col-md-3">
+							<label class="lsinmargen" for="lis_uopt">Tipo:</label>
+							{!! Form::select('lis_uopt',[1=>'Sin IGV',2=>'Con IGV'],1,['class'=>'custom-select','id'=>'lis_uopt']) !!}
+						</div>
+						<div class="col-md-3">
+							<label class="lsinmargen" for="ut_fini">Fecha Inicial:</label>
+							{!! Form::date('ut_fini', \Carbon\Carbon::now(), ['class'=>'form-control','autocomplete'=>'off', 'id'=>'ut_fini']) !!}
+						</div>
+						<div class="col-md-3">
+							<label class="lsinmargen" for="ut_ffin">Fecha Final:</label>
+							{!! Form::date('ut_ffin', \Carbon\Carbon::now(), ['class'=>'form-control','autocomplete'=>'off', 'id'=>'ut_ffin']) !!}
+						</div>
+						<div class="col">
+							{!! Form::submit('Mostar', ['class'=>'btn btn-primary mtop25']) !!}
+						</div>
+					</div>
+					{!! Form::close() !!}
+				</div>				
+			</div>
+		</div>
+	</div>
+	@endif
+	@if(kvfj(Auth::user()->permissions,'cierre'))
+	<div class="row mtop16 mbottom16">
+		<div class="col-md-12">
+			<div class="panel shadow">
+				<div class="headercontent">
+					<h2 class="title">Saldos al cierre de periodo</h2>
+				</div>
+				<div class="inside">
+					{!! Form::open(['url'=>'/admin/rfarmacia/saldos','target'=>"_blank"]) !!}
+					<div class="row">
+						<div class="col-md-2">
+							<label class="lsinmargen" for="periodo">Periodo:</label>
+							{!! Form::text('periodo', pAnterior(session('pfarmacia')), ['class'=>'form-control','autocomplete'=>'off', 'id'=>'periodo']) !!}
+						</div>
+						<div class="col">
+							{!! Form::submit('Mostar', ['class'=>'btn btn-primary mtop25']) !!}
+						</div>
+					</div>
+					{!! Form::close() !!}
+				</div>				
+			</div>
+		</div>
+	</div>
+	@endif
 </div>
 .
 @endsection
