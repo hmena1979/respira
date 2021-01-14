@@ -174,14 +174,14 @@
             document.getElementById("vence").disabled = false;
         });
 
-        document.getElementById('cantidad').addEventListener("blur",function(){
-            if(parseInt(this.value) > parseInt(document.getElementById("stock").value)){
-                alert("Cantidad excede al stock de producto");
-                this.value = '';
-            }else{
-                document.getElementById("subtotal").value = Redondea(this.value * document.getElementById("precio").value,2);
-            }
-        });
+        // document.getElementById('cantidad').addEventListener("blur",function(){
+        //     if(parseInt(this.value) > parseInt(document.getElementById("stock").value)){
+        //         alert("Cantidad excede al stock de producto");
+        //         this.value = '';
+        //     }else{
+        //         document.getElementById("subtotal").value = Redondea(this.value * document.getElementById("precio").value,2);
+        //     }
+        // });
 
         document.getElementById('lote').addEventListener("blur",function(){
             this.value = this.value.toUpperCase();

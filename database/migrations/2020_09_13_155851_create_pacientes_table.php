@@ -32,7 +32,7 @@ class CreatePacientesTable extends Migration
             $table->string('lorigen', 40)->nullable();
             $table->string('lresidencia', 40)->nullable();
             $table->string('responsable', 50)->nullable();
-            $table->string('direccion', 100)->nullable();
+            $table->string('direccion', 150)->nullable();
             $table->string('telefono', 40)->nullable();
             $table->string('email', 60)->nullable();            
             $table->text('antecedentes')->nullable();
