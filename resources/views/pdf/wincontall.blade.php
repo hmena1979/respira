@@ -186,7 +186,7 @@
                     <td></td>
                 </tr>
                 @endforeach
-                @foreach($notaadm as $fac)
+                @foreach($notafar as $fac)
                 <tr>
                     <td></td>
                     <td>{{ date("d/m/Y",strtotime($fac->fecha)) }}</td>
