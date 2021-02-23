@@ -9,7 +9,8 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-            <div class="col-md-3 text-center">
+            <div class="col-md-3 text-center mbottom16">
+				<a class='btn btn-convertir btn-block mb-2' href="{{ url('/admin/tipmeds/add') }}"><b><i class="fas fa-plus"></i> TIPO MEDICAMENTO</b></a>
                 @foreach($tipmeds as $tipmed)
                 @if($tipmed->id == $id)
                 <a class='btn btn-primary btn-block' href="{{ url('/admin/tipmeds/'.$tipmed->id) }}">{{ $tipmed->nombre }}</a>
@@ -22,12 +23,18 @@
 			<div class="col-md-9">
 				<div class="panel shadow">
 					<div class="headercontent">
-                    <h2 class="title"><i class="fas fa-tablets"></i> Tipo medicamento: <strong>{{ $nombre }}</strong></h2>
+                    <h2 class="title">
+						<i class="fas fa-tablets"></i> Tipo medicamento: <strong>{{ $nombre }}</strong>
+						<span class="ml-2">
+							<a href="{{ url('/admin/tipmed/'.$nombre.'/edit') }}"datatoggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
+						</span>
+						
+					</h2>
 						<ul>
                             @if(kvfj(Auth::user()->permissions,'tipmed_add'))
 							<li>
-								<a href="{{ url('/admin/tipmed/add/'.$id) }}">
-									<i class="fas fa-plus"></i> Agregar registro
+								<a class="btn btn-agregar mt-2" href="{{ url('/admin/tipmed/add/'.$id) }}">
+									Agregar Composición
 								</a>
                             </li>
                             @endif

@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="{{ url('/static/css/reportes.css?v='.time()) }}">
 	</head>
 	<body>
-        {{-- {{ dd($factura) }} --}}
+        {{-- {{ dd($periodo) }} --}}
         <table>
             {{-- <caption>
                 <h3 class="text-left">DOCTOR: {{$doctor->nombre}}</h3>

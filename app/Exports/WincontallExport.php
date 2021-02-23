@@ -37,9 +37,9 @@ class WincontallExport implements FromView
         $salida = Salida::with(['cli'])
             ->select('fecha','comprobante_id','serie','numero','ruc','tot_gravadas','tot_exoneradas',
                 'tot_igv','total','moneda','tipo')
-            ->where('periodo', $periodo)
             ->where('comprobante_id', '01')
             ->orWhere('comprobante_id', '03')
+            ->where('periodo', $periodo)
             ->orderBy('comprobante_id', 'asc')
             ->orderBy('fecha', 'asc')
             ->get();
@@ -55,7 +55,8 @@ class WincontallExport implements FromView
             'factura' => $factura,
             'notaadm' => $notaadm,
             'salida' => $salida,
-            'notafar' => $notafar
+            'notafar' => $notafar,
+            'periodo' => $periodo
         ];
         
         return view('pdf.wincontall',$data);
