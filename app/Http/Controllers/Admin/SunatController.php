@@ -658,6 +658,15 @@ class SunatController extends Controller
         $afectacion = Afectacion::pluck('nombre','codigo');
         $parametro = Param::findOrFail(1);
         $formatter = new NumeroALetras();
+
+        $tclinica = Factura::where('comprobante_id',$nota->dmcomprobante_id)
+                ->where('serie',$nota->dmserie)
+                ->where('numero',$nota->dmnumero)
+                ->value('total_clinica');
+
+        if($nota->comprobante_id == '07' && $nota->dmtipo_id == '01' && $tclinica <> $nota->total){
+            return back()->with('message', 'El monto de la NOTA DE CRÉDITO es diferente al comprobante de pago')->with('typealert', 'danger')->withinput();
+        }
         
         if($nota->moneda=='PEN'){
             $letra = $formatter->toInvoice($nota->total, 2, 'soles');

@@ -183,6 +183,15 @@ Route::prefix('/admin')->group(function(){
     //Modulo Tipo de medicamento
     Route::get('/tipmeds/{id}', 'Admin\TipMedController@getTipMedHome')->name('tipmeds');
     Route::get('/tipmeds/{id}/selcomp', 'Admin\TipMedController@getTipMedSelComposicion')->name('tipmeds');
+    Route::get('/tipmed/add', 'Admin\TipMedController@getTipMedAdd')->name('tipmed_add');
+    Route::post('/tipmed/add', 'Admin\TipMedController@postTipMedAdd')->name('tipmed_add');
+    Route::get('/tipmed/{id}/edit', 'Admin\TipMedController@getTipMedEdit')->name('tipmed_edit');
+    Route::post('/tipmed/{id}/edit', 'Admin\TipMedController@postTipMedEdit')->name('tipmed_edit');
+    Route::get('/tipmed/{id}/addcomposicion', 'Admin\TipMedController@getTipMedAddComposicion')->name('tipmed_add');
+    Route::post('/tipmed/{id}/addcomposicion', 'Admin\TipMedController@postTipMedAddComposicion')->name('tipmed_add');
+    Route::get('/tipmed/{id}/editcomposicion', 'Admin\TipMedController@getTipMedEditComposicion')->name('tipmed_edit');
+    Route::post('/tipmed/{id}/editcomposicion', 'Admin\TipMedController@postTipMedEditComposicion')->name('tipmed_edit');
+    Route::get('/tipmed/{id}/deletecomposicion', 'Admin\TipMedController@getTipMedDeleteComposicion')->name('tipmed_edit');
 
     //Modulo importaciones
     Route::get('/import', 'Admin\ImportController@getImportHome')->name('import');
