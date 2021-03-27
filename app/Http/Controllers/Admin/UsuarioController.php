@@ -189,6 +189,7 @@ class UsuarioController extends Controller
 			'sunat' => $request->input('sunat'),
 			'saldos' => $request->input('saldos'),
 			'cierre' => $request->input('cierre'),
+			'vencimientos' => $request->input('vencimientos'),			
 			'cadmision' => $request->input('cadmision'),
 			'cfarmacia' => $request->input('cfarmacia'),
 			'usuarios' => $request->input('usuarios'),

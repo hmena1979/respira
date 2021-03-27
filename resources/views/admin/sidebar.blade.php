@@ -38,7 +38,7 @@
 			</div>
 			<div class="sub-menu">
 				@if(kvfj(Auth::user()->permissions,'terapias'))
-				<a href="{{ url('/admin/terapias') }}" class="lk-terapias lk-terapia_add lk-terapia_edit lk-terapia_delete" "data-toggle="tooltip" data-placement="top" title = 'Terapias'><i class="fas fa-window-restore"></i><span>Terapias</span></a>
+				<a href="{{ url('/admin/terapias') }}" class="lk-terapias lk-terapia_add lk-terapia_edit lk-terapia_delete" "data-toggle="tooltip" data-placement="top" title = 'Terapias'><i class="fas fa-procedures"></i><span>Terapias</span></a>
 				@endif
 			</div>
 			<div class="sub-menu">
@@ -133,6 +133,9 @@
 				@endif
 				@if(kvfj(Auth::user()->permissions,'saldos'))
 				<a href="{{ url('/admin/saldos') }}" class="lk-parametros" "data-toggle="tooltip" data-placement="top" title = 'Regenerar Saldos'><i class="fas fa-cog"></i><span>Regenerar Saldos</span></a>
+				@endif
+				@if(kvfj(Auth::user()->permissions,'vencimientos'))
+				<a href="{{ url('/admin/producto/vencimiento') }}" class="lk-vencimientos" "data-toggle="tooltip" data-placement="top" title = 'Vencimiento de Producto'><i class="fas fa-cog"></i><span>Vencimiento de Producto</span></a>
 				@endif
 				@if(kvfj(Auth::user()->permissions,'cierre'))
 				<a href="{{ url('/admin/cierre') }}" class="lk-cierre" "data-toggle="tooltip" data-placement="top" title = 'Cierre de mes'><i class="fas fa-calendar-check"></i><span>Cierre de mes</span></a>

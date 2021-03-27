@@ -13,6 +13,7 @@ use App\Http\Models\Umedida;
 use App\Http\Models\Laboratorio;
 use App\Http\Models\Detingreso;
 use App\Http\Models\Detsalida;
+use App\Http\Models\Vencimiento;
 
 class ProductoController extends Controller
 {
@@ -145,7 +146,6 @@ class ProductoController extends Controller
 
     		if($doctor->save()):
     			return redirect('/admin/productos/')->with('message', 'Registro guardado')->with('typealert', 'success');
-
     		endif;
     	endif;
     }
@@ -197,6 +197,94 @@ class ProductoController extends Controller
             //$pro = Producto::findOrFail($bus);
             return response()->json($pro);
         }
+    }
+
+    public function getVencimientoHome()
+    {
+        $vencimientos = Vencimiento::join('productos','vencimientos.producto_id','productos.id')
+            ->select('vencimientos.id','vencimientos.producto_id','productos.nombre', 'vencimientos.lote',
+                'vencimientos.vencimiento', 'vencimientos.entradas', 'vencimientos.salidas', 'vencimientos.saldo')
+            ->where('vencimientos.saldo','>',0)
+            ->orderBy('productos.nombre')
+            ->get();
+        $data = [
+            'vencimientos' => $vencimientos
+        ];
+        return view('admin.productos.vencimiento',$data);
+    }
+
+    public function getVencimientoEdit($id)
+    {
+        $vencimiento = Vencimiento::findOrFail($id);
+        $producto = Producto::findOrFail($vencimiento->producto_id);
+        $data = [
+            'vencimiento' => $vencimiento,
+            'producto' => $producto
+        ];
+        return view('admin.productos.vencedit',$data);
+    }
+
+    public function postVencimientoEdit(Request $request, $id)
+    {
+        $m = '';
+        $rules = [
+    		'nlote' => 'required',
+    		'nvencimiento' => 'required',
+    		'ncantidad' => 'required'
+    	];
+    	$messages = [
+    		'nlote.required' => 'Ingrese nuevo Lote.',
+    		'nvencimiento.required' => 'Ingrese nuevo Vencimiento.',
+    		'ncantidad.required' => 'Ingrese cantidad a descontar.'
+    	];
+
+    	$validator = Validator::make($request->all(),$rules,$messages);
+    	if($validator->fails()):
+    		return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withinput();
+    	else:
+            $venc = Vencimiento::findOrFail($id);
+            $producto = $venc->producto_id;
+            $saldo = $venc->saldo;
+            $nlote = Str::upper(e($request->input('nlote')));
+            $nvencimiento = e($request->input('nvencimiento'));
+            $ncantidad = e($request->input('ncantidad'));
+            if($ncantidad > $saldo){
+                return back()->with('message', 'Se ha producido un error, cantidad exede al Saldo')->with('typealert', 'danger')->withinput();
+            }
+            //-------------------------------------------------------------------------------------------------
+            // Actualiza Vencimientos
+            $v = Vencimiento::where('producto_id',$producto)->where('lote',$nlote)->get();
+            if($v->count() == 0){
+                $vencn = new Vencimiento;
+                $vencn->producto_id = $producto;
+                $vencn->lote = $nlote;
+                $vencn->vencimiento = $nvencimiento;
+                $vencn->entradas = $ncantidad;
+                $vencn->salidas = 0;
+                $vencn->saldo = $ncantidad;
+                if($vencn->save()):
+                    $m = $m.'Lote actualizado con exito. ';
+                endif;
+            }else{
+                $venc = Vencimiento::where('producto_id',$producto)
+                ->where('lote',$nlote)
+                ->update([
+                    'entradas' => $v[0]->entradas + $ncantidad,
+                    'saldo' => $v[0]->saldo + $ncantidad
+                ]);
+                
+                $m = $m.'Lote actualizado con exito. ';
+            }
+            $venc->salidas = $venc->salidas + $ncantidad;
+            $venc->saldo = $venc->saldo - $ncantidad;
+            if($venc->save()):
+    			return redirect('/admin/producto/vencimiento')->with('message', 'Registro actualizado')->with('typealert', 'success');
+    		endif;
+
+            //-------------------------------------------------------------------------------------------------
+        endif;
+
+
     }
 
 }

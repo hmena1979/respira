@@ -225,6 +225,9 @@ Route::prefix('/admin')->group(function(){
     Route::get('/producto/{id}/edit', 'Admin\ProductoController@getProductoEdit')->name('producto_edit');
     Route::post('/producto/{id}/edit', 'Admin\ProductoController@postProductoEdit')->name('producto_edit');
     Route::get('/producto/{id}/delete', 'Admin\ProductoController@getProductoDelete')->name('producto_delete');
+    Route::get('/producto/vencimiento', 'Admin\ProductoController@getVencimientoHome')->name('vencimientos');
+    Route::get('/producto/{id}/vencimientoedit', 'Admin\ProductoController@getVencimientoEdit')->name('vencimientos');
+    Route::post('/producto/{id}/vencimientoedit', 'Admin\ProductoController@postVencimientoEdit')->name('vencimientos');
     //Busqueda Modal - Productos x Nombre o Composición
     Route::get('/producto/{bus}/search', 'Admin\ProductoController@getProductoSearch')->name('cie10');
     Route::get('/producto/{bus}/searchid', 'Admin\ProductoController@getProductoSearchId')->name('cie10');
