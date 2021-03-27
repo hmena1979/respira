@@ -47,6 +47,7 @@
                     <div class="row mtop16">
                         @include('admin.usuarios.permissions.module_notadms')
                         @include('admin.usuarios.permissions.module_notfars')
+                        @include('admin.usuarios.permissions.module_terapias')
                         {{-- @include('admin.usuarios.permissions.module_salidas') --}}
                     </div>
                     <div class="row mtop16">

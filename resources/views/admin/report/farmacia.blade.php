@@ -190,6 +190,33 @@
 		</div>
 	</div>
 	@endif
+	<div class="row mtop16 mbottom16">
+		<div class="col-md-12">
+			<div class="panel shadow">
+				<div class="headercontent">
+					<h2 class="title">Kardex por producto</h2>
+				</div>
+				<div class="inside">
+					{!! Form::open(['url'=>'/admin/rfarmacia/movkardex','target'=>"_blank"]) !!}
+					<div class="row">
+						<div class="col-md-2">
+							<label class="lsinmargen" for="rk_periodo">Periodo:</label>
+							{!! Form::text('rk_periodo', session('pfarmacia'), ['class'=>'form-control','autocomplete'=>'off', 'id'=>'rk_periodo']) !!}
+						</div>
+						<div class="col-md-6">
+							<label class="lsinmargen" for="rk_producto">Producto:</label>
+							{!! Form::select('rk_producto',$productos,null,['class'=>'custom-select','id'=>'rk_producto','placeholder'=>'']) !!}
+						</div>
+						<div class="col-md-1">
+							{!! Form::submit('Mostar', ['class'=>'btn btn-primary mtop25']) !!}
+						</div>
+					</div>
+
+					{!! Form::close() !!}
+				</div>				
+			</div>
+		</div>
+	</div>
 	@if(kvfj(Auth::user()->permissions,'cierre'))
 	<div class="row mtop16 mbottom16">
 		<div class="col-md-12">

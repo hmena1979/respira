@@ -171,27 +171,40 @@ class IngresoController extends Controller
                     $precio = round($di->precio * $ingreso->tc,4);
                 }
                 // Actualiza producto
-                $p = Producto::find($di->producto_id);            	
-            	$p->precompra = preProm($p->stock, $p->precompra, $di->cantidad, $precio);
-            	$p->stock = $p->stock + $di->cantidad;
+                $p = Producto::find($di->producto_id);
+                if($ingreso->comprobante_id == '07'){
+                    $p->precompra = prePromE($p->stock, $p->precompra, $di->cantidad, $precio);
+                    $p->stock = $p->stock - $di->cantidad;
+                }else{
+                    $p->precompra = preProm($p->stock, $p->precompra, $di->cantidad, $precio);
+                    $p->stock = $p->stock + $di->cantidad;
+                }
+            	
             	if($p->save()):
             		$m = $m.'Stock de producto actualizado con exito. ';
                 endif;
                 // Actualiza Kardex
                 $k = new Kardex;
             	$k->periodo = session('pfarmacia');
-            	$k->tipo = 1; ////(1)Ingreso (2)Consumo directo (3)Salidas
+            	if($ingreso->comprobante_id == '07'){
+                    $k->tipo = 4; ////(1)Ingreso (2)Consumo directo (3)Salidas (4)Nota de Credito
+            	    $k->cant_ent = $di->cantidad * -1;
+                }
+                else{
+                    $k->tipo = 1; ////(1)Ingreso (2)Consumo directo (3)Salidas (4)Nota de Credito
+            	    $k->cant_ent = $di->cantidad;
+                }
             	$k->operacion_id = $di->id;
             	$k->producto_id = $di->producto_id;
             	$k->cliente_id = $proveedor->id;
             	$k->documento = numDoc($ingreso->serie,$ingreso->numero);
             	$k->proveedor = $proveedor->razsoc;
             	$k->fecha = $ingreso->fecha;
-            	$k->cant_ent = $di->cantidad;
             	$k->cant_sald = $p->stock;
             	$k->pre_compra = $precio;
             	$k->pre_prom = $p->precompra;
             	$k->descrip = $di->glosa;
+                
             	if($k->save()):
             		$m = $m.'Kardex actualizado con exito. ';
                 endif;
@@ -209,12 +222,23 @@ class IngresoController extends Controller
                         $m = $m.'Lote actualizado con exito. ';
                     endif;
                 }else{
-                    $venc = Vencimiento::where('producto_id',$di->producto_id)
+                    if($ingreso->comprobante_id == '07'){
+                        $venc = Vencimiento::where('producto_id',$di->producto_id)
+                        ->where('lote',$di->lote)
+                        ->update([
+                            'entradas' => $v[0]->entradas - $di->cantidad,
+                            'saldo' => $v[0]->saldo - $di->cantidad
+                        ]);
+                    }
+                    else{
+                        $venc = Vencimiento::where('producto_id',$di->producto_id)
                         ->where('lote',$di->lote)
                         ->update([
                             'entradas' => $v[0]->entradas + $di->cantidad,
                             'saldo' => $v[0]->saldo + $di->cantidad
                         ]);
+                    }
+                    
                     $m = $m.'Lote actualizado con exito. ';
                 }
                 //Actualiza sumatoria
@@ -244,8 +268,15 @@ class IngresoController extends Controller
         $can_ant = $di->cantidad;
         $p = Producto::findOrFail($prod);
 
-        $rprecio = prePromE($p->stock, $p->precio_prom, $can_ant, $pre_ant);
-        $rstock = $p->stock - $can_ant;
+        if($ingreso->comprobante_id == '07'){
+            $rprecio = preProm($p->stock, $p->precio_prom, $can_ant, $pre_ant);
+            $rstock = $p->stock + $can_ant;
+        }
+        else{
+            $rprecio = prePromE($p->stock, $p->precio_prom, $can_ant, $pre_ant);
+            $rstock = $p->stock - $can_ant;
+        }
+        
         
         if($di->delete()):
             $k = Kardex::where('operacion_id',$id)->where('tipo', 1)->delete();
@@ -253,13 +284,25 @@ class IngresoController extends Controller
             $p->precompra = $rprecio;
             $p1 = $p->save();
             //Vencimiento
-            $v = Vencimiento::where('producto_id',$prod)->where('lote',$lote)->get();
-            $venc = Vencimiento::where('producto_id',$prod)
-                ->where('lote',$lote)
-                ->update([
-                    'entradas' => $v[0]->entradas - $can_ant,
-                    'saldo' => $v[0]->saldo - $can_ant
-                ]);
+            if($ingreso->comprobante_id == '07'){
+                $v = Vencimiento::where('producto_id',$prod)->where('lote',$lote)->get();
+                $venc = Vencimiento::where('producto_id',$prod)
+                    ->where('lote',$lote)
+                    ->update([
+                        'entradas' => $v[0]->entradas + $can_ant,
+                        'saldo' => $v[0]->saldo + $can_ant
+                    ]);
+            }
+            else{
+                $v = Vencimiento::where('producto_id',$prod)->where('lote',$lote)->get();
+                $venc = Vencimiento::where('producto_id',$prod)
+                    ->where('lote',$lote)
+                    ->update([
+                        'entradas' => $v[0]->entradas - $can_ant,
+                        'saldo' => $v[0]->saldo - $can_ant
+                    ]);
+            }
+            
             //Actualiza sumatoria
             $stafecto = Detingreso::where('ingreso_id', $ingreso_id)->where('afecto', 1)->sum('subtotal');
             $stinafecto = Detingreso::where('ingreso_id', $ingreso_id)->where('afecto', 2)->sum('subtotal');

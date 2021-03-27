@@ -98,7 +98,7 @@
                 <tbody>
                     @foreach($recetas as $r)
                     <tr>
-                        <td>{{ $r->nombre }}</td>
+                        <td>{{ $r->nombre }}<br><span class="letchica">{{$r->composicion}}</span></td>
                         <td class="text-center">{{ $r->um->nombre }}</td>
                         <td class="text-center">{{ round($r->cantidad,2) }}</td>
                         <td>

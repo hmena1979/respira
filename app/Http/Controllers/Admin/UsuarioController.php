@@ -272,6 +272,10 @@ class UsuarioController extends Controller
 			'modreceta_add' => $request->input('modreceta_add'),
 			'modreceta_edit' => $request->input('modreceta_edit'),
 			'modreceta_delete' => $request->input('modreceta_delete'),
+			'terapias' => $request->input('terapias'),
+			'terapia_add' => $request->input('terapia_add'),
+			'terapia_edit' => $request->input('terapia_edit'),
+			'terapia_delete' => $request->input('terapia_delete'),
 		];
 		$permissions = json_encode($permissions);
 		$user->permissions = $permissions;

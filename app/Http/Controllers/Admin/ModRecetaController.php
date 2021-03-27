@@ -104,6 +104,7 @@ class ModRecetaController extends Controller
             $r->modreceta_id = $id;
             $r->producto_id = $request->input('producto_id');
             $r->nombre = Str::upper(e($request->input('nombre')));
+            $r->composicion = Str::upper(e($request->input('composicion')));
             $r->umedida_id = e($request->input('umedida_id'));
             $r->cantidad = e($request->input('cantidad'));
             $r->posologia = e($request->input('posologia'));
@@ -163,6 +164,7 @@ class ModRecetaController extends Controller
             $r = DetModreceta::findOrFail($id);
             $r->producto_id = $request->input('producto_id');
             $r->nombre = Str::upper(e($request->input('nombre')));
+            $r->composicion = Str::upper(e($request->input('composicion')));
             $r->umedida_id = e($request->input('umedida_id'));
             $r->cantidad = e($request->input('cantidad'));
             $r->posologia = e($request->input('posologia'));

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator, Str, Auth;
 
+use Storage;
+
 use App\Http\Models\Paciente;
 use App\Http\Models\Categoria;
 use App\Http\Models\Doctor;
@@ -17,6 +19,8 @@ use App\Http\Models\Receta;
 use App\Http\Models\Umedida;
 use App\Http\Models\Modreceta;
 use App\Http\Models\DetModreceta;
+use App\Http\Models\Examen;
+
 
 class HistoriaController extends Controller
 {
@@ -34,6 +38,14 @@ class HistoriaController extends Controller
         //$historias = Historia::where('paciente_id', $id)->get();
         $historia1 = Historia::where('paciente_id', $id)->where('item', $item)->get();
         //$historia_id = Historia::where('paciente_id', $id)->where('item', $item)->value('id');
+        if($item == 'E'){
+            $exa = 1;
+        }
+        else{
+            $exa = 2;
+        }
+
+        
         if($historia1->count() == 0){
             $historia1 = Historia::where('paciente_id', $id)->get();
             $item = $historia1[0]->item;
@@ -44,6 +56,7 @@ class HistoriaController extends Controller
         else:
             $historia_id = '';
         endif;
+        
         $doctor = Doctor::where('activo',1)->orderBy('nombre')->pluck('nombre','id');
         $cie10s = Cie10::pluck('nombre','codigo');
         $diagnosticos = Diagnostico::with(['cie','tip','vis'])->where('historia_id', $historia_id)->get();
@@ -56,6 +69,7 @@ class HistoriaController extends Controller
         $postie = Categoria::where('modulo', 9)->orWhere('modulo',12)->orderBy('nombre')->pluck('nombre','codigo');
         $tipo = Categoria::where('modulo', 13)->orderBy('nombre')->pluck('nombre','codigo');
         $modreceta = Modreceta::orderBy('nombre')->pluck('nombre','id');
+        $examen = Examen::where('paciente_id', $id)->get();
         $data = [
             'paciente' => $paciente,
             'historia1' => $historia1,
@@ -71,7 +85,9 @@ class HistoriaController extends Controller
             'posfre' => $posfre,
             'postie' => $postie,
             'tipo' => $tipo,
-            'modreceta' => $modreceta
+            'exa' => $exa,
+            'modreceta' => $modreceta,
+            'examen' => $examen
         ];
         if(!session('pagina')):
             session(['pagina' => "uno"]);
@@ -302,6 +318,7 @@ class HistoriaController extends Controller
             }
             $r->producto_id = $request->input('producto_id');
             $r->nombre = Str::upper(e($request->input('nombre')));
+            $r->composicion = Str::upper(e($request->input('composicion')));
             $r->umedida_id = e($request->input('umedida_id'));
             $r->cantidad = e($request->input('cantidad'));
             $r->posologia = e($request->input('posologia'));
@@ -326,6 +343,7 @@ class HistoriaController extends Controller
                 'historia_id'=>$id,
                 'producto_id'=>$det->producto_id,
                 'nombre'=>$det->nombre,
+                'composicion'=>$det->composicion,
                 'umedida_id'=>$det->umedida_id,
                 'cantidad'=>$det->cantidad,
                 'posologia'=>$det->posologia,
@@ -346,7 +364,6 @@ class HistoriaController extends Controller
             $receta = Receta::findOrFail($id);
             return response()->json($receta);
         }
-        
     }
 
     public function getHistoriaPrescriptionDelete($id)
@@ -486,6 +503,58 @@ class HistoriaController extends Controller
             if($h->save()):
                 return redirect('/admin')->with('message', 'Registro actualizado')->with('typealert', 'success');
             endif;
+        endif;
+    }
+
+    public function postHistoriaExamenAdd(Request $request, $id)
+    {
+        $rules = [
+    		'fecha' => 'required',
+    		'tipo' => 'required',
+    		'imagen' => 'required',
+    		'resultado' => 'required'
+    	];
+    	$messages = [
+    		'fecha.required' => 'Ingrese fecha.',
+    		'tipo.required' => 'Ingrese tipo',
+    		'imagen.required' => 'Ingrese Imagen/Documento',
+    		'resultado.required' => 'Ingrese resultado'
+    	];
+
+    	$validator = validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+    		return back()->withErrors($validator)->with('message', 'Se ha producido un error')->with('typealert', 'danger')->withinput();
+    	else:
+    		$fileExt = trim($request->file('imagen')->getClientOriginalExtension());
+    		$name = Str::slug(str_replace($fileExt, '', $request->file('imagen')->getClientOriginalName()));
+    		$archivo = rand(1,999).$name.'.'.$fileExt;
+            $archivo = $id.'/'.$archivo;
+            $content = $request->file('imagen');
+            Storage::disk('examenes')->makeDirectory($id);
+            $abc = Storage::disk('examenes')->put($id, $content);
+            $examen = new Examen;
+            $examen->paciente_id = $id;
+            $examen->fecha = Str::upper(e($request->input('fecha')));
+            $examen->tipo = Str::upper(e($request->input('tipo')));
+            $examen->ruta = $abc;
+            $examen->resultado = Str::upper(e($request->input('resultado')));
+            if($examen->save()):
+                
+                
+    			return redirect('/admin/historias/'.$id.'/E/home')->with('message', 'Registro guardado')->with('typealert', 'success');
+    		endif;
+
+
+        endif;
+    }
+
+    public function getHistoriaExamenDelete($id)
+    {
+        $d = Examen::findOrFail($id);
+        $ruta = $d->ruta;
+        if($d->delete()):
+            Storage::disk('examenes')->delete($ruta);
+            return back()->with('message', 'Registro eliminado')->with('typealert', 'success');
         endif;
     }
 

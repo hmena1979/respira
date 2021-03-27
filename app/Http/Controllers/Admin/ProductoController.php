@@ -193,7 +193,7 @@ class ProductoController extends Controller
     public function getProductoSearchId(Request $request, $bus)
     {
         if($request->ajax()){
-            $pro = Producto::where('id',$bus)->get();
+            $pro = Producto::with(['composicion'])->where('id',$bus)->get();
             //$pro = Producto::findOrFail($bus);
             return response()->json($pro);
         }

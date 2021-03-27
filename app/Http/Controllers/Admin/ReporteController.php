@@ -19,6 +19,7 @@ use App\Http\Models\Salida;
 use App\Http\Models\Detsalida;
 use App\Http\Models\Producto;
 use App\Http\Models\Saldo;
+use App\Http\Models\Kardex;
 
 
 class ReporteController extends Controller
@@ -529,6 +530,28 @@ class ReporteController extends Controller
             'parametro' => $parametro
         ];
         $pdf = PDF::loadView('pdf.saldos', $data)->setPaper('A4', 'portrait');
+        // return view('pdf.rmovfar',$data);
+        return $pdf->stream('rep.pdf', array('Attachment'=>false));
+    }
+
+    public function postReporteKardex(Request $request)
+    {
+        $parametro = Param::findOrFail(1);
+        $periodo = e($request->input('rk_periodo'));
+        $prod = e($request->input('rk_producto'));
+        $producto = Producto::findOrFail($prod);
+
+        $kardex = Kardex::where('periodo',$periodo)->where('producto_id',$prod)
+            ->orderBy('fecha')
+            ->get();
+
+        $data = [
+            'periodo' => $periodo,
+            'producto' => $producto,
+            'parametro' => $parametro,
+            'kardex' => $kardex
+        ];
+        $pdf = PDF::loadView('pdf.kardex', $data)->setPaper('A4', 'portrait');
         // return view('pdf.rmovfar',$data);
         return $pdf->stream('rep.pdf', array('Attachment'=>false));
     }

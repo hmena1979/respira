@@ -45,7 +45,7 @@
             <tbody>
                 @foreach($recetas as $r)
                 <tr>
-                    <td>{{ $r->nombre }}</td>
+                    <td>{{ $r->nombre }}<br><span class="letchica">{{$r->composicion}}</span></td>
                     <td>{{ $r->um->nombre }}</td>
                     <td class="text-center">{{ round($r->cantidad,2) }}</td>
                     <td>
@@ -80,7 +80,7 @@
             {!! Form::text('item', $historia->item, ['class'=>'form-control', 'autocomplete'=>'off','hidden']) !!}
             {!! Form::text('producto_id', '', ['class'=>'form-control', 'id'=>'producto_id', 'autocomplete'=>'off','hidden']) !!}
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label class="lsinmargen" for="nombre">Producto:</label>
                 <div class="input-group">
                     {!! Form::text('nombre', null, ['class'=>'form-control', 'id'=>'nombrep','autocomplete'=>'off']) !!}
@@ -109,7 +109,11 @@
                 </div>
                 <!-- Fin Modal -->
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <label class="lsinmargen" for="composicion">Composición:</label>
+                {!! Form::text('composicion', null, ['class'=>'form-control', 'id'=>'composicion','autocomplete'=>'off']) !!}
+            </div>
+            <div class="col-md-3">
                 <label class="lsinmargen" for="umedida_id">Presentación:</label>
                 {!! Form::select('umedida_id',$umedida,null,['class'=>'custom-select', 'id'=>'umedida_id', 'placeholder'=>'']) !!}
             </div>

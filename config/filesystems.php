@@ -61,6 +61,13 @@ return [
             //'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        
+        'examenes' => [
+            'driver' => 'local',
+            'root' => public_path().'/examenes',
+            //'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

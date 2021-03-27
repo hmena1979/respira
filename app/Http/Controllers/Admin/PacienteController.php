@@ -368,4 +368,19 @@ class PacienteController extends Controller
         }
     }
 
+    public function getPacienteBusId($id)
+    {
+        $pac = Paciente::findorFail($id);
+        $respuesta = [
+            'id' => $pac->id,
+            'fecnac' => $pac->fecnac,
+            'edad' => \Carbon\Carbon::parse($pac->fecnac)->age,
+            'sexo_id' => $pac->sexo_id,
+            'direccion' => $pac->direccion,
+            'doctor_id' => 	$pac->doctor_id
+        ];
+        return $respuesta;
+        
+    }
+
 }

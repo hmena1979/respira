@@ -37,6 +37,11 @@
 				@endif
 			</div>
 			<div class="sub-menu">
+				@if(kvfj(Auth::user()->permissions,'terapias'))
+				<a href="{{ url('/admin/terapias') }}" class="lk-terapias lk-terapia_add lk-terapia_edit lk-terapia_delete" "data-toggle="tooltip" data-placement="top" title = 'Terapias'><i class="fas fa-window-restore"></i><span>Terapias</span></a>
+				@endif
+			</div>
+			<div class="sub-menu">
 				@if(kvfj(Auth::user()->permissions,'report'))
 				<a href="{{ url('/admin/radmision') }}" class="report" "data-toggle="tooltip" data-placement="top" title = 'Reportes'><i class="fas fa-window-restore"></i><span>Reportes</span></a>
 				@endif

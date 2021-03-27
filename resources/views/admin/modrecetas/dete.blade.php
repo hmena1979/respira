@@ -32,7 +32,7 @@
                         {!! Form::open(['url'=>'/admin/modreceta/'.$detmodreceta->id.'/dete']) !!}
                         <div class="row">
                             {!! Form::text('producto_id', $detmodreceta->producto_id, ['class'=>'form-control', 'id'=>'producto_id', 'autocomplete'=>'off','hidden']) !!}
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="lsinmargen" for="nombre">Producto:</label>
                                 <div class="input-group">
                                     {!! Form::text('nombre', $detmodreceta->nombre, ['class'=>'form-control', 'id'=>'nombrep','autocomplete'=>'off']) !!}
@@ -61,7 +61,11 @@
                                 </div>
                                 <!-- Fin Modal -->
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <label class="lsinmargen" for="composicion">Composición:</label>
+                                {!! Form::text('composicion', null, ['class'=>'form-control', 'id'=>'composicion','autocomplete'=>'off']) !!}
+                            </div>
+                            <div class="col-md-3">
                                 <label class="lsinmargen" for="umedida_id">Presentación:</label>
                                 {!! Form::select('umedida_id',$umedida,$detmodreceta->umedida_id,['class'=>'custom-select', 'id'=>'umedida_id', 'placeholder'=>'']) !!}	
                             </div>
@@ -149,6 +153,7 @@
     function devPr(valor){
         $.get(url_global+"/admin/producto/"+valor+"/searchid/",function(response){
             document.getElementById("nombrep").value = response[0].nombre;
+            document.getElementById("composicion").value = response[0].composicion.nombre;
             document.getElementById("umedida_id").value = response[0].umedida_id;
             document.getElementById("producto_id").value = valor;
         });	

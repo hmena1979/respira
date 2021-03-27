@@ -44,7 +44,7 @@ Route::prefix('/admin')->group(function(){
     Route::get('/paciente/{id}/delete', 'Admin\PacienteController@getPacienteDelete')->name('paciente_delete');
     Route::get('/paciente/{tipo}/{numero}/busdni', 'Admin\PacienteController@getPacienteBusDNI')->name('pacientes');
     Route::get('/paciente/{tipo}/{numero}/busapi', 'Admin\PacienteController@getPacienteBusApi')->name('pacientes');
-
+    Route::get('/paciente/{id}/busid', 'Admin\PacienteController@getPacienteBusId')->name('pacientes');
 
     //Modulo de proveedor - cliente
     Route::get('/proveedores', 'Admin\ProveedorController@getProveedorHome')->name('proveedores');
@@ -75,6 +75,9 @@ Route::prefix('/admin')->group(function(){
     Route::get('/historia/{id}/searchprescription', 'Admin\HistoriaController@getHistoriaSearchPrescription')->name('historia_prescription');
     Route::post('/historia/{id}/prescriptionfooter', 'Admin\HistoriaController@postHistoriaPrescriptionFooter')->name('historia_prescription');
     Route::get('/historia/{id}/prescriptiondelete', 'Admin\HistoriaController@getHistoriaPrescriptionDelete')->name('historia_prescription');
+    Route::post('/historia/{id}/examenadd', 'Admin\HistoriaController@postHistoriaExamenAdd')->name('historia_prescription');
+    Route::get('/historia/{id}/examendelete', 'Admin\HistoriaController@getHistoriaExamenDelete')->name('historia_edit');
+
 
     //Modulo de doctores
     Route::get('/doctores/{status}', 'Admin\DoctorController@getDoctorHome')->name('doctores');
@@ -275,6 +278,21 @@ Route::prefix('/admin')->group(function(){
     Route::post('/modreceta/{id}/edit', 'Admin\ModRecetaController@postModRecetaEdit')->name('modreceta_edit');
     Route::get('/modreceta/{id}/delete', 'Admin\ModRecetaController@getModRecetaDelete')->name('modreceta_delete');
 
+    //Modulo de terapias
+    Route::get('/terapias', 'Admin\TerapiaController@getTerapiaHome')->name('terapias');
+    Route::get('/terapia/add', 'Admin\TerapiaController@getTerapiaAdd')->name('terapia_add');
+    Route::post('/terapia/add', 'Admin\TerapiaController@postTerapiaAdd')->name('terapia_add');
+    Route::get('/terapia/{id}/edit', 'Admin\TerapiaController@getTerapiaEdit')->name('terapia_edit');
+    Route::post('/terapia/{id}/edit', 'Admin\TerapiaController@postTerapiaEdit')->name('terapia_edit');
+    Route::get('/terapia/{id}/delete', 'Admin\TerapiaController@getTerapiaDelete')->name('terapia_delete');
+    Route::post('/terapia/{id}/addeditdetitem', 'Admin\TerapiaController@postTerapiaAddEditDetItem')->name('terapia_edit');
+    Route::get('/terapia/{id}/searchitem', 'Admin\TerapiaController@getTerapiaSearchItem')->name('terapias');
+    Route::get('/terapia/{id}/deleteitem', 'Admin\TerapiaController@getTerapiaDeleteItem')->name('terapia_delete');
+    Route::post('/terapia/{id}/addeditdetitem2', 'Admin\TerapiaController@postTerapiaAddEditDetItem2')->name('terapia_edit');
+    Route::get('/terapia/{id}/searchitem2', 'Admin\TerapiaController@getTerapiaSearchItem2')->name('terapias');
+    Route::get('/terapia/{id}/deleteitem2', 'Admin\TerapiaController@getTerapiaDeleteItem2')->name('terapia_delete');
+
+
     //Cierre de mes
     Route::get('/cierre', 'Admin\CierreController@getCierreHome')->name('cierre');
     Route::post('/cierre/cadmision', 'Admin\CierreController@postCierreAdmision')->name('cadmision');
@@ -299,6 +317,7 @@ Route::prefix('/admin')->group(function(){
     Route::post('/rfarmacia/movcomp', 'Admin\ReporteController@postReporteMovComprobantes')->name('report');
     Route::post('/rfarmacia/utilidad', 'Admin\ReporteController@postReporteUtilidad')->name('report');
     Route::post('/rfarmacia/saldos', 'Admin\ReporteController@postReporteSaldos')->name('report');
+    Route::post('/rfarmacia/movkardex', 'Admin\ReporteController@postReporteKardex')->name('report');
 
     //SUNAT - Geberación de XML y envio a SUNAT
     Route::get('/sunat/{id}/xml', 'Admin\SunatController@getSunatAdmision')->name('pdf');

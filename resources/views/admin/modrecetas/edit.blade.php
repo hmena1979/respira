@@ -44,10 +44,11 @@
                         <table class="table table-hover table-sm table-bordered table">
                             <thead class="thead-blue">
                                 <tr>
-                                    <th width="30%">Producto</th>
+                                    <th width="20%">Producto</th>
+                                    <th width="15%">Composicion</th>
                                     <th width="10%">Presentación</th>
                                     <th width="10%">Cantidad</th>
-                                    <th width="30%">Posología</th>
+                                    <th width="25%">Posología</th>
                                     <th width="10%">Tiempo</th>
                                     <th width="10%">
                                         {{-- <a href="{{ url('admin/pdf/'.$historia->id.'/receta') }}" class="opttable" target="_blank" datatoggle="tooltip" data-placement="top" title="Imprimir receta"><i class="fas fa-prescription"></i>H </a> --}}
@@ -60,6 +61,7 @@
                                 @foreach($detmodrecetas as $r)
                                 <tr>
                                     <td>{{ $r->nombre }}</td>
+                                    <td>{{ $r->composicion }}</td>
                                     <td>{{ $r->um->nombre }}</td>
                                     <td class="text-center">{{ round($r->cantidad,2) }}</td>
                                     <td>

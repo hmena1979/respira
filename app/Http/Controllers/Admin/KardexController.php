@@ -89,6 +89,22 @@ class KardexController extends Controller
                         $kg = $k->save();
                     }                    
                     break;
+                case 4:
+                    if($kardex->cant_ent+$stock == 0){
+                        $sum = 1;
+                    }else{
+                        $sum = $kardex->cant_ent+$stock;
+                    }
+                    $precio = round((($stock*$precio) + ($kardex->cant_ent*$kardex->pre_compra))/$sum,4);
+                    $stock = $stock + $kardex->cant_ent;
+                    $entradas += $kardex->cant_ent;
+                    if($kardex->cant_sald <> $stock || $kardex->pre_prom <> $precio){
+                        $k = Kardex::findOrFail($kardex->id);
+                        $k->cant_sald = $stock;
+                        $k->pre_prom = $precio;
+                        $kg = $k->save();
+                    }                    
+                    break;
                 // default:
                 //     $titulo = 'Código';
                 //     break;

@@ -116,13 +116,13 @@
                         </a>
                         @else
                         @foreach($paciente->his as $his)
-                            @if($his->item===$item)
+                            @if($his->item===$item && $exa <> '1')
                             <a href="{{ url('/admin/historias/'.$his->paciente_id.'/'.$his->item.'/home') }}" class="list-group-item list-group-item-action active">{{$his->fecha}}</a>
                             @else
                             <a href="{{ url('/admin/historias/'.$his->paciente_id.'/'.$his->item.'/home') }}" class="list-group-item list-group-item-action">{{$his->fecha}}</a>
                             @endif
                         @endforeach
-                        <a href="{{ url('/admin/historias/'.$his->paciente_id.'/'.'E'.'/home') }}" class="list-group-item list-group-item-action @if($item==='E') active @endif">Exámenes</a>
+                        <a href="{{ url('/admin/historias/'.$his->paciente_id.'/'.'E'.'/home') }}" class="list-group-item list-group-item-action @if($exa == '1') active @endif">Exámenes</a>
                         @endif
                         
                       </div>
@@ -131,6 +131,9 @@
             <div class="col-md-10">
 				<div class="panel shadow">
 					<div class="inside">
+                        @if($exa == '1')
+                        @include('admin.historias.form_historia_examen')    
+                        @else
                         @if($paciente->his->count()===0)
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -171,6 +174,8 @@
                             </div>
                         </div>
                         @endforeach
+                        @endif
+                        
                         @endif
                         </div>
                     </div>
@@ -287,6 +292,7 @@
     function devPr(valor){
         $.get(url_global+"/admin/producto/"+valor+"/searchid/",function(response){
             document.getElementById("nombrep").value = response[0].nombre;
+            document.getElementById("composicion").value = response[0].composicion.nombre;
             document.getElementById("umedida_id").value = response[0].umedida_id;
             document.getElementById("producto_id").value = valor;
         });	
@@ -301,6 +307,7 @@
             document.getElementById("tipitem").value = 2;
             document.getElementById("producto_id").value = response.producto_id;
             document.getElementById("nombrep").value = response.nombre;
+            document.getElementById("composicion").value = response.composicion;
             document.getElementById("umedida_id").value = response.umedida_id;
             document.getElementById("cantidad").value = response.cantidad;
             document.getElementById("posologia").value = response.posologia;
