@@ -2,7 +2,7 @@
 @section('title','Noticias')
 @section('breadcrumb')
 	<li class="breadcrumb-item">
-		<a href="{{ url('/admin/noticias/') }}"><i class="far fa-newspaper"></i> Noticias</a>
+		<a href="{{ url('/admin/web/noticias/') }}"><i class="far fa-newspaper"></i> Noticias</a>
 	</li>
 @endsection
 
