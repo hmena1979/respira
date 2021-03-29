@@ -34,6 +34,10 @@
                 <input type="checkbox" name="vencimientos" id="vencimientos" value="true" @if(kvfj($user->permissions, 'vencimientos')) checked @endif>
                 <label for="vencimientos">Vencimento de Productos.</label>
             </div>
+            <div class="form-check">
+                <input type="checkbox" name="web" id="web" value="true" @if(kvfj($user->permissions, 'web')) checked @endif>
+                <label for="web">Web.</label>
+            </div>
             
         </div>
     </div>

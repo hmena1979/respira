@@ -338,6 +338,55 @@ Route::prefix('/admin')->group(function(){
 
     //Pruebas
     // Route::get('/pruebas', 'Admin\SunatController@getSunat')->name('pdf');
+    //----------------------------------------------------------------------------------------------------//
+    //------------------------------------     WEB        ------------------------------------------------//
+    //----------------------------------------------------------------------------------------------------//
+    //Modulo Carrousel - Imagen Principal
+	Route::get('/web/imgprins', 'Admin\ImgPrinController@getHome');
+	Route::get('/web/imgprin/add', 'Admin\ImgPrinController@getAdd');
+	Route::post('/web/imgprin/add', 'Admin\ImgPrinController@postAdd');
+	Route::get('/web/imgprin/{id}/edit', 'Admin\ImgPrinController@getEdit');
+	Route::post('/web/imgprin/{id}/edit', 'Admin\ImgPrinController@postEdit');
+	Route::get('/web/imgprin/{id}/del', 'Admin\ImgPrinController@getDel');
+	Route::get('/web/imgprin/{id}/up', 'Admin\ImgPrinController@getUp');
+	Route::get('/web/imgprin/{id}/down', 'Admin\ImgPrinController@getDown');
+
+    //Modulo Nosotros
+	Route::get('/web/nosotros', 'Admin\NosotrosController@getHome');
+	Route::post('/web/nosotros', 'Admin\NosotrosController@postHome');
+
+    //Modulo Especialidades
+	Route::get('/web/especialidads', 'Admin\EspecialidadController@getEspecialidadHome')->name('web');
+	Route::get('/web/especialidad/add', 'Admin\EspecialidadController@getEspecialidadAdd')->name('web');
+	Route::post('web/especialidad/add', 'Admin\EspecialidadController@postEspecialidadAdd')->name('web');
+	Route::get('/web/especialidad/{id}/edit', 'Admin\EspecialidadController@getEspecialidadEdit')->name('web');
+	Route::post('/web/especialidad/{id}/edit', 'Admin\EspecialidadController@postEspecialidadEdit')->name('web');
+	Route::get('/web/especialidad/{id}/del', 'Admin\EspecialidadController@getEspecialidadDel')->name('web');
+	Route::get('/web/especialidad/{id}/up', 'Admin\EspecialidadController@getEspecialidadUp')->name('web');
+	Route::get('/web/especialidad/{id}/down', 'Admin\EspecialidadController@getEspecialidadDown')->name('web');
+
+    //Modulo Sedes
+	Route::get('/web/sedes', 'Admin\SedeController@getSedeHome');
+	Route::get('/web/sede/add', 'Admin\SedeController@getSedeAdd');
+	Route::post('/web/sede/add', 'Admin\SedeController@postSedeAdd');
+	Route::get('/web/sede/{id}/edit', 'Admin\SedeController@getSedeEdit');
+	Route::post('/web/sede/{id}/edit', 'Admin\SedeController@postSedeEdit');
+	Route::get('/web/sede/{id}/up', 'Admin\SedeController@getSedeUp');
+	Route::get('/web/sede/{id}/down', 'Admin\SedeController@getSedeDown');
+	Route::post('/web/sede/{id}/galeria/add', 'Admin\SedeController@postSedeGaleriaAdd');
+	Route::get('/web/sede/{id}/galeria/{idgal}/del', 'Admin\SedeController@getSedeGaleriaDel');
+
+    //Modulo Noticias
+	Route::get('/web/noticias', 'Admin\NoticiaController@getNoticiaHome');
+	Route::get('/web/noticia/add', 'Admin\NoticiaController@getNoticiaAdd');
+	Route::post('/web/noticia/add', 'Admin\NoticiaController@postNoticiaAdd');
+	Route::get('/web/noticia/{id}/edit', 'Admin\NoticiaController@getNoticiaEdit');
+	Route::post('/web/noticia/{id}/edit', 'Admin\NoticiaController@postNoticiaEdit');
+	Route::get('/web/noticia/{id}/del', 'Admin\NoticiaController@getNoticiaDel');
+	Route::get('/web/noticia/{id}/up', 'Admin\NoticiaController@getNoticiaUp');
+	Route::get('/web/noticia/{id}/down', 'Admin\NoticiaController@getNoticiaDown');
+    //----------------------------------------------------------------------------------------------------//
+    //----------------------------------------------------------------------------------------------------//
 
 
     

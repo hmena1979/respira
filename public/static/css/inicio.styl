@@ -1,3 +1,8 @@
+colorprin = #309BC7
+colorosc = #3080C7
+colorsec = #81C822
+barra = #EAEAEA
+
 body	
 	//background-image linear-gradient(-90deg, #F7FFFF, #F44B3F) !important
 	background-color #f5f6fa
@@ -49,7 +54,7 @@ label
 .menu-bar
 	.botsup
 		//background-image linear-gradient(-90deg, #D16F0E, #A90100) !important
-		background-color #A90100 !important
+		background-color barra !important
 		
 .dropdown
 	&:hover
@@ -57,22 +62,25 @@ label
 			display: block
 			
 .dropdown-menu	
-	background-color #A90100 !important	
+	background-color barra !important	
 	a
-		color #FFF !important
+		color colorosc !important
 		&:hover
 			display: block
-			background-color #A90100 !important
+			background-color barra !important
 			font-weight 500
-			border-bottom 1px solid #fff
+			border-bottom 1px solid colorsec
 
 .navbar-brand
-	color #FFF !important
+	color colorosc !important
+
+.navbar-toggler-icon 
+	color #3080C7 !important
 
 .nav-link
 	font-size 16px
 	margin 3px
-	color #FFF !important
+	color colorosc !important
 	font-weight 500
 	&:hover
 		//font-weight 600
@@ -83,7 +91,7 @@ label
 	margin-right 20px
 
 .menu-bar .navbar-toggler
-	color #FFF !important
+	color colorprin !important
 	padding-right 20px
 	outline none !important
 	border none !important
@@ -99,7 +107,7 @@ label
 	font-size 50px
 
 .especial	
-	color #A90100 !important
+	color colorsec !important
 	//background-color #f5f6fa
 	//background-image linear-gradient(-90deg, #C8C8C8, #F44B3F) !important
 	
@@ -113,7 +121,7 @@ label
 	
 .enlesp
 	a
-		color #A90100 !important
+		color colorsec !important
 		&:hover
 			color #D16F0E !important
 			font-weight 600
@@ -121,15 +129,15 @@ label
 		
 ////// FOOTER /////////////////////////////////////////////////////////////
 .footer
-	color #fff !important
-	background-color #A90100	
+	color colorprin !important
+	background-color barra	
 
 
 .lisfoot
 	font-size 18px
 	a
-		color #fff !important
-		background-color #A90100		
+		color colorprin !important
+		background-color colorsec		
 		li
 			padding-bottom 10px
 
@@ -138,20 +146,20 @@ label
 
 .icofoot
 	font-size 40px
-	color #fff !important
-	background-color #A90100
+	color colorprin !important
+	background-color barra
 	
 ////////////////////////////////////////////////////////////////////////////
 .panel
 	background-color #fff
 	border-radius 6px
-	border 2px solid #DE1B09
+	border 2px solid colorsec
 	width 100%
 	.header
 		border-bottom 1px solid #e8e8e8
 		h2.title
 			display inline-block
-			color #A90100
+			color colorsec
 			font-size 3.1em
 			font-weight 600
 			padding 6px 30px
@@ -167,7 +175,7 @@ label
 	border-radius 6px
 	font-size 20px
 	font-weight 600
-	background-color #A90100
+	background-color colorsec
 	color #fff
 	padding 16px
 	margin-right 16px
@@ -176,7 +184,7 @@ label
 .lisder
 	 list-style-type none
 	 a
-		color #A90100
+		color colorsec
 		background-color #fff !important
 		&:hover
 			color #D16F0E !important
@@ -207,7 +215,7 @@ label
 	font-size 20px
 
 .sed_icono
-	color #A90100
+	color colorsec
 	font-size 50px
 	font-weight 600
 
@@ -228,7 +236,7 @@ label
 	padding 0px
 	margin 0px
 	&:hover
-		color #A90100 !important
+		color colorsec !important
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .tnoticia

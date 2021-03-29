@@ -123,6 +123,28 @@
 			</a>
 		</li>
 		@endif
+		<li class="item" id="web">
+			<a href="#web" class="menu-btn">
+				<i class="fas fa-globe-americas"></i><span>Web<i class="fas fa-chevron-down drop-down"></i></span>
+			</a>
+			<div class="sub-menu">
+				@if(kvfj(Auth::user()->permissions,'web'))
+				<a href="{{ url('/admin/web/imgprins') }}" class="lk-web" "data-toggle="tooltip" data-placement="top" title = 'Imagen Principal'><i class="fas fa-globe-americas"></i><span>Imagen Principal</span></a>
+				@endif
+				@if(kvfj(Auth::user()->permissions,'web'))
+				<a href="{{ url('/admin/web/nosotros') }}" class="lk-web" "data-toggle="tooltip" data-placement="top" title = 'Nosotros'><i class="fas fa-globe-americas"></i><span>Nosotros</span></a>
+				@endif
+				@if(kvfj(Auth::user()->permissions,'web'))
+				<a href="{{ url('/admin/web/especialidads') }}" class="lk-web" "data-toggle="tooltip" data-placement="top" title = 'Servicios'><i class="fas fa-globe-americas"></i><span>Servicios</span></a>
+				@endif
+				@if(kvfj(Auth::user()->permissions,'web'))
+				<a href="{{ url('/admin/web/sedes') }}" class="lk-web" "data-toggle="tooltip" data-placement="top" title = 'Sedes'><i class="fas fa-globe-americas"></i><span>Sedes</span></a>
+				@endif
+				@if(kvfj(Auth::user()->permissions,'web'))
+				<a href="{{ url('/admin/web/noticias') }}" class="lk-web" "data-toggle="tooltip" data-placement="top" title = 'Noticias'><i class="fas fa-globe-americas"></i><span>Noticias</span></a>
+				@endif
+			</div>
+		</li>
 		<li class="item" id="util">
 			<a href="#util" class="menu-btn">
 				<i class="fas fa-cog"></i><span>Utilitarios<i class="fas fa-chevron-down drop-down"></i></span>
