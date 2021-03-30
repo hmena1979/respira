@@ -111,6 +111,9 @@
 				@if(kvfj(Auth::user()->permissions,'tipmeds'))
 				<a href="{{ url('/admin/tipmeds/1') }}" class="lk-tipmeds lk-tipmed_add lk-tipmed_edit lk-tipmed_delete" "data-toggle="tooltip" data-placement="top" title = 'Tipo medicamento'><i class="fas fa-tablets"></i><span>Tipo medicamento</span></a>
 				@endif
+				@if(kvfj(Auth::user()->permissions,'laboratorios'))
+				<a href="{{ url('/admin/laboratorios') }}" class="lk-laboratorios lk-laboratorio_add lk-laboratorio_edit lk-laboratorio_delete" "data-toggle="tooltip" data-placement="top" title = 'Laboratorios'><i class="fas fa-tablets"></i><span>Laboratorios</span></a>
+				@endif
 				@if(kvfj(Auth::user()->permissions,'modrecetas'))
 				<a href="{{ url('/admin/modrecetas') }}" class="lk-modrecetas lk-modreceta_add lk-modreceta_edit lk-modreceta_delete" "data-toggle="tooltip" data-placement="top" title = 'Modelo de receta'><i class="fas fa-prescription"></i><span>Modelo de receta</span></a>
 				@endif

@@ -119,6 +119,9 @@ class SalidaController extends Controller
             $f->hora = e($request->input('hora'));
             $f->vencimiento = e($request->input('vencimiento'));
             $f->cancelacion = e($request->input('cancelacion'));
+            if(empty($f->cancelacion)){
+                $f->cancelacion = null;
+            }
             $f->moneda = e($request->input('moneda'));
             $f->tc = $request->input('tc')==''?null:e($request->input('tc'));
             $f->tipsal = $request->input('tipsal');
@@ -353,6 +356,9 @@ class SalidaController extends Controller
             $f->hora = e($request->input('hora'));
             $f->vencimiento = e($request->input('vencimiento'));
             $f->cancelacion = e($request->input('cancelacion'));
+            if(empty($f->cancelacion)){
+                $f->cancelacion = null;
+            }
             $f->moneda = e($request->input('moneda'));
             $f->tc = $request->input('tc')==''?null:e($request->input('tc'));
             $f->fpago_id = e($request->input('fpago_id'));

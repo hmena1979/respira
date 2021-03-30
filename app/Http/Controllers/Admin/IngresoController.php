@@ -89,6 +89,9 @@ class IngresoController extends Controller
             $f->fecha = e($request->input('fecha'));
             $f->vencimiento = e($request->input('vencimiento'));
             $f->cancelacion = e($request->input('cancelacion'));
+            if(empty($f->cancelacion)){
+                $f->cancelacion = null;
+            }
             $f->moneda = e($request->input('moneda'));
             $f->tc = $request->input('tc')==''?null:e($request->input('tc'));
             $f->comprobante_id = e($request->input('comprobante_id'));
@@ -362,6 +365,9 @@ class IngresoController extends Controller
             $f->fecha = e($request->input('fecha'));
             $f->vencimiento = e($request->input('vencimiento'));
             $f->cancelacion = e($request->input('cancelacion'));
+            if(empty($f->cancelacion)){
+                $f->cancelacion = null;
+            }
             $f->moneda = e($request->input('moneda'));
             $f->tc = $request->input('tc')==''?null:e($request->input('tc'));
             $f->comprobante_id = e($request->input('comprobante_id'));

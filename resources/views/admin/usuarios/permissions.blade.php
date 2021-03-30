@@ -51,6 +51,9 @@
                         {{-- @include('admin.usuarios.permissions.module_salidas') --}}
                     </div>
                     <div class="row mtop16">
+                        @include('admin.usuarios.permissions.module_laboratorios')
+                    </div>
+                    <div class="row mtop16">
                         <div class="col-md-12">
                             <div class="panel shadow">
                                 <div class="inside">

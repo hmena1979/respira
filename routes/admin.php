@@ -295,6 +295,14 @@ Route::prefix('/admin')->group(function(){
     Route::get('/terapia/{id}/searchitem2', 'Admin\TerapiaController@getTerapiaSearchItem2')->name('terapias');
     Route::get('/terapia/{id}/deleteitem2', 'Admin\TerapiaController@getTerapiaDeleteItem2')->name('terapia_delete');
 
+    //Modulo de Laboratorios
+    Route::get('/laboratorios', 'Admin\LaboratorioController@getLaboratorioHome')->name('laboratorios');
+    Route::get('/laboratorio/add', 'Admin\LaboratorioController@getLaboratorioAdd')->name('laboratorio_add');
+    Route::post('/laboratorio/add', 'Admin\LaboratorioController@postLaboratorioAdd')->name('laboratorio_add');
+    Route::get('/laboratorio/{id}/edit', 'Admin\LaboratorioController@getLaboratorioEdit')->name('laboratorio_edit');
+    Route::post('/laboratorio/{id}/edit', 'Admin\LaboratorioController@postLaboratorioEdit')->name('laboratorio_edit');
+    Route::get('/laboratorio/{id}/delete', 'Admin\LaboratorioController@getLaboratorioDelete')->name('laboratorio_delete');
+
 
     //Cierre de mes
     Route::get('/cierre', 'Admin\CierreController@getCierreHome')->name('cierre');

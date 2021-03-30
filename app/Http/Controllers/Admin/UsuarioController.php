@@ -278,6 +278,10 @@ class UsuarioController extends Controller
 			'terapia_add' => $request->input('terapia_add'),
 			'terapia_edit' => $request->input('terapia_edit'),
 			'terapia_delete' => $request->input('terapia_delete'),
+			'laboratorios' => $request->input('laboratorios'),
+			'laboratorio_add' => $request->input('laboratorio_add'),
+			'laboratorio_edit' => $request->input('laboratorio_edit'),
+			'laboratorio_delete' => $request->input('laboratorio_delete')
 		];
 		$permissions = json_encode($permissions);
 		$user->permissions = $permissions;
