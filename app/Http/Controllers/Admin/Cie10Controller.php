@@ -42,7 +42,7 @@ class Cie10Controller extends Controller
     public function getBusCie10(Request $request, $bus)
     {
         if($request->ajax()){            
-            $cie = Cie10::where('nombre','like','%'.$bus.'%')
+            $cie = Cie10::where('nombre','like',$bus.'%')
                 ->orWhere('codigo','like','%'.$bus.'%')
                 ->orderby('nombre','Asc')->get();
             return response()->json($cie);

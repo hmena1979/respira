@@ -26,7 +26,7 @@
                 <td width="40%">
                     <div class="numero">
                         <span>RECETA MEDICA</span><br>
-                        FECHA: {{$historia->fecha}}<br>
+                        FECHA: {{date('d-m-Y',strtotime($historia->fecha))}}<br>
                         N° {{$paciente->historia.$historia->item}}<br>
                     </div>
                 </td>
@@ -180,7 +180,7 @@
                     <td class="tam40">
                         @if(!empty($historia->pfecha))
                         <div class="pcita">
-                            @if($historia->ptipo == '1')CITA: @ELSE CONTROL: @ENDIF <strong> {{$historia->pfecha}}</strong>
+                            @if($historia->ptipo == '1')CITA: @ELSE CONTROL: @ENDIF <strong> {{date('d-m-Y',strtotime($historia->pfecha))}}</strong>
                         </div>
                         @ENDIF
                         <div class="telfcita">
@@ -206,7 +206,7 @@
                             <td class="borde-punteado table-top">
                                 <img class="imgplan" src="{{ url('/static/images/logopruebas.jpg') }}" width="330" >
                                 <p class="titpaciente">
-                                    <span class=""><strong>FECHA: </strong></span>{{$historia->fecha}} <br>
+                                    <span class=""><strong>FECHA: </strong></span>{{date('d-m-Y',strtotime($historia->fecha))}} <br>
                                     <span class=""><strong>PACIENTE: </strong></span>{{$paciente->razsoc}}
                                 </p>
                                 <table class="tam100 planes">
@@ -345,7 +345,7 @@
                             <td class="borde-punteado table-top">
                                 <img class="imgplan" src="{{ url('/static/images/logopruebas.jpg') }}" width="310" >
                                 <p class="titpaciente">
-                                    <span class=""><strong>FECHA: </strong></span>{{$historia->fecha}} <br>
+                                    <span class=""><strong>FECHA: </strong></span>{{date('d-m-Y',strtotime($historia->fecha))}} <br>
                                     <span class=""><strong>PACIENTE: </strong></span>{{$paciente->razsoc}}
                                 </p>
                                 <table class="tam100 planes">

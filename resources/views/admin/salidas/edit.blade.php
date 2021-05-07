@@ -219,7 +219,7 @@
                                     <td>{{ $detsalida->subtotal }}</td>
                                     <td>
                                         <div class="opts">
-                                            @if(kvfj(Auth::user()->permissions,'salida_edit'))
+                                            @if(kvfj(Auth::user()->permissions,'salida_edit') && $salida->status == 1)
                                             {{-- <a href="{{ url('/admin/ingreso/'.$detingreso->id.'/dete') }}"datatoggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a> --}}
                                             <a href="{{ url('/admin/salida/'.$detsalida->id.'/detd') }}"datatoggle="tooltip" data-placement="top" title="Eliminar" onclick="return confirm('Desea eliminar el registro?')"><i class="fas fa-trash-alt"></i></a>
                                             @endif
