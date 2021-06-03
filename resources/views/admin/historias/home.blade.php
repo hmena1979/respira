@@ -115,7 +115,7 @@
                             {{\Carbon\Carbon::now()->format('d-m-Y')}}
                         </a>
                         @else
-                        @foreach($paciente->his as $his)
+                        @foreach($paciente->his as $his) 
                             @if($his->item===$item && $exa <> '1')
                             <a href="{{ url('/admin/historias/'.$his->paciente_id.'/'.$his->item.'/home') }}" class="list-group-item list-group-item-action active">{{$his->fecha}}</a>
                             @else

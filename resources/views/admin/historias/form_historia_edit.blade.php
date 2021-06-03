@@ -81,6 +81,7 @@
     </div>
 </div>
 <div class="row mtop16">
+    
     <div class="col-md-2">
         {!! Form::submit('Guardar', ['class'=>'btn btn-success']) !!}
     </div>

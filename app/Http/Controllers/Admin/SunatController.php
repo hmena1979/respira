@@ -2403,7 +2403,6 @@ class SunatController extends Controller
 
             return Excel::download(new WincontallExport($periodo), $file);
             // return view('pdf.wincontall',$data);
-
         endif;
 
         

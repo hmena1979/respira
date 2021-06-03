@@ -89,7 +89,7 @@ Route::prefix('/admin')->group(function(){
     Route::get('/doctor/{id}/delete', 'Admin\DoctorController@getDoctorDelete')->name('doctor_delete');
 
     //Modulo de CIE10
-    Route::get('/cie10', 'Admin\Cie10Controller@getCie10Home')->name('cie10');
+    Route::get('/cie10', 'Admin\Cie10Controller@getCie10Home')->name('cie10'); 
     Route::get('/cie10/registro', 'Admin\Cie10Controller@getCie10Registro')->name('cie10');
     Route::get('/cie10/add', 'Admin\Cie10Controller@getCie10Add')->name('cie10_add');
     Route::post('/cie10/add', 'Admin\Cie10Controller@postCie10Add')->name('cie10_add');
