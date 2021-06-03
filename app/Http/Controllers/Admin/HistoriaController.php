@@ -558,4 +558,12 @@ class HistoriaController extends Controller
         endif;
     }
 
+    public function getHistoriaDelete($id)
+    {
+        $d = Historia::findOrFail($id);
+        if($d->delete()):
+            return back()->with('message', 'Registro eliminado')->with('typealert', 'success');
+        endif;
+    }
+
 }

@@ -34,15 +34,16 @@ class WincontallExport implements FromView
             ->orderBy('comprobante_id', 'asc')
             ->orderBy('fecha', 'asc')
             ->get();
+
         $salida = Salida::with(['cli'])
             ->select('fecha','comprobante_id','serie','numero','ruc','tot_gravadas','tot_exoneradas',
                 'tot_igv','total','moneda','tipo')
-            ->where('comprobante_id', '01')
-            ->orWhere('comprobante_id', '03')
             ->where('periodo', $periodo)
+            ->where('comprobante_id','<>', '00')
             ->orderBy('comprobante_id', 'asc')
             ->orderBy('fecha', 'asc')
             ->get();
+
         $notafar = NotaFar::with(['cli'])
             ->select('fecha','comprobante_id','serie','numero','ruc','tot_gravadas','tot_exoneradas',
                 'tot_igv','total','moneda','dmcomprobante_id','dmserie','dmnumero')

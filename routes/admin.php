@@ -77,6 +77,7 @@ Route::prefix('/admin')->group(function(){
     Route::get('/historia/{id}/prescriptiondelete', 'Admin\HistoriaController@getHistoriaPrescriptionDelete')->name('historia_prescription');
     Route::post('/historia/{id}/examenadd', 'Admin\HistoriaController@postHistoriaExamenAdd')->name('historia_prescription');
     Route::get('/historia/{id}/examendelete', 'Admin\HistoriaController@getHistoriaExamenDelete')->name('historia_edit');
+    Route::get('/historia/{id}/delete', 'Admin\HistoriaController@getHistoriaDelete')->name('historia_edit');
 
 
     //Modulo de doctores

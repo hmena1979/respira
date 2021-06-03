@@ -80,5 +80,12 @@
         {!! Form::textarea('exafisico',$historia->exafisico,['class'=>'form-control', 'rows'=>'3']) !!}			
     </div>
 </div>
-{!! Form::submit('Guardar', ['class'=>'btn btn-success mtop16']) !!}
+<div class="row mtop16">
+    <div class="col-md-2">
+        {!! Form::submit('Guardar', ['class'=>'btn btn-success']) !!}
+    </div>
+    <div class="col-md-10 text-right">
+        <a class="btn btn-danger" href="{{ url('/admin/historia/'.$historia->id.'/delete') }}">Borrar Historia</a>
+    </div>
+</div>
 {!! Form::close() !!}
