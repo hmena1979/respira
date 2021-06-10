@@ -273,14 +273,16 @@ class ReporteController extends Controller
 
     }
 
-    public function postReporteProducto()
+    public function postReporteProducto(Request $request)
     {
         $parametro = Param::findOrFail(1);
         $productos = Producto::with(['umedida'])->orderBy('nombre')->get();
+        $tipo = $request->input('rp_optprod');
 
         $data = [
             'parametro' => $parametro,
-            'productos' => $productos
+            'productos' => $productos,
+            'tipo' => $tipo
         ];
         $pdf = PDF::loadView('pdf.rproductos', $data)->setPaper('A4', 'portrait');
         return $pdf->stream('Pacientes.pdf', array('Attachment'=>false));

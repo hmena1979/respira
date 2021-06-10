@@ -28,8 +28,13 @@
 								</div>
 							</div>
 						</div> --}}
+						<div class="col-md-3">
+							<label class="lsinmargen" for="rp_optprod">Precio:</label>
+							{!! Form::select('rp_optprod',[1=>'Precio Venta',2=>'Precio Promedio S/IGV'],1,['class'=>'custom-select','id'=>'rp_optprod']) !!}
+
+						</div>
 						<div class="col">
-							{!! Form::submit('Listar productos', ['class'=>'btn btn-primary']) !!}
+							{!! Form::submit('Listar productos', ['class'=>'btn btn-primary mtop25']) !!}
 						</div>
 					</div>
 					{!! Form::close() !!}

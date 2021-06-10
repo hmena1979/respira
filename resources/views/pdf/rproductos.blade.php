@@ -52,7 +52,7 @@
                         <td>{{ $producto->nombre }}</td>
                         <td>{{ $producto->umedida->nombre }}</td>
                         <td>{{ $producto->stock }}</td>
-                        <td>{{ $producto->premerca }}</td>
+                        <td>{{ $tipo==1 ? $producto->premerca : $producto->precompra}}</td>
                     </tr>
                     @endforeach
                 </tbody>

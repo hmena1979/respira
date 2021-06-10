@@ -262,9 +262,12 @@ class ProductoController extends Controller
                 $vencn->entradas = $ncantidad;
                 $vencn->salidas = 0;
                 $vencn->saldo = $ncantidad;
+                
                 if($vencn->save()):
+                    // return 'Llego2';
                     $m = $m.'Lote actualizado con exito. ';
                 endif;
+                
             }else{
                 $venc = Vencimiento::where('producto_id',$producto)
                 ->where('lote',$nlote)
